@@ -1,0 +1,7 @@
+﻿pi_definition,reference,spearman_T_over_M,spearman_proximity,spearman_T,spearman_p_D,spearman_P_D,spearman_pi_inflow_share,spearman_proximity_P,same_min_T_over_M_group,same_closest_group,n_closest_rate_same,n_groups
+first_last,first_last_same_snapshot,1.0,1.0,1.0,1.0,1.0,1.0,1.0,True,True,9,9
+corresponding,first_last_same_snapshot,1.0,1.0,1.0,0.7333333333333334,0.9833333333333333,-0.13333333333333333,1.0,True,True,9,9
+recurrent_last,first_last_same_snapshot,1.0,1.0,1.0,0.8666666666666667,0.9833333333333333,0.5666666666666667,1.0,True,True,9,9
+first_last,published_results,1.0,1.0,1.0,1.0,,,,True,True,9,9
+corresponding,published_results,1.0,1.0,1.0,0.7333333333333334,,,,True,True,9,9
+recurrent_last,published_results,1.0,1.0,1.0,0.8666666666666667,,,,True,True,9,9

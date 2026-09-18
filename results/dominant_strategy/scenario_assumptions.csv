@@ -1,0 +1,15 @@
+﻿parameter,value,status
+phi_grid,"0.0,0.5,1.0,2.0,4.0,8.0",stylised
+gamma_grid,"0.0,1.0,2.0",stylised
+horizon_years,100.0,stylised
+tau_years,24.313891490486423,fitted (1 / mean d)
+horizon_in_tau,4.112875145433965,derived
+pull_rule,additional outflow alpha_i phi from D_i to separate compartments hosted by the focal region (i != focal); pre-existing abroad stock keeps observed host shares W,stylised
+retention_rule,beta_i/(1+phi) for researchers pulled to the focal region,stylised
+host_recruitment_rule,each host recruits r_j x hosted abroad PIs; I0_j reduced so the fitted equilibrium is unchanged,stylised
+collapse_rule,r_i -> 0 permanently once T_i < M_i (integrator terminal event at the crossing),stylised
+variety_rule,"h_D, h_A scaled by (N_eff/N_eff0)^gamma; gamma = 0 is the fitted model",stylised
+initial_state,baseline equilibrium from results/endogenous/equilibrium_summary.csv,fitted
+transition_rates,data/cohort/transition_rates.csv,fitted
+recruitment_split,"I0, r from results/endogenous/equilibrium_summary.csv (exogenous_share=fitted); 0.25 as sensitivity",fitted / stylised
+host_shares,"results/annual/annual_interciv_stock.csv, all years, off-diagonal",fitted
