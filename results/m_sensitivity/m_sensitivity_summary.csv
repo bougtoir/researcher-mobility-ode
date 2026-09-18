@@ -1,0 +1,7 @@
+﻿M_multiplier,n_below_M,min_T_over_M,min_T_over_M_group,closest_group,closest_rate_all_I0,closest_rate_unchanged_vs_base,spearman_T_over_M_vs_base,spearman_proximity_vs_base,n_d_more_elastic_than_alpha,n_groups
+0.5,0,6.025723926301014,Other Western,Other Western,True,9,1.0,1.0,9,9
+0.75,0,4.017149284200676,Other Western,Other Western,True,9,1.0,1.0,9,9
+1.0,0,3.012861963150507,Other Western,Other Western,True,9,1.0,1.0,9,9
+1.25,0,2.4102895705204053,Other Western,Other Western,False,8,1.0,1.0,9,9
+1.5,0,2.008574642100338,Other Western,Other Western,False,8,1.0,1.0,9,9
+2.0,0,1.5064309815752535,Other Western,Other Western,False,8,1.0,1.0,9,9

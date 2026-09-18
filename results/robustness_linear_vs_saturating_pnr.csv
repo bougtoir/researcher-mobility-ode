@@ -1,0 +1,10 @@
+origin_group,linear_closest,linear_factor,linear_proximity,saturating_closest,saturating_factor,saturating_proximity
+Anglosphere ex-US,I0,0.0471,0.9529,I0,0.0424,0.9576
+Continental Europe,I0,0.0201,0.9799,I0,0.0178,0.9822
+Hindu,I0,0.0421,0.9579,I0,0.0344,0.9656
+Islamic,I0,0.0255,0.9745,I0,0.0212,0.9788
+Japanese,I0,0.0611,0.9389,I0,0.0585,0.9415
+Other Civilizations,I0,0.0349,0.9651,I0,0.0312,0.9688
+Other Western,I0,0.3319,0.6681,I0,0.3074,0.6926
+Sinic,I0,0.0103,0.9897,I0,0.0089,0.9911
+United States,I0,0.0125,0.9875,I0,0.0112,0.9888

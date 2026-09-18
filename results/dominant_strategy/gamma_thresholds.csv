@@ -1,0 +1,31 @@
+﻿focal,phi,host_recruits,metric,gamma_max,gamma_threshold
+Sinic,0.5,True,field_hits_total,6.0,0.0
+Sinic,0.5,True,focal_hosted_hits,6.0,4.465351212769747
+Sinic,0.5,True,field_PI_total,6.0,0.4510608036071062
+Sinic,1.0,True,field_hits_total,6.0,0.0
+Sinic,1.0,True,focal_hosted_hits,6.0,3.4629701748490334
+Sinic,1.0,True,field_PI_total,6.0,0.3682488575577736
+Sinic,2.0,True,field_hits_total,6.0,0.0
+Sinic,2.0,True,focal_hosted_hits,6.0,2.4760228861123323
+Sinic,2.0,True,field_PI_total,6.0,0.2813552990555763
+Sinic,4.0,True,field_hits_total,6.0,0.0
+Sinic,4.0,True,focal_hosted_hits,6.0,1.8029845152050257
+Sinic,4.0,True,field_PI_total,6.0,0.2121938243508339
+Sinic,8.0,True,field_hits_total,6.0,0.0
+Sinic,8.0,True,focal_hosted_hits,6.0,1.4535500351339579
+Sinic,8.0,True,field_PI_total,6.0,0.16592412628233433
+United States,0.5,True,field_hits_total,6.0,4.946239756420255
+United States,0.5,True,focal_hosted_hits,6.0,
+United States,0.5,True,field_PI_total,6.0,
+United States,1.0,True,field_hits_total,6.0,3.075723174959421
+United States,1.0,True,focal_hosted_hits,6.0,
+United States,1.0,True,field_PI_total,6.0,4.970450548455119
+United States,2.0,True,field_hits_total,6.0,1.5216056015342474
+United States,2.0,True,focal_hosted_hits,6.0,
+United States,2.0,True,field_PI_total,6.0,2.482867442071438
+United States,4.0,True,field_hits_total,6.0,0.7942543588578701
+United States,4.0,True,focal_hosted_hits,6.0,5.424810826778412
+United States,4.0,True,field_PI_total,6.0,1.2203788217157125
+United States,8.0,True,field_hits_total,6.0,0.5233193077147007
+United States,8.0,True,focal_hosted_hits,6.0,3.007255230098963
+United States,8.0,True,field_PI_total,6.0,0.7458620388060808

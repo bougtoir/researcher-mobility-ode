@@ -1,0 +1,918 @@
+origin_group,year,compartment,inflow
+Anglosphere ex-US,2000,A,101
+Anglosphere ex-US,2000,D,1816
+Anglosphere ex-US,2000,H_A,66
+Anglosphere ex-US,2000,H_D,895
+Anglosphere ex-US,2000,P_A,252
+Anglosphere ex-US,2000,P_D,2810
+Anglosphere ex-US,2001,A,54
+Anglosphere ex-US,2001,D,1320
+Anglosphere ex-US,2001,H_A,38
+Anglosphere ex-US,2001,H_D,586
+Anglosphere ex-US,2001,P_A,92
+Anglosphere ex-US,2001,P_D,1767
+Anglosphere ex-US,2002,A,95
+Anglosphere ex-US,2002,D,2311
+Anglosphere ex-US,2002,H_A,34
+Anglosphere ex-US,2002,H_D,660
+Anglosphere ex-US,2002,P_A,206
+Anglosphere ex-US,2002,P_D,2529
+Anglosphere ex-US,2003,A,36
+Anglosphere ex-US,2003,D,1578
+Anglosphere ex-US,2003,H_A,25
+Anglosphere ex-US,2003,H_D,556
+Anglosphere ex-US,2003,P_A,88
+Anglosphere ex-US,2003,P_D,1462
+Anglosphere ex-US,2004,A,58
+Anglosphere ex-US,2004,D,1497
+Anglosphere ex-US,2004,H_A,27
+Anglosphere ex-US,2004,H_D,563
+Anglosphere ex-US,2004,P_A,74
+Anglosphere ex-US,2004,P_D,1379
+Anglosphere ex-US,2005,A,62
+Anglosphere ex-US,2005,D,1569
+Anglosphere ex-US,2005,H_A,27
+Anglosphere ex-US,2005,H_D,643
+Anglosphere ex-US,2005,P_A,74
+Anglosphere ex-US,2005,P_D,1309
+Anglosphere ex-US,2006,A,72
+Anglosphere ex-US,2006,D,1656
+Anglosphere ex-US,2006,H_A,27
+Anglosphere ex-US,2006,H_D,672
+Anglosphere ex-US,2006,P_A,80
+Anglosphere ex-US,2006,P_D,1235
+Anglosphere ex-US,2007,A,57
+Anglosphere ex-US,2007,D,1502
+Anglosphere ex-US,2007,H_A,43
+Anglosphere ex-US,2007,H_D,634
+Anglosphere ex-US,2007,P_A,66
+Anglosphere ex-US,2007,P_D,1167
+Anglosphere ex-US,2008,A,62
+Anglosphere ex-US,2008,D,1442
+Anglosphere ex-US,2008,H_A,36
+Anglosphere ex-US,2008,H_D,747
+Anglosphere ex-US,2008,P_A,46
+Anglosphere ex-US,2008,P_D,1028
+Anglosphere ex-US,2009,A,48
+Anglosphere ex-US,2009,D,1482
+Anglosphere ex-US,2009,H_A,24
+Anglosphere ex-US,2009,H_D,633
+Anglosphere ex-US,2009,P_A,56
+Anglosphere ex-US,2009,P_D,987
+Anglosphere ex-US,2010,A,61
+Anglosphere ex-US,2010,D,1518
+Anglosphere ex-US,2010,H_A,35
+Anglosphere ex-US,2010,H_D,691
+Anglosphere ex-US,2010,P_A,50
+Anglosphere ex-US,2010,P_D,952
+Anglosphere ex-US,2011,A,40
+Anglosphere ex-US,2011,D,1496
+Anglosphere ex-US,2011,H_A,33
+Anglosphere ex-US,2011,H_D,676
+Anglosphere ex-US,2011,P_A,36
+Anglosphere ex-US,2011,P_D,920
+Anglosphere ex-US,2012,A,65
+Anglosphere ex-US,2012,D,1527
+Anglosphere ex-US,2012,H_A,41
+Anglosphere ex-US,2012,H_D,693
+Anglosphere ex-US,2012,P_A,38
+Anglosphere ex-US,2012,P_D,914
+Anglosphere ex-US,2013,A,47
+Anglosphere ex-US,2013,D,1531
+Anglosphere ex-US,2013,H_A,50
+Anglosphere ex-US,2013,H_D,760
+Anglosphere ex-US,2013,P_A,47
+Anglosphere ex-US,2013,P_D,939
+Anglosphere ex-US,2014,A,65
+Anglosphere ex-US,2014,D,1612
+Anglosphere ex-US,2014,H_A,51
+Anglosphere ex-US,2014,H_D,822
+Anglosphere ex-US,2014,P_A,33
+Anglosphere ex-US,2014,P_D,925
+Anglosphere ex-US,2015,A,56
+Anglosphere ex-US,2015,D,1623
+Anglosphere ex-US,2015,H_A,54
+Anglosphere ex-US,2015,H_D,883
+Anglosphere ex-US,2015,P_A,44
+Anglosphere ex-US,2015,P_D,929
+Anglosphere ex-US,2016,A,50
+Anglosphere ex-US,2016,D,1467
+Anglosphere ex-US,2016,H_A,72
+Anglosphere ex-US,2016,H_D,958
+Anglosphere ex-US,2016,P_A,43
+Anglosphere ex-US,2016,P_D,814
+Continental Europe,2000,A,162
+Continental Europe,2000,D,4614
+Continental Europe,2000,H_A,118
+Continental Europe,2000,H_D,2006
+Continental Europe,2000,P_A,365
+Continental Europe,2000,P_D,5949
+Continental Europe,2001,A,87
+Continental Europe,2001,D,3525
+Continental Europe,2001,H_A,51
+Continental Europe,2001,H_D,1246
+Continental Europe,2001,P_A,156
+Continental Europe,2001,P_D,3681
+Continental Europe,2002,A,129
+Continental Europe,2002,D,5269
+Continental Europe,2002,H_A,61
+Continental Europe,2002,H_D,1369
+Continental Europe,2002,P_A,212
+Continental Europe,2002,P_D,5036
+Continental Europe,2003,A,88
+Continental Europe,2003,D,3887
+Continental Europe,2003,H_A,50
+Continental Europe,2003,H_D,1207
+Continental Europe,2003,P_A,92
+Continental Europe,2003,P_D,3210
+Continental Europe,2004,A,82
+Continental Europe,2004,D,3748
+Continental Europe,2004,H_A,48
+Continental Europe,2004,H_D,1267
+Continental Europe,2004,P_A,70
+Continental Europe,2004,P_D,2994
+Continental Europe,2005,A,102
+Continental Europe,2005,D,3874
+Continental Europe,2005,H_A,60
+Continental Europe,2005,H_D,1441
+Continental Europe,2005,P_A,114
+Continental Europe,2005,P_D,3146
+Continental Europe,2006,A,146
+Continental Europe,2006,D,4558
+Continental Europe,2006,H_A,85
+Continental Europe,2006,H_D,1529
+Continental Europe,2006,P_A,124
+Continental Europe,2006,P_D,3213
+Continental Europe,2007,A,109
+Continental Europe,2007,D,4225
+Continental Europe,2007,H_A,64
+Continental Europe,2007,H_D,1591
+Continental Europe,2007,P_A,83
+Continental Europe,2007,P_D,3027
+Continental Europe,2008,A,143
+Continental Europe,2008,D,4675
+Continental Europe,2008,H_A,92
+Continental Europe,2008,H_D,1827
+Continental Europe,2008,P_A,117
+Continental Europe,2008,P_D,3084
+Continental Europe,2009,A,118
+Continental Europe,2009,D,4712
+Continental Europe,2009,H_A,74
+Continental Europe,2009,H_D,1779
+Continental Europe,2009,P_A,89
+Continental Europe,2009,P_D,2950
+Continental Europe,2010,A,132
+Continental Europe,2010,D,4856
+Continental Europe,2010,H_A,67
+Continental Europe,2010,H_D,1976
+Continental Europe,2010,P_A,92
+Continental Europe,2010,P_D,3082
+Continental Europe,2011,A,149
+Continental Europe,2011,D,4803
+Continental Europe,2011,H_A,74
+Continental Europe,2011,H_D,2003
+Continental Europe,2011,P_A,92
+Continental Europe,2011,P_D,2817
+Continental Europe,2012,A,157
+Continental Europe,2012,D,4827
+Continental Europe,2012,H_A,73
+Continental Europe,2012,H_D,2137
+Continental Europe,2012,P_A,92
+Continental Europe,2012,P_D,2983
+Continental Europe,2013,A,149
+Continental Europe,2013,D,4701
+Continental Europe,2013,H_A,79
+Continental Europe,2013,H_D,2101
+Continental Europe,2013,P_A,86
+Continental Europe,2013,P_D,2982
+Continental Europe,2014,A,129
+Continental Europe,2014,D,5118
+Continental Europe,2014,H_A,94
+Continental Europe,2014,H_D,2053
+Continental Europe,2014,P_A,97
+Continental Europe,2014,P_D,2789
+Continental Europe,2015,A,136
+Continental Europe,2015,D,4911
+Continental Europe,2015,H_A,96
+Continental Europe,2015,H_D,2221
+Continental Europe,2015,P_A,101
+Continental Europe,2015,P_D,2637
+Continental Europe,2016,A,170
+Continental Europe,2016,D,4804
+Continental Europe,2016,H_A,112
+Continental Europe,2016,H_D,2298
+Continental Europe,2016,P_A,91
+Continental Europe,2016,P_D,2614
+Hindu,2000,A,6
+Hindu,2000,D,210
+Hindu,2000,H_A,2
+Hindu,2000,H_D,47
+Hindu,2000,P_A,15
+Hindu,2000,P_D,236
+Hindu,2001,A,3
+Hindu,2001,D,222
+Hindu,2001,H_A,1
+Hindu,2001,H_D,35
+Hindu,2001,P_A,5
+Hindu,2001,P_D,203
+Hindu,2002,A,8
+Hindu,2002,D,361
+Hindu,2002,H_A,1
+Hindu,2002,H_D,28
+Hindu,2002,P_A,10
+Hindu,2002,P_D,312
+Hindu,2003,A,12
+Hindu,2003,D,258
+Hindu,2003,H_A,1
+Hindu,2003,H_D,54
+Hindu,2003,P_A,7
+Hindu,2003,P_D,221
+Hindu,2004,A,5
+Hindu,2004,D,301
+Hindu,2004,H_A,2
+Hindu,2004,H_D,47
+Hindu,2004,P_A,3
+Hindu,2004,P_D,216
+Hindu,2005,A,9
+Hindu,2005,D,327
+Hindu,2005,H_A,4
+Hindu,2005,H_D,52
+Hindu,2005,P_A,9
+Hindu,2005,P_D,240
+Hindu,2006,A,20
+Hindu,2006,D,510
+Hindu,2006,H_A,4
+Hindu,2006,H_D,67
+Hindu,2006,P_A,12
+Hindu,2006,P_D,306
+Hindu,2007,A,15
+Hindu,2007,D,437
+Hindu,2007,H_A,7
+Hindu,2007,H_D,93
+Hindu,2007,P_A,10
+Hindu,2007,P_D,315
+Hindu,2008,A,12
+Hindu,2008,D,561
+Hindu,2008,H_A,10
+Hindu,2008,H_D,144
+Hindu,2008,P_A,10
+Hindu,2008,P_D,364
+Hindu,2009,A,11
+Hindu,2009,D,758
+Hindu,2009,H_A,5
+Hindu,2009,H_D,148
+Hindu,2009,P_A,14
+Hindu,2009,P_D,438
+Hindu,2010,A,28
+Hindu,2010,D,993
+Hindu,2010,H_A,6
+Hindu,2010,H_D,221
+Hindu,2010,P_A,21
+Hindu,2010,P_D,584
+Hindu,2011,A,20
+Hindu,2011,D,1211
+Hindu,2011,H_A,2
+Hindu,2011,H_D,239
+Hindu,2011,P_A,14
+Hindu,2011,P_D,704
+Hindu,2012,A,21
+Hindu,2012,D,1435
+Hindu,2012,H_A,8
+Hindu,2012,H_D,290
+Hindu,2012,P_A,28
+Hindu,2012,P_D,983
+Hindu,2013,A,24
+Hindu,2013,D,1419
+Hindu,2013,H_A,12
+Hindu,2013,H_D,310
+Hindu,2013,P_A,24
+Hindu,2013,P_D,901
+Hindu,2014,A,13
+Hindu,2014,D,1759
+Hindu,2014,H_A,6
+Hindu,2014,H_D,363
+Hindu,2014,P_A,18
+Hindu,2014,P_D,1117
+Hindu,2015,A,24
+Hindu,2015,D,1882
+Hindu,2015,H_A,8
+Hindu,2015,H_D,491
+Hindu,2015,P_A,19
+Hindu,2015,P_D,1131
+Hindu,2016,A,25
+Hindu,2016,D,2074
+Hindu,2016,H_A,15
+Hindu,2016,H_D,608
+Hindu,2016,P_A,21
+Hindu,2016,P_D,1253
+Islamic,2000,A,16
+Islamic,2000,D,286
+Islamic,2000,H_A,5
+Islamic,2000,H_D,45
+Islamic,2000,P_A,16
+Islamic,2000,P_D,288
+Islamic,2001,A,9
+Islamic,2001,D,240
+Islamic,2001,H_A,2
+Islamic,2001,H_D,38
+Islamic,2001,P_A,21
+Islamic,2001,P_D,220
+Islamic,2002,A,30
+Islamic,2002,D,520
+Islamic,2002,H_A,10
+Islamic,2002,H_D,53
+Islamic,2002,P_A,35
+Islamic,2002,P_D,435
+Islamic,2003,A,26
+Islamic,2003,D,399
+Islamic,2003,H_A,6
+Islamic,2003,H_D,54
+Islamic,2003,P_A,19
+Islamic,2003,P_D,352
+Islamic,2004,A,18
+Islamic,2004,D,550
+Islamic,2004,H_A,6
+Islamic,2004,H_D,71
+Islamic,2004,P_A,14
+Islamic,2004,P_D,412
+Islamic,2005,A,31
+Islamic,2005,D,611
+Islamic,2005,H_A,5
+Islamic,2005,H_D,87
+Islamic,2005,P_A,29
+Islamic,2005,P_D,493
+Islamic,2006,A,48
+Islamic,2006,D,896
+Islamic,2006,H_A,5
+Islamic,2006,H_D,116
+Islamic,2006,P_A,20
+Islamic,2006,P_D,630
+Islamic,2007,A,57
+Islamic,2007,D,948
+Islamic,2007,H_A,17
+Islamic,2007,H_D,163
+Islamic,2007,P_A,31
+Islamic,2007,P_D,662
+Islamic,2008,A,42
+Islamic,2008,D,1307
+Islamic,2008,H_A,13
+Islamic,2008,H_D,232
+Islamic,2008,P_A,24
+Islamic,2008,P_D,825
+Islamic,2009,A,62
+Islamic,2009,D,1493
+Islamic,2009,H_A,15
+Islamic,2009,H_D,303
+Islamic,2009,P_A,28
+Islamic,2009,P_D,1010
+Islamic,2010,A,71
+Islamic,2010,D,1790
+Islamic,2010,H_A,15
+Islamic,2010,H_D,353
+Islamic,2010,P_A,50
+Islamic,2010,P_D,1166
+Islamic,2011,A,63
+Islamic,2011,D,1945
+Islamic,2011,H_A,18
+Islamic,2011,H_D,465
+Islamic,2011,P_A,42
+Islamic,2011,P_D,1310
+Islamic,2012,A,86
+Islamic,2012,D,2371
+Islamic,2012,H_A,23
+Islamic,2012,H_D,412
+Islamic,2012,P_A,53
+Islamic,2012,P_D,1699
+Islamic,2013,A,105
+Islamic,2013,D,2595
+Islamic,2013,H_A,26
+Islamic,2013,H_D,532
+Islamic,2013,P_A,52
+Islamic,2013,P_D,1801
+Islamic,2014,A,118
+Islamic,2014,D,2953
+Islamic,2014,H_A,30
+Islamic,2014,H_D,610
+Islamic,2014,P_A,56
+Islamic,2014,P_D,1959
+Islamic,2015,A,108
+Islamic,2015,D,3369
+Islamic,2015,H_A,45
+Islamic,2015,H_D,747
+Islamic,2015,P_A,52
+Islamic,2015,P_D,2262
+Islamic,2016,A,114
+Islamic,2016,D,3432
+Islamic,2016,H_A,32
+Islamic,2016,H_D,950
+Islamic,2016,P_A,61
+Islamic,2016,P_D,2703
+Japanese,2000,A,61
+Japanese,2000,D,1373
+Japanese,2000,H_A,21
+Japanese,2000,H_D,261
+Japanese,2000,P_A,72
+Japanese,2000,P_D,1111
+Japanese,2001,A,39
+Japanese,2001,D,1111
+Japanese,2001,H_A,15
+Japanese,2001,H_D,161
+Japanese,2001,P_A,26
+Japanese,2001,P_D,747
+Japanese,2002,A,56
+Japanese,2002,D,2211
+Japanese,2002,H_A,12
+Japanese,2002,H_D,293
+Japanese,2002,P_A,65
+Japanese,2002,P_D,1446
+Japanese,2003,A,23
+Japanese,2003,D,1319
+Japanese,2003,H_A,6
+Japanese,2003,H_D,163
+Japanese,2003,P_A,16
+Japanese,2003,P_D,623
+Japanese,2004,A,22
+Japanese,2004,D,1018
+Japanese,2004,H_A,7
+Japanese,2004,H_D,164
+Japanese,2004,P_A,18
+Japanese,2004,P_D,429
+Japanese,2005,A,30
+Japanese,2005,D,1211
+Japanese,2005,H_A,10
+Japanese,2005,H_D,172
+Japanese,2005,P_A,17
+Japanese,2005,P_D,549
+Japanese,2006,A,28
+Japanese,2006,D,1174
+Japanese,2006,H_A,5
+Japanese,2006,H_D,190
+Japanese,2006,P_A,20
+Japanese,2006,P_D,462
+Japanese,2007,A,24
+Japanese,2007,D,1133
+Japanese,2007,H_A,10
+Japanese,2007,H_D,196
+Japanese,2007,P_A,17
+Japanese,2007,P_D,449
+Japanese,2008,A,23
+Japanese,2008,D,1138
+Japanese,2008,H_A,10
+Japanese,2008,H_D,206
+Japanese,2008,P_A,12
+Japanese,2008,P_D,421
+Japanese,2009,A,14
+Japanese,2009,D,1049
+Japanese,2009,H_A,8
+Japanese,2009,H_D,161
+Japanese,2009,P_A,12
+Japanese,2009,P_D,326
+Japanese,2010,A,15
+Japanese,2010,D,975
+Japanese,2010,H_A,5
+Japanese,2010,H_D,128
+Japanese,2010,P_A,16
+Japanese,2010,P_D,331
+Japanese,2011,A,17
+Japanese,2011,D,995
+Japanese,2011,H_A,4
+Japanese,2011,H_D,191
+Japanese,2011,P_A,10
+Japanese,2011,P_D,297
+Japanese,2012,A,15
+Japanese,2012,D,1020
+Japanese,2012,H_A,7
+Japanese,2012,H_D,154
+Japanese,2012,P_A,8
+Japanese,2012,P_D,359
+Japanese,2013,A,20
+Japanese,2013,D,953
+Japanese,2013,H_A,7
+Japanese,2013,H_D,140
+Japanese,2013,P_A,10
+Japanese,2013,P_D,309
+Japanese,2014,A,20
+Japanese,2014,D,928
+Japanese,2014,H_A,11
+Japanese,2014,H_D,129
+Japanese,2014,P_A,16
+Japanese,2014,P_D,294
+Japanese,2015,A,21
+Japanese,2015,D,887
+Japanese,2015,H_A,10
+Japanese,2015,H_D,140
+Japanese,2015,P_A,8
+Japanese,2015,P_D,270
+Japanese,2016,A,13
+Japanese,2016,D,859
+Japanese,2016,H_A,5
+Japanese,2016,H_D,198
+Japanese,2016,P_A,8
+Japanese,2016,P_D,238
+Other Civilizations,2000,A,110
+Other Civilizations,2000,D,959
+Other Civilizations,2000,H_A,25
+Other Civilizations,2000,H_D,195
+Other Civilizations,2000,P_A,135
+Other Civilizations,2000,P_D,922
+Other Civilizations,2001,A,67
+Other Civilizations,2001,D,737
+Other Civilizations,2001,H_A,21
+Other Civilizations,2001,H_D,149
+Other Civilizations,2001,P_A,62
+Other Civilizations,2001,P_D,738
+Other Civilizations,2002,A,89
+Other Civilizations,2002,D,1266
+Other Civilizations,2002,H_A,27
+Other Civilizations,2002,H_D,168
+Other Civilizations,2002,P_A,80
+Other Civilizations,2002,P_D,1063
+Other Civilizations,2003,A,66
+Other Civilizations,2003,D,986
+Other Civilizations,2003,H_A,18
+Other Civilizations,2003,H_D,128
+Other Civilizations,2003,P_A,51
+Other Civilizations,2003,P_D,728
+Other Civilizations,2004,A,72
+Other Civilizations,2004,D,1020
+Other Civilizations,2004,H_A,14
+Other Civilizations,2004,H_D,167
+Other Civilizations,2004,P_A,45
+Other Civilizations,2004,P_D,765
+Other Civilizations,2005,A,54
+Other Civilizations,2005,D,1093
+Other Civilizations,2005,H_A,15
+Other Civilizations,2005,H_D,194
+Other Civilizations,2005,P_A,55
+Other Civilizations,2005,P_D,709
+Other Civilizations,2006,A,80
+Other Civilizations,2006,D,1371
+Other Civilizations,2006,H_A,22
+Other Civilizations,2006,H_D,247
+Other Civilizations,2006,P_A,54
+Other Civilizations,2006,P_D,915
+Other Civilizations,2007,A,78
+Other Civilizations,2007,D,1424
+Other Civilizations,2007,H_A,25
+Other Civilizations,2007,H_D,219
+Other Civilizations,2007,P_A,58
+Other Civilizations,2007,P_D,912
+Other Civilizations,2008,A,97
+Other Civilizations,2008,D,1442
+Other Civilizations,2008,H_A,26
+Other Civilizations,2008,H_D,237
+Other Civilizations,2008,P_A,64
+Other Civilizations,2008,P_D,847
+Other Civilizations,2009,A,90
+Other Civilizations,2009,D,1454
+Other Civilizations,2009,H_A,32
+Other Civilizations,2009,H_D,273
+Other Civilizations,2009,P_A,63
+Other Civilizations,2009,P_D,933
+Other Civilizations,2010,A,115
+Other Civilizations,2010,D,1606
+Other Civilizations,2010,H_A,25
+Other Civilizations,2010,H_D,269
+Other Civilizations,2010,P_A,58
+Other Civilizations,2010,P_D,909
+Other Civilizations,2011,A,90
+Other Civilizations,2011,D,1636
+Other Civilizations,2011,H_A,29
+Other Civilizations,2011,H_D,282
+Other Civilizations,2011,P_A,53
+Other Civilizations,2011,P_D,995
+Other Civilizations,2012,A,94
+Other Civilizations,2012,D,1856
+Other Civilizations,2012,H_A,20
+Other Civilizations,2012,H_D,314
+Other Civilizations,2012,P_A,60
+Other Civilizations,2012,P_D,1023
+Other Civilizations,2013,A,99
+Other Civilizations,2013,D,2047
+Other Civilizations,2013,H_A,26
+Other Civilizations,2013,H_D,378
+Other Civilizations,2013,P_A,63
+Other Civilizations,2013,P_D,1096
+Other Civilizations,2014,A,122
+Other Civilizations,2014,D,2249
+Other Civilizations,2014,H_A,39
+Other Civilizations,2014,H_D,368
+Other Civilizations,2014,P_A,79
+Other Civilizations,2014,P_D,1320
+Other Civilizations,2015,A,114
+Other Civilizations,2015,D,2342
+Other Civilizations,2015,H_A,50
+Other Civilizations,2015,H_D,494
+Other Civilizations,2015,P_A,71
+Other Civilizations,2015,P_D,1343
+Other Civilizations,2016,A,106
+Other Civilizations,2016,D,2379
+Other Civilizations,2016,H_A,43
+Other Civilizations,2016,H_D,616
+Other Civilizations,2016,P_A,63
+Other Civilizations,2016,P_D,1343
+Other Western,2000,A,17
+Other Western,2000,D,120
+Other Western,2000,H_A,15
+Other Western,2000,H_D,71
+Other Western,2000,P_A,29
+Other Western,2000,P_D,198
+Other Western,2001,A,11
+Other Western,2001,D,85
+Other Western,2001,H_A,8
+Other Western,2001,H_D,32
+Other Western,2001,P_A,13
+Other Western,2001,P_D,110
+Other Western,2002,A,11
+Other Western,2002,D,123
+Other Western,2002,H_A,7
+Other Western,2002,H_D,62
+Other Western,2002,P_A,19
+Other Western,2002,P_D,127
+Other Western,2003,A,4
+Other Western,2003,D,93
+Other Western,2003,H_A,2
+Other Western,2003,H_D,44
+Other Western,2003,P_A,18
+Other Western,2003,P_D,77
+Other Western,2004,A,6
+Other Western,2004,D,93
+Other Western,2004,H_A,1
+Other Western,2004,H_D,58
+Other Western,2004,P_A,6
+Other Western,2004,P_D,104
+Other Western,2005,A,3
+Other Western,2005,D,108
+Other Western,2005,H_A,4
+Other Western,2005,H_D,39
+Other Western,2005,P_A,5
+Other Western,2005,P_D,65
+Other Western,2006,A,11
+Other Western,2006,D,104
+Other Western,2006,H_A,4
+Other Western,2006,H_D,46
+Other Western,2006,P_A,8
+Other Western,2006,P_D,82
+Other Western,2007,A,8
+Other Western,2007,D,93
+Other Western,2007,H_A,2
+Other Western,2007,H_D,50
+Other Western,2007,P_A,14
+Other Western,2007,P_D,54
+Other Western,2008,A,6
+Other Western,2008,D,89
+Other Western,2008,H_A,2
+Other Western,2008,H_D,53
+Other Western,2008,P_A,7
+Other Western,2008,P_D,75
+Other Western,2009,A,5
+Other Western,2009,D,68
+Other Western,2009,H_A,2
+Other Western,2009,H_D,51
+Other Western,2009,P_A,5
+Other Western,2009,P_D,72
+Other Western,2010,A,8
+Other Western,2010,D,104
+Other Western,2010,H_A,5
+Other Western,2010,H_D,31
+Other Western,2010,P_A,11
+Other Western,2010,P_D,74
+Other Western,2011,A,8
+Other Western,2011,D,102
+Other Western,2011,H_A,5
+Other Western,2011,H_D,54
+Other Western,2011,P_A,8
+Other Western,2011,P_D,64
+Other Western,2012,A,6
+Other Western,2012,D,106
+Other Western,2012,H_A,4
+Other Western,2012,H_D,56
+Other Western,2012,P_A,5
+Other Western,2012,P_D,57
+Other Western,2013,A,7
+Other Western,2013,D,115
+Other Western,2013,H_A,6
+Other Western,2013,H_D,54
+Other Western,2013,P_A,5
+Other Western,2013,P_D,62
+Other Western,2014,A,12
+Other Western,2014,D,126
+Other Western,2014,H_A,5
+Other Western,2014,H_D,48
+Other Western,2014,P_A,5
+Other Western,2014,P_D,64
+Other Western,2015,A,7
+Other Western,2015,D,106
+Other Western,2015,H_A,6
+Other Western,2015,H_D,76
+Other Western,2015,P_D,48
+Other Western,2016,A,5
+Other Western,2016,D,101
+Other Western,2016,H_A,5
+Other Western,2016,H_D,63
+Other Western,2016,P_A,6
+Other Western,2016,P_D,58
+Sinic,2000,A,87
+Sinic,2000,D,1489
+Sinic,2000,H_A,28
+Sinic,2000,H_D,398
+Sinic,2000,P_A,121
+Sinic,2000,P_D,2022
+Sinic,2001,A,70
+Sinic,2001,D,1349
+Sinic,2001,H_A,18
+Sinic,2001,H_D,285
+Sinic,2001,P_A,87
+Sinic,2001,P_D,2051
+Sinic,2002,A,113
+Sinic,2002,D,3655
+Sinic,2002,H_A,36
+Sinic,2002,H_D,349
+Sinic,2002,P_A,176
+Sinic,2002,P_D,3819
+Sinic,2003,A,98
+Sinic,2003,D,2656
+Sinic,2003,H_A,30
+Sinic,2003,H_D,437
+Sinic,2003,P_A,109
+Sinic,2003,P_D,3694
+Sinic,2004,A,104
+Sinic,2004,D,3357
+Sinic,2004,H_A,37
+Sinic,2004,H_D,536
+Sinic,2004,P_A,125
+Sinic,2004,P_D,5671
+Sinic,2005,A,127
+Sinic,2005,D,4508
+Sinic,2005,H_A,31
+Sinic,2005,H_D,677
+Sinic,2005,P_A,167
+Sinic,2005,P_D,7206
+Sinic,2006,A,156
+Sinic,2006,D,5300
+Sinic,2006,H_A,44
+Sinic,2006,H_D,697
+Sinic,2006,P_A,176
+Sinic,2006,P_D,8297
+Sinic,2007,A,175
+Sinic,2007,D,4883
+Sinic,2007,H_A,48
+Sinic,2007,H_D,806
+Sinic,2007,P_A,158
+Sinic,2007,P_D,8489
+Sinic,2008,A,202
+Sinic,2008,D,5921
+Sinic,2008,H_A,71
+Sinic,2008,H_D,1008
+Sinic,2008,P_A,169
+Sinic,2008,P_D,8505
+Sinic,2009,A,130
+Sinic,2009,D,6436
+Sinic,2009,H_A,58
+Sinic,2009,H_D,947
+Sinic,2009,P_A,114
+Sinic,2009,P_D,8132
+Sinic,2010,A,148
+Sinic,2010,D,6815
+Sinic,2010,H_A,35
+Sinic,2010,H_D,986
+Sinic,2010,P_A,130
+Sinic,2010,P_D,7731
+Sinic,2011,A,151
+Sinic,2011,D,5740
+Sinic,2011,H_A,50
+Sinic,2011,H_D,1002
+Sinic,2011,P_A,100
+Sinic,2011,P_D,6246
+Sinic,2012,A,196
+Sinic,2012,D,5630
+Sinic,2012,H_A,59
+Sinic,2012,H_D,1051
+Sinic,2012,P_A,103
+Sinic,2012,P_D,4804
+Sinic,2013,A,170
+Sinic,2013,D,5617
+Sinic,2013,H_A,74
+Sinic,2013,H_D,1331
+Sinic,2013,P_A,122
+Sinic,2013,P_D,4330
+Sinic,2014,A,212
+Sinic,2014,D,5668
+Sinic,2014,H_A,90
+Sinic,2014,H_D,1424
+Sinic,2014,P_A,134
+Sinic,2014,P_D,3586
+Sinic,2015,A,157
+Sinic,2015,D,5099
+Sinic,2015,H_A,80
+Sinic,2015,H_D,1684
+Sinic,2015,P_A,87
+Sinic,2015,P_D,2539
+Sinic,2016,A,172
+Sinic,2016,D,5179
+Sinic,2016,H_A,118
+Sinic,2016,H_D,2113
+Sinic,2016,P_A,86
+Sinic,2016,P_D,2357
+United States,2000,A,184
+United States,2000,D,3198
+United States,2000,H_A,164
+United States,2000,H_D,2212
+United States,2000,P_A,406
+United States,2000,P_D,5387
+United States,2001,A,119
+United States,2001,D,2413
+United States,2001,H_A,84
+United States,2001,H_D,1635
+United States,2001,P_A,218
+United States,2001,P_D,3510
+United States,2002,A,210
+United States,2002,D,5259
+United States,2002,H_A,83
+United States,2002,H_D,1990
+United States,2002,P_A,390
+United States,2002,P_D,6413
+United States,2003,A,134
+United States,2003,D,3368
+United States,2003,H_A,61
+United States,2003,H_D,1588
+United States,2003,P_A,144
+United States,2003,P_D,3308
+United States,2004,A,107
+United States,2004,D,2984
+United States,2004,H_A,55
+United States,2004,H_D,1541
+United States,2004,P_A,123
+United States,2004,P_D,2688
+United States,2005,A,121
+United States,2005,D,3157
+United States,2005,H_A,84
+United States,2005,H_D,1628
+United States,2005,P_A,143
+United States,2005,P_D,2902
+United States,2006,A,141
+United States,2006,D,3236
+United States,2006,H_A,78
+United States,2006,H_D,1523
+United States,2006,P_A,142
+United States,2006,P_D,2669
+United States,2007,A,138
+United States,2007,D,2781
+United States,2007,H_A,70
+United States,2007,H_D,1569
+United States,2007,P_A,132
+United States,2007,P_D,2303
+United States,2008,A,134
+United States,2008,D,2578
+United States,2008,H_A,90
+United States,2008,H_D,1562
+United States,2008,P_A,133
+United States,2008,P_D,2182
+United States,2009,A,149
+United States,2009,D,2700
+United States,2009,H_A,78
+United States,2009,H_D,1478
+United States,2009,P_A,134
+United States,2009,P_D,2044
+United States,2010,A,121
+United States,2010,D,2791
+United States,2010,H_A,96
+United States,2010,H_D,1472
+United States,2010,P_A,103
+United States,2010,P_D,2046
+United States,2011,A,124
+United States,2011,D,2839
+United States,2011,H_A,91
+United States,2011,H_D,1604
+United States,2011,P_A,106
+United States,2011,P_D,2009
+United States,2012,A,157
+United States,2012,D,2805
+United States,2012,H_A,75
+United States,2012,H_D,1558
+United States,2012,P_A,114
+United States,2012,P_D,1867
+United States,2013,A,184
+United States,2013,D,2885
+United States,2013,H_A,102
+United States,2013,H_D,1576
+United States,2013,P_A,126
+United States,2013,P_D,1841
+United States,2014,A,161
+United States,2014,D,3306
+United States,2014,H_A,105
+United States,2014,H_D,1779
+United States,2014,P_A,101
+United States,2014,P_D,1815
+United States,2015,A,157
+United States,2015,D,3329
+United States,2015,H_A,99
+United States,2015,H_D,1761
+United States,2015,P_A,104
+United States,2015,P_D,1750
+United States,2016,A,150
+United States,2016,D,3257
+United States,2016,H_A,119
+United States,2016,H_D,2213
+United States,2016,P_A,93
+United States,2016,P_D,1761
