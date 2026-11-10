@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Build a Technology in Society full-article manuscript from ODE result CSVs.
+"""Build a Journal of Informetrics full-length-article manuscript from ODE result CSVs.
 
 Outputs (regenerated from results/* CSVs, no hard-coded numbers):
-- docs/manuscript_full_article.docx (+ _blinded.docx for double-anonymised review)
-- docs/manuscript_full_article.md
-- docs/manuscript_full_article_figures.pptx
+- docs/JOI_MANUSCRIPT_FINAL.docx (+ JOI_MANUSCRIPT_BLINDED.docx for double-anonymised review)
+- docs/JOI_MANUSCRIPT_FINAL.md
+- docs/JOI_FIGURES_EDITABLE.pptx
 - docs/supplementary_material.docx
-- docs/highlights.docx (separate editable file, 3-5 bullets <= 85 characters)
+- docs/JOI_HIGHLIGHTS.docx (separate editable file, 3-5 bullets <= 85 characters)
 - docs/figures/*.png
 
 All numerical values are read from the result CSVs produced by the analysis
@@ -557,7 +557,7 @@ def build_figure3(eq, fig_dir: Path):
 
 
 def build_figure4(pnr_closest, fig_dir: Path):
-    """Closest point-of-no-return proximity by group."""
+    """Closest viability-boundary proximity by group."""
     fig_dir.mkdir(parents=True, exist_ok=True)
     pnr_closest = pnr_closest.sort_values("proximity")
     groups = pnr_closest["group"].tolist()
@@ -573,7 +573,7 @@ def build_figure4(pnr_closest, fig_dir: Path):
         ax.text(width + 0.01, bar.get_y() + bar.get_height() / 2,
                 label, va="center", fontsize=7)
     ax.set_xlabel("Required proportional change in rate |critical factor − 1|")
-    ax.set_title("Closest point-of-no-return sensitivity by group (smaller = more fragile)")
+    ax.set_title("Closest viability-boundary sensitivity by group (smaller = more fragile)")
     xmax = max(1.2, max(prox) * 1.15) if prox else 1.2
     ax.set_xlim(0, xmax)
     ax.axvline(1.0, color="gray", linestyle="--", linewidth=0.8)
@@ -755,7 +755,7 @@ def build_figure10(trans_rates, eq, fig_dir: Path):
 
 
 def build_figure11(eq, pnr_active, fig_dir: Path):
-    """T/M safety margin versus closest PNR proximity for all macro-regions."""
+    """T/M safety margin versus closest boundary proximity for all macro-regions."""
     fig_dir.mkdir(parents=True, exist_ok=True)
 
     active = pnr_active[(pnr_active["target"] == "domestic_active") & (pnr_active["is_within_bounds"])].copy()
@@ -775,11 +775,11 @@ def build_figure11(eq, pnr_active, fig_dir: Path):
                     textcoords="offset points", xytext=(6, 4), fontsize=8)
     ax.axvline(1.0, color="gray", linestyle="--", lw=1)
     ax.set_xlabel("T / M (equilibrium active pool / minimum viable threshold)", fontsize=10)
-    ax.set_ylabel("PNR proximity (|critical factor − 1|)\nsmaller = more fragile", fontsize=10)
-    ax.set_title("Model evaluation: safety margin vs. point-of-no-return proximity", fontsize=11, weight="bold")
+    ax.set_ylabel("boundary proximity (|critical factor − 1|)\nsmaller = more fragile", fontsize=10)
+    ax.set_title("Model evaluation: safety margin vs. viability-boundary proximity", fontsize=11, weight="bold")
 
     ja = merged[merged["group"] == JAPAN].iloc[0]
-    ax.annotate(f"Japan: PNR lever = {ja['rate_name']}",
+    ax.annotate(f"Japan: boundary lever = {ja['rate_name']}",
                 (ja["T_over_M"], ja["proximity"]),
                 textcoords="offset points", xytext=(-30, -25),
                 fontsize=9, color="red",
@@ -927,7 +927,7 @@ def load_m_sensitivity():
 
 
 def pi_proxy_table(pp):
-    """Supplementary table: T/M, rank and closest PNR lever under each PI proxy."""
+    """Supplementary table: T/M, rank and closest boundary lever under each PI proxy."""
     eqd = pp["equilibrium"]
     rows = []
     for d, sub in eqd.groupby("pi_definition", sort=False):
@@ -954,7 +954,7 @@ def pi_proxy_agreement_table(pp):
     a = a[a["pi_definition"] != "first_last"].copy()
     a["PI proxy"] = a["pi_definition"].map(PI_PROXY_LABELS)
     out = a[["PI proxy", "spearman_T_over_M", "spearman_proximity", "spearman_p_D", "spearman_P_D", "spearman_proximity_P", "n_closest_rate_same", "n_groups", "same_min_T_over_M_group"]].copy()
-    out.columns = ["PI proxy", "Spearman rho (T/M)", "Spearman rho (PNR proximity, T)", "Spearman rho (p_D)", "Spearman rho (P_D)", "Spearman rho (PNR proximity, P_D)", "Same closest lever (regions)", "Regions", "Same lowest-T/M region"]
+    out.columns = ["PI proxy", "Spearman rho (T/M)", "Spearman rho (boundary proximity, T)", "Spearman rho (p_D)", "Spearman rho (P_D)", "Spearman rho (boundary proximity, P_D)", "Same closest lever (regions)", "Regions", "Same lowest-T/M region"]
     out["Same lowest-T/M region"] = out["Same lowest-T/M region"].map({True: "yes", False: "no"})
     return out
 
@@ -1031,7 +1031,7 @@ def robustness_context(pp, ms):
 
 
 def robustness_paragraph(para, pp, ms):
-    """Main-text paragraph on PI-proxy and M-multiplier robustness (Section 5.5)."""
+    """Main-text paragraph on PI-proxy and M-multiplier robustness (Section 3.6)."""
     rc = robustness_context(pp, ms)
     if pp is None and ms is None:
         return
@@ -1042,7 +1042,7 @@ def robustness_paragraph(para, pp, ms):
             + (f"({rc['pp_n_snapshot']:,} authors under the same inclusion rules; the difference from Table 1 reflects OpenAlex updates to author and affiliation records between the two extractions) " if "pp_n_snapshot" in rc else "")
             + "and replacing the baseline definition (first last-author paper) with the first corresponding-author paper or with recurrence as last author (two or more last-author papers) changes the share of authors classified as PIs "
             f"(mean across macro-regions {_fmt(rc['pp_share_first_last']*100, 1)}%, {_fmt(rc['pp_share_corresponding']*100, 1)}% and {_fmt(rc['pp_share_recurrent']*100, 1)}% respectively), the promotion rates p_D and p_A, the equilibrium PI pool P_D and the split of recruitment between exogenous entry and PI-driven feedback. "
-            "Because I_0 is calibrated so that total equilibrium entry equals observed entry (Section 4.2), the active pool T, T/M and the proximity of the entry lever are invariant to the proxy by construction; the informative test is therefore whether the proxy-dependent quantities reorder the macro-regions. "
+            "Because I_0 is calibrated so that total equilibrium entry equals observed entry (Section 2.8), the active pool T, T/M and the proximity of the entry lever are invariant to the proxy by construction; the informative test is therefore whether the proxy-dependent quantities reorder the macro-regions. "
             + ("The ordering is preserved: " if min(rc['pp_rho_PD_min'], rc['pp_rho_proxP_min'], rc['pp_el_rho_min']) >= 0.9 else "The ordering is largely preserved: ")
             + f"Spearman rho with the baseline is at least {_fmt(rc['pp_rho_PD_min'], 2)} for the equilibrium PI pool and {_fmt(rc['pp_rho_proxP_min'], 2)} for the proximity of the PI pool to its own threshold, "
             f"the elasticity of T to p_D rises from {_fmt(rc['pp_el_base'][0], 2)}-{_fmt(rc['pp_el_base'][1], 2)} under the baseline to {_fmt(rc['pp_el_alt'][0], 2)}-{_fmt(rc['pp_el_alt'][1], 2)} under the stricter proxies (Spearman rho of the elasticity ranking with the baseline at least {_fmt(rc['pp_el_rho_min'], 2)}), "
@@ -1096,14 +1096,14 @@ def load_annual_data():
 
 
 def pnr_robustness_table():
-    """Compare closest PNR levers between linear and saturating endogenous inflow."""
+    """Compare closest boundary levers between linear and saturating endogenous inflow."""
     lin_path = BASE_DIR / "results" / "endogenous" / "closest_point_of_no_return.csv"
     sat_path = BASE_DIR / "results" / "endogenous_saturating" / "closest_point_of_no_return.csv"
     if not (lin_path.exists() and sat_path.exists()):
         return pd.DataFrame()
     lin = _apply_display_names(pd.read_csv(lin_path))
     sat = _apply_display_names(pd.read_csv(sat_path))
-    # Focus on the active-pool threshold, which is the operative PNR in the main text.
+    # Focus on the active-pool threshold, which is the operative boundary in the main text.
     lin = lin[lin["target"] == "domestic_active"].copy()
     sat = sat[sat["target"] == "domestic_active"].copy()
     lin = lin.rename(columns={
@@ -1431,7 +1431,7 @@ def compute_dominant_context(dom):
 
 
 def _poaching_paragraph(dctx):
-    """Section 6.5 paragraph on when talent concentration turns against the recruiter (from gamma_thresholds.csv)."""
+    """Section 3.9 paragraph on when talent concentration turns against the recruiter (from gamma_thresholds.csv)."""
     fd1 = dctx["focal_display"]
     fd2 = dctx.get("focal2_display")
     s1 = dctx["th_self_focal1"].dropna()
@@ -1565,14 +1565,14 @@ def compute_context(cohort, eq, sat_eq, top_t, pnr_closest, period_compare, poli
     pd_elas["abs_e"] = pd_elas["elasticity"].abs()
     highest_pd_group = pd_elas.sort_values("abs_e", ascending=False).iloc[0]["group"] if not pd_elas.empty else JAPAN
 
-    # Point of no return
+    # Model-implied viability boundary
     closest_rate_counts = pnr_closest["rate_name"].value_counts()
     closest_rate_mode = closest_rate_counts.index[0] if not closest_rate_counts.empty else "I0"
     all_closest_same = len(closest_rate_counts) == 1
     if all_closest_same:
-        pnr_lever_text = f"{closest_rate_mode} is the closest point-of-no-return lever for the active researcher pool in every group"
+        pnr_lever_text = f"{closest_rate_mode} is the closest viability-boundary lever for the active researcher pool in every group"
     else:
-        pnr_lever_text = f"{closest_rate_mode} is the most common closest point-of-no-return lever for the active researcher pool"
+        pnr_lever_text = f"{closest_rate_mode} is the most common closest viability-boundary lever for the active researcher pool"
 
     # Saturating reduction range
     sat_range_text = ""
@@ -1720,10 +1720,10 @@ def _package_summary():
 
 
 def _unify_pnr_markdown(text):
-    """Unify 'point of no return' to PNR in markdown, keeping the definition in the Abstract and Introduction."""
+    """Unify 'model-implied viability boundary' to boundary in markdown, keeping the definition in the Abstract and Introduction."""
     import re
 
-    pnr_re = re.compile(r"point of no return(?: \(PNR\))?", re.IGNORECASE)
+    pnr_re = re.compile(r"model-implied viability boundary(?: \(boundary\))?", re.IGNORECASE)
     current_section = None
     seen = {"Abstract": False, "1. Introduction": False}
 
@@ -1732,7 +1732,7 @@ def _unify_pnr_markdown(text):
         if section in ("Abstract", "1. Introduction") and not seen[key]:
             seen[key] = True
             return m.group(0)
-        return "PNR"
+        return "boundary"
 
     out_lines = []
     for line in text.split("\n"):
@@ -1875,10 +1875,10 @@ def _mathify_docx(doc, stop_at="References"):
 
 
 def _unify_pnr_docx(doc):
-    """Unify 'point of no return' to PNR in docx body text, keeping definitions in Abstract and Introduction."""
+    """Unify 'model-implied viability boundary' to boundary in docx body text, keeping definitions in Abstract and Introduction."""
     import re
 
-    pnr_re = re.compile(r"point of no return(?: \(PNR\))?", re.IGNORECASE)
+    pnr_re = re.compile(r"model-implied viability boundary(?: \(boundary\))?", re.IGNORECASE)
     current_section = None
     seen = {"Abstract": False, "Introduction": False}
 
@@ -1897,7 +1897,7 @@ def _unify_pnr_docx(doc):
                     if not seen[current_section]:
                         seen[current_section] = True
                     else:
-                        run.text = pnr_re.sub("PNR", run.text)
+                        run.text = pnr_re.sub("boundary", run.text)
     return doc
 
 
@@ -1991,35 +1991,32 @@ def _abstract_and_highlights(eq, pnr_closest):
     )
     smallest_tm = eq.assign(tm=eq["T_equilibrium"] / eq["M_threshold"]).sort_values("tm").iloc[0]
     abstract = (
-        "Artificial intelligence (AI) research talent is a general-purpose infrastructural input, comparable to coal in Jevons's analysis of industrial Britain. "
-        "Its rapid concentration in a few centres raises a question that neither researcher-mobility nor evolutionary innovation studies answer: "
-        "at what point does the loss of researchers from a smaller research system become a lasting loss of variety for the field as a whole? "
-        "We derive a mechanism linking career-transition rates to a minimum viable coauthor scale and to variety loss, and examine four propositions with a six-compartment "
-        f"ordinary-differential-equation model fitted to OpenAlex AI/ML records (2000-2023) for {len(eq)} research macro-regions. "
-        f"All equilibrium active pools exceed their minimum viable scale, but proximity to the point of no return depends on the ratio of pool to threshold, not absolute size: "
-        f"the lowest ratio is {_fmt(smallest_tm['tm'], 2)} ({smallest_tm['group']}), and the closest point of no return is in {closest['group']}, "
-        f"where a {closest['proximity']*100:.0f}% {'reduction' if closest['critical_factor'] < 1 else 'increase'} in the {_rate_label(closest['rate_name'])} would drive the active pool to its threshold. "
+        "Researcher mobility is measured as stocks and net flows, but those quantities do not say whether a research system can still reproduce its own workforce. "
+        "We build a reproducible measurement pipeline that turns open bibliometric records into cohort career-transition rates, a six-compartment dynamical model, and an early-warning indicator pair: the equilibrium active pool relative to a minimum viable coauthor scale (T/M) and the proximity of that equilibrium to a model-implied viability boundary. "
+        f"Applied to an OpenAlex AI/ML cohort (2000-2023) across {len(eq)} research macro-regions, all systems exceed their minimum scale, but distance to the boundary is governed by relative scale rather than size: "
+        f"the lowest T/M is {_fmt(smallest_tm['tm'], 2)} ({display_group(smallest_tm['group'])}), and the closest boundary is in {display_group(closest['group'])}, "
+        f"where a {closest['proximity']*100:.0f}% {'reduction' if closest['critical_factor'] < 1 else 'increase'} in {_rate_label(closest['rate_name'])} would drive the active pool to its threshold. "
         + lever_text
         + hist_text
-        + "Treating AI research capacity as a sociotechnical infrastructure rather than a national asset, the analysis is mechanistic and reproducible from open data, and gives governments, funders and universities a common early-warning metric. "
-        "Preserving variety across research macro-regions is argued to benefit the whole field and society, not only the systems at risk."
+        + "Every measurement choice is audited in the results: seven origin specifications never reverse a macro-region's mobility direction, six PI definitions leave the T-side rankings structurally invariant while the P-side varies, and missingness and censoring bounds are quantified. "
+        "The pipeline is field-agnostic; AI/ML is the case study. The indicators give funders and evaluators a recomputable monitor of research-system viability."
     )
     keywords = (
-        "researcher mobility; artificial intelligence; research variety; minimum viable population; "
-        "path dependence; compartment model; technology policy"
+        "researcher mobility; research evaluation; science of science; minimum viable scale; "
+        "compartment model; bibliometric indicators; artificial intelligence"
     )
     highlights = [
-        "AI research talent is framed as a general-purpose input, after Jevons's coal question",
-        "Career transition rates linked to minimum viable scale and lasting variety loss",
-        f"Closest point of no return: {closest['group']}, via {closest['proximity']*100:.0f}% change in {closest['rate_name']}",
+        "A reproducible pipeline from bibliometric records to research-system viability",
+        "Distance to the boundary follows relative scale T/M, not system size",
+        f"Closest boundary: {display_group(closest['group'])}, via {closest['proximity']*100:.0f}% change in {closest['rate_name']}",
         highlight_lever,
-        "Preserving macro-regional variety benefits the whole AI field, not only small systems",
+        "Seven origin rules and six PI definitions audited in the main results",
     ]
     return abstract, keywords, highlights
 
 
 def check_front_matter(abstract, highlights):
-    """Enforce Technology in Society limits: abstract <= 250 words, 3-5 highlights <= 85 chars."""
+    """Enforce Journal of Informetrics limits: abstract <= 250 words, 3-5 highlights <= 85 chars."""
     n_words = len(abstract.split())
     if n_words > 250:
         raise ValueError(f"Abstract has {n_words} words (limit 250)")
@@ -2043,7 +2040,7 @@ def _data_availability_text(blinded=False):
         + repo
         + ". The same repository contains the Python code for cohort extraction, rate estimation, the ODE model and its endogenous-inflow variant, the bootstrap, the sensitivity and robustness analyses, the coupled nine-region simulation, and the script that regenerates this manuscript, its figures, tables and Supplementary Material. "
         "The author-level cohort and the underlying work and authorship records are derivatives of OpenAlex data and are not redistributed; the single reproduction command (reproduce.sh) re-extracts them from the OpenAlex API with the scripts provided, using the same subfield, year window and inclusion rules, and then rebuilds all results from that extraction. "
-        "OpenAlex is updated continuously, so a fresh extraction reproduces the reported rates, rankings and thresholds up to small snapshot differences of the kind reported in Section 5.5. "
+        "OpenAlex is updated continuously, so a fresh extraction reproduces the reported rates, rankings and thresholds up to small snapshot differences of the kind reported in Section 3.6. "
         "No proprietary or restricted data were used."
     )
 
@@ -2095,7 +2092,7 @@ def _add_title_page(doc, word_count=None, blinded=False):
 
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.add_run("Article type: Research Article")
+    p.add_run("Article type: Full Length Article")
 
     if word_count:
         p = doc.add_paragraph()
@@ -2154,6 +2151,17 @@ def _add_front_matter(doc, abstract, keywords, highlights, blinded=False):
         p.add_run(text)
 
 
+def load_measurement_validity():
+    """Load the Gate-1 measurement-validity result tables (results/measurement_validity/)."""
+    base = BASE_DIR / "results" / "measurement_validity"
+    out = {}
+    for name in ["ORIGIN_SENSITIVITY", "MOBILITY_SENSITIVITY", "MOBILITY_MULTISTATE",
+                 "PI_SENSITIVITY", "PI_PROPAGATION_P", "MISSINGNESS_SUMMARY"]:
+        f = base / f"{name}.csv"
+        out[name] = _apply_display_names(pd.read_csv(f)) if f.exists() else None
+    return out
+
+
 def _add_table_from_df(doc, df, caption, decimals=None, bold_header=True):
     if decimals is None:
         decimals = {}
@@ -2191,6 +2199,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     dctx = compute_dominant_context(dom)
     pi_proxy = load_pi_proxy()
     m_sens = load_m_sensitivity()
+    mv = load_measurement_validity()
     n_authors = len(cohort)
 
     def para(text=""):
@@ -2210,191 +2219,58 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     # 1. Introduction
     # ------------------------------------------------------------------
     doc.add_heading("1. Introduction", level=1)
-    p = para("In 1865 William Stanley Jevons asked whether Britain's industrial expansion could outlast the coal on which it ran")
-    C(p, "jevons")
-    p.add_run(". His question was not about a commodity but about a general-purpose input whose availability conditioned every downstream industry. "
-              "Artificial intelligence (AI) and machine learning (ML) research talent occupies a comparable position today: methods developed by a small, highly mobile population of doctoral researchers, post-doctoral researchers and principal investigators (PIs) are being embedded in science, industry and public administration as a general-purpose technology")
+    p = para("The science of science measures researcher mobility as stocks and net flows: how many scientists a country has, how many leave and how many arrive")
+    C(p, "thorn", "franzoni", "appelt")
+    p.add_run(". Those quantities describe redistribution, but they do not tell an evaluator whether a research system can still reproduce its own workforce. "
+              "What is missing is a community-level state variable-an observable quantity whose approach to a critical value would indicate that a system's research capacity is becoming unsustainable before the headcount shows it. "
+              "This paper builds that measurement pipeline end to end and applies it to one field where the question is urgent.")
+    p = para("Artificial intelligence (AI) and machine learning (ML) research is an informative case. Its methods are a general-purpose technology being embedded across science, industry and public administration")
     C(p, "bresnahan", "macropolo")
-    p.add_run(". Governments in the United States, China, Europe, Japan and India now treat this population as a strategic input and compete for it through visas, fellowships and salaries")
-    C(p, "appelt", "shachar")
-    p.add_run(". Unlike coal, however, research talent is reproducible, mobile and subject to positive feedback: researchers train researchers, and they cluster where other researchers already are. "
-              "The policy-relevant question is therefore not whether the global stock of AI researchers will be exhausted, but whether the distribution of that stock across research systems can pass a point beyond which some systems can no longer reproduce themselves.")
-
-    p = para("Two literatures speak to that question without answering it. "
-             "Research on scientist mobility describes brain drain, brain circulation and brain gain in terms of stocks and net flows")
-    C(p, "thorn", "franzoni")
-    p.add_run(", and the economics of science explains the individual career decisions behind those flows")
-    C(p, "stephan")
-    p.add_run(". Evolutionary and innovation-systems economics explains why variety among research programmes matters for long-run technological change and how positive feedback produces lock-in")
-    C(p, "nelson", "dosi", "arthur")
-    p.add_run(". Neither literature specifies the mechanism by which individual career-transition rates in one research system translate into a lasting loss of variety for the field as a whole. "
-              "Without that mechanism, arguments for sustaining smaller research systems remain either national (protect our researchers) or purely normative (diversity is good), and they cannot say how close a system is to a threshold or which transition would move it there.")
-
-    p = para("This paper supplies that mechanism and tests it. "
-             "Section 2 reviews the two literatures and the AI-specific evidence on concentration and homogenisation, identifies the gap, and derives a four-step mechanism: career-transition rates determine the active researcher pool; network externalities in recruitment make the pool self-reinforcing; the pool must exceed a minimum viable coauthor scale to keep producing work; and falling below that scale removes a distinct research programme from the global menu of variety. "
-             "From this mechanism we derive one research question and four propositions (P1-P4) about which research systems are closest to their point of no return (PNR), which transitions govern the distance, how endogenous recruitment shapes it, and whether historical changes in transition rates have moved systems toward or away from the threshold. "
-             f"Section 3 describes the OpenAlex cohort of {n_authors:,} AI/ML authors and the grouping of countries into {len(eq)} research macro-regions")
-    C(p, "openalex")
-    p.add_run(". Section 4 specifies a six-compartment ordinary-differential-equation (ODE) model whose rates are estimated from those data. "
-              "Section 5 reports the propositions' tests, and Section 6 discusses who benefits from preserving variety across research macro-regions.")
-
-    p = para("The contribution is threefold. "
-             "Theoretically, it links researcher-mobility research to evolutionary innovation studies through an explicit threshold mechanism, and it extends Jevons's question from an exhaustible resource to a reproducible but concentrating human input. "
-             "Empirically, it provides what are, to our knowledge, the first comparative estimates of career-transition rates, minimum viable coauthor scale and PNR proximity for AI/ML research macro-regions from open bibliometric data. "
-             "For technology and society, it reframes the case for sustaining smaller research systems: the beneficiaries are not only those systems but the field and the societies that depend on the variety of problems, methods and evaluation norms it can generate.")
-
-    # ------------------------------------------------------------------
-    # 2. Theoretical framework
-    # ------------------------------------------------------------------
-    doc.add_heading("2. Theoretical framework", level=1)
-
-    doc.add_heading("2.1 Researcher mobility: from net flows to career transitions", level=2)
-    p = para("Researcher mobility has been studied under the headings of brain drain, brain circulation and brain gain")
-    C(p, "thorn")
-    p.add_run(". Thorn and Holm-Nielsen argue that outflows from smaller systems become a gain only when return migration and diaspora networks are supported, and a drain when local environments cannot retain or reproduce talent")
-    C(p, "thorn")
-    p.add_run(". Appelt et al., using a gravity model for 1996-2011, find that collaboration, economic convergence and visa restrictions are the strongest correlates of bilateral flows, and that much movement is circulation rather than one-way migration")
-    C(p, "appelt")
-    p.add_run(". Franzoni et al. document large cross-country differences in the share of foreign-born scientists")
-    C(p, "franzoni")
-    p.add_run(". In AI/ML specifically, the United States remains the dominant destination while China and India expand domestic retention")
-    C(p, "macropolo")
-    p.add_run("; mobile AI scientists retain collaboration ties with their origin systems")
-    C(p, "alshebli")
-    p.add_run("; and elite AI networks are highly clustered, with brain drain from developing systems intensifying")
-    C(p, "yuan")
-    p.add_run(". The economics of science provides the microfoundation: individuals decide where to train, whether to go abroad, when to return and when to leave research in response to career incentives and institutional quality")
-    C(p, "stephan")
-    p.add_run(". What this literature measures, however, is stocks and flows. It does not specify a community-level state variable whose crossing would make the loss of researchers self-reinforcing rather than recoverable.")
-
-    doc.add_heading("2.2 Variety, selection and lock-in in evolutionary innovation studies", level=2)
-    p = para("Evolutionary economics treats technological change as a process of variety generation and selection")
-    C(p, "nelson")
-    p.add_run(". Research programmes are carried by organisations with routines, and technological paradigms channel search along trajectories that exclude alternatives")
-    C(p, "dosi")
-    p.add_run(". Metcalfe formalises selection as a replicator process in which the rate of change of the population depends on the variety present in it")
-    C(p, "metcalfe")
-    p.add_run(", and Saviotti shows that variety is both an output of and an input to long-run development: without new variety, selection eventually exhausts the options on which it operates")
-    C(p, "saviotti")
-    p.add_run(". Arthur and David show how increasing returns and positive feedback lock a system into a historically contingent trajectory that may be inferior to foregone alternatives")
-    C(p, "arthur", "david")
-    p.add_run(". The national and sectoral innovation-systems literature adds that these processes are institutionally embedded: funding systems, labour markets and universities co-evolve with the research they sustain")
-    C(p, "lundvall", "malerba")
-    p.add_run(". Stirling's general framework distinguishes variety (number of categories), balance (their relative size) and disparity (how different they are), and argues that all three matter for the resilience of a technological system")
-    C(p, "stirling")
-    p.add_run(". Aghion et al. provide complementary evidence that innovation is highest at intermediate degrees of competition")
-    C(p, "aghion")
-    p.add_run(". This literature explains why the loss of a distinct research programme is costly and hard to reverse, but its unit of analysis is the firm, the technology or the sector. It does not connect variety to the career-transition rates of the researchers who carry research programmes.")
-
-    p = para("The danger is not hypothetical; several fields have narrowed onto a dominant approach, lost the communities that carried alternatives, and then stagnated until variety was rebuilt from outside or from marginal survivors. "
-             "AI itself provides the clearest case: after the perceptrons controversy of the late 1960s, funding and students moved almost entirely to symbolic approaches, connectionist research survived only in a few peripheral groups, and the field waited nearly two decades for the back-propagation revival")
-    C(p, "olazaran", "rumelhart")
-    p.add_run(". Hooker's hardware lottery, discussed below, reads the subsequent history in the same terms. In Soviet biology, the state-enforced dominance of Lysenkoism removed genetics as a research programme and left the country decades behind in the life sciences once the programme was abandoned")
-    C(p, "joravsky")
-    p.add_run(". In economics, the convergence of macroeconomics on a single class of equilibrium models before 2008 is widely cited by economists themselves as a reason the profession failed to see the financial crisis coming")
-    C(p, "colander")
-    p.add_run(", and in theoretical physics the concentration of positions and students on string theory has been criticised from within the field for crowding out alternatives without delivering testable progress")
-    C(p, "smolin")
-    p.add_run(". Agricultural monocultures show the same structure with a biological rather than intellectual selection pressure: the 1970 southern corn leaf blight spread through a maize crop in which most hybrids shared one cytoplasm")
-    C(p, "ullstrup")
-    p.add_run("; coffee leaf rust destroyed the Ceylon coffee industry in the 1870s-1880s once plantations of a single, genetically narrow Coffea arabica stock were connected by trade, and the same pathogen caused the 2008-2013 crises in Colombia and Central America after resistance in the dominant cultivars broke down")
-    C(p, "mccook", "avelino")
-    p.add_run("; and the Gros Michel banana was eliminated commercially by Fusarium wilt, with its Cavendish successor now facing the same fate")
-    C(p, "ploetz")
-    p.add_run(". At the level of science as a whole, large fields have been shown to ossify around canonical work and disruptive contributions have declined across disciplines")
-    C(p, "chu", "park")
-    p.add_run(". These cases differ in mechanism and in how contested the diagnosis is, and we do not claim that AI/ML is already in such a state; they establish that a field can select its way into a position from which recovery is slow and depends on the survival of communities outside the dominant programme.")
-
-    doc.add_heading("2.3 Why AI/ML is a special case: concentration and homogenisation", level=2)
-    p = para("Several features of contemporary AI/ML research make the variety-selection argument more than a general worry. "
-             "First, Kleinberg and Raghavan show formally that when many decision-makers converge on the same algorithm, an algorithmic monoculture can lower social welfare even if each adopter individually improves, because correlated errors are no longer averaged out")
-    C(p, "kleinberg")
-    p.add_run(". Second, Hooker's hardware lottery argues that which research ideas succeed depends on their compatibility with the dominant hardware and software stack, so that concentration of compute concentrates the ideas that can be tested")
-    C(p, "hooker")
-    p.add_run(". Third, benchmark and dataset use has become increasingly concentrated on a small number of datasets originating from a few institutions")
-    C(p, "koch")
-    p.add_run(", and the pursuit of general benchmarks embeds particular framings of what counts as progress")
-    C(p, "raji")
-    p.add_run(". Fourth, the empirical success of scaling laws")
-    C(p, "kaplan")
-    p.add_run(" and foundation models")
-    C(p, "bommasani")
-    p.add_run(" has produced a single dominant paradigm whose compute requirements have grown by orders of magnitude")
-    C(p, "sevilla")
-    p.add_run(", shifting participation from universities toward a few large firms and their partners")
-    C(p, "ahmed")
-    p.add_run(". Fifth, the data on which models are trained are dominated by a few languages and by cultural framings embedded in them")
-    C(p, "joshi", "bender")
-    p.add_run(". Each of these is a channel through which the geography of the research population shapes the variety of problems, methods and evaluation norms in the field.")
-
-    p = para("There are serious counterarguments. "
-             "Compute and data exhibit economies of scale, so concentration may be the efficient way to reach the frontier, and open-source and open-weight releases diffuse frontier methods to researchers everywhere at low cost")
-    C(p, "bommasani")
-    p.add_run(". Geographic or macro-regional diversity is, moreover, only a coarse proxy for the cognitive diversity that matters for problem-solving")
-    C(p, "hongpage")
-    p.add_run("; two research systems in different regions may work on the same problems with the same methods. "
-              "We accept these points. The argument developed below is not that concentration is inefficient in the short run, nor that every region carries a distinct research programme. "
-              "It is that when a research system falls below the scale needed to reproduce itself, whatever distinct problem framings, data, languages and institutional experiments it carried are removed from the menu on which future selection can operate, and that this loss is difficult to reverse because the same positive feedbacks that produced it work against recovery. "
-              "Open diffusion of methods lowers the cost of using the frontier; it does not by itself sustain the local PIs, students and institutions needed to define problems differently.")
-
-    doc.add_heading("2.4 The gap: an infrastructural input with a threshold", level=2)
-    p = para("Bringing the literatures together exposes the gap. "
-             "Mobility research has the microdata on career transitions but no community-level threshold; evolutionary innovation studies have the threshold concepts (lock-in, loss of variety) but no link to career transitions. "
-             "Jevons's coal question is useful precisely because it framed a general-purpose input in terms of a system-level constraint rather than individual mines, and because it was refined by later work showing that efficiency gains can increase rather than reduce demand")
+    p.add_run("; its senior researchers are unusually mobile internationally; and its talent, compute and data are concentrating in a small number of systems")
+    C(p, "macropolo", "sevilla", "ahmed")
+    p.add_run(". Governments compete for this population through visas, fellowships and salaries")
+    C(p, "appelt", "shachar", "kerr")
+    p.add_run(". The question echoes Jevons's coal question—extended from an exhaustible input to a reproducible but concentrating human one")
     C(p, "jevons", "alcott")
-    p.add_run(". The analogy has strict limits. Researchers are human capital that reproduces through training; they move across systems; and AI tools may raise rather than lower the demand for researchers. "
-              "We therefore do not claim that AI talent is exhaustible. We claim that, like coal for Jevons, it is an input whose distribution across systems determines what the whole can do, and that for each system there is a scale below which the input is no longer reproduced locally. "
-              "Identifying that scale and the transitions that govern distance to it is the missing mechanism.")
-
-    doc.add_heading("2.5 Mechanism: transition rates, network externalities, minimum viable scale, variety loss", level=2)
-    p = para("The mechanism has four steps. "
-             "(i) Career-transition rates determine the active pool. Within a research system, researchers enter (exogenous entry I_0), move abroad early in their career (α), return (β), produce high-impact work (h_D, h_A), become PIs (p_D, p_A) or leave research (d). Given these rates, the domestic active pool T = D + H_D + P_D has a well-defined equilibrium. "
-             "(ii) Network externalities make the pool self-reinforcing. Recruitment is not exogenous: PIs train students and attract post-doctoral researchers, so inflow rises with the PI stock. This is a network externality in the sense of Katz and Shapiro—the value of joining a research system rises with the number already in it")
+    p.add_run(". A measurement framework that converts individual career-transition rates into system-level viability indicators is therefore of direct interest to research evaluation and science-of-science research, and AI/ML is the field where we calibrate and illustrate it; the framework itself is field-agnostic.")
+    p = para("The mechanism behind the indicators has four steps. "
+             "(i) Career-transition rates-entry (I_0), early-career moves abroad (α), return (β), high-impact production (h_D, h_A), promotion to independent authorship (p_D, p_A) and dropout (d)-determine the equilibrium domestic active pool T. "
+             "(ii) Recruitment exhibits a network externality: principal investigators (PIs) train students and attract post-doctoral researchers, so inflow rises with the PI stock")
     C(p, "katz")
-    p.add_run(". It implies that a decline in T reduces future inflow, which reduces T further. "
-              "(iii) The pool must exceed a minimum viable scale. Following the minimum-viable-population concept in conservation biology")
+    p.add_run(", making the pool self-reinforcing. "
+             "(iii) A research system must exceed a minimum viable coauthor scale M-an operational quantity computed from the field's observed number of independent last-author groups and its coauthor intensity")
     C(p, "shaffer")
-    p.add_run(", we define an operational minimum viable coauthor scale M = k × c̄ as the number of active researchers needed to staff the field's observed number of distinct PI groups (k) at its observed coauthor intensity (c̄); hereafter M. It is operational in that it is computed from observed publication structure rather than derived from a demographic extinction model. Below M the system cannot produce work at the field's norms, mentorship chains break and the feedback in step (ii) runs in reverse. "
-              "(iv) Falling below M removes variety. Because research programmes are carried by PIs and the institutions around them")
-    C(p, "nelson", "dosi")
-    p.add_run(", a system that can no longer reproduce its PI stock loses the programme, not just the headcount. The loss is path-dependent in Arthur's sense")
-    C(p, "arthur")
-    p.add_run(": recovery requires rebuilding the feedback loop against competitors that have grown stronger in the meantime. In the AI-specific channels of Section 2.3, this means fewer independent sources of problems, benchmarks, data and evaluation norms for the field as a whole.")
+    p.add_run("-to sustain its norms of production. "
+             "(iv) Below M, the system can no longer reproduce its PI stock, and the research programme it carried leaves the field's menu of variety, a loss that is path-dependent in Arthur's sense")
+    C(p, "arthur", "nelson", "dosi")
+    p.add_run(". The research question is: for each research system, how far is the active pool from its minimum viable scale, which transition governs that distance, and has the distance been shrinking?")
+    p = para("Four propositions are derived from the mechanism before seeing the results. "
+             "P1 (relative scale): distance to the viability boundary is governed by T/M rather than absolute T; because the entry lever rescales the whole equilibrium, this is a structural implication used diagnostically, not a falsifiable hypothesis. "
+             "P2 (asymmetric leakage): dropout, which removes researchers from every compartment, is more elastic than early-career outflow, which preserves return. "
+             "P3 (endogenous recruitment): the transition closest to the threshold is the one feeding the reproduction loop from outside (I_0), and the fragility ranking is robust to the form of the recruitment feedback. "
+             "P4 (historical drift): later-window rates imply different equilibria from earlier-window rates, so proximity to the threshold is not stationary. "
+             "P2-P4 are falsifiable by the fitted model; P1 is checked for consistency.")
+    p = para("The contribution is primarily methodological. "
+             f"We assemble a fully reproducible measurement pipeline-from OpenAlex extraction through researcher identification, geographic attribution, mobility transitions, PI operationalisation and community aggregation to a calibrated six-compartment dynamical model-for a cohort of {n_authors:,} AI/ML authors across {len(eq)} research macro-regions")
+    C(p, "openalex")
+    p.add_run(". "
+              "Each measurement choice is stress-tested: origin assignment under seven specifications, mobility direction under each, PI status under six alternative definitions propagated through the model, and a missingness and censoring audit; the sensitivity results are reported in the Results section alongside the model results, not relegated to footnotes. "
+              "Empirically, we provide comparative estimates of career-transition rates, minimum viable scale and proximity to a model-implied viability boundary (MVB) for the macro-regions. "
+              "For research evaluation, the output is an early-warning indicator pair (T/M and MVB proximity) that can be recomputed with each OpenAlex release. "
+              "AI/ML serves as the case study; we make no claim that the specific findings generalise to other fields, only that the pipeline transfers.")
+    p = para("Section 2 specifies data and measurement, Section 3 reports observed, model and sensitivity results in that order, Section 4 discusses implications and limitations, and Section 5 concludes.")
 
-    doc.add_heading("2.6 Research question and propositions", level=2)
-    p = para("The research question follows: for each AI/ML research macro-region, how far is the active researcher pool from its minimum viable scale, which career transition governs that distance, and has the distance been shrinking? "
-             "Four propositions are derived from the mechanism rather than from the data.")
-    p = para("P1 (relative scale; structural implication). Under network externalities in recruitment, distance to the point of no return is governed by the ratio T/M rather than by absolute T. Systems with lower T/M require a smaller proportional change in a transition rate to reach M, so proximity should track T/M more closely than it tracks T. Because the entry lever rescales the whole equilibrium, this is a structural implication of the model rather than a hypothesis the data could reject; its diagnostic content is that the ranking by absolute size and the ranking by proximity diverge.")
-    p = para("P2 (asymmetric leakage). A transition that removes researchers from every compartment (dropout, d) has a larger equilibrium elasticity than a transition that moves researchers between compartments within the global system (early-career outflow, α), because the latter preserves the possibility of return (β) and of contribution from abroad. Hence |elasticity of T with respect to d| > |elasticity with respect to α| in every system.")
-    p = para("P3 (endogenous recruitment). Because inflow depends on the PI stock, the transition closest to the threshold should be the one that feeds the reproduction loop from outside—exogenous entry I_0—rather than a mobility rate; and the ranking of systems by proximity should be robust to the functional form of the recruitment feedback (linear versus saturating).")
-    p = para("P4 (historical drift). If transition rates estimated from the later career window (2011-2016) differ from those of the earlier window (2000-2010), the equilibrium implied by the later rates should differ from that implied by the earlier rates; where the later equilibrium is smaller, the system has been drifting toward its threshold and the mechanism predicts ongoing variety loss unless rates change.")
-    p = para("These propositions are mechanistic in the sense that each follows from a specific step of Section 2.5. P2-P4 could be falsified by the fitted model: P2 by any system in which α is more elastic than d, P3 by a mobility rate being the closest lever or by rank reversals under saturation, and P4 by identical early- and late-window equilibria. P1 is a diagnostic proposition: it is checked for consistency and used to read the results, not tested.")
 
     # ------------------------------------------------------------------
-    # 3. Data
+    # 2. Data and measurement
     # ------------------------------------------------------------------
-    doc.add_heading("3. Data and macro-regional grouping", level=1)
+    doc.add_heading("2. Data and measurement", level=1)
+
+    doc.add_heading("2.1 Data source and cohort", level=2)
     p = para("We extracted AI/ML works and author histories from the OpenAlex API for subfield 1702 (Artificial Intelligence), 2000-2023")
     C(p, "openalex")
     p.add_run(". OpenAlex provides open, CC0 metadata on authors, affiliations, countries, publication dates and citations. "
-              "Author histories were built by following each author's sequence of works and affiliations, assigning a country per work and an origin macro-region by the modal country of recorded affiliations.")
-
-    doc.add_heading("3.1 Research macro-regions", level=2)
-    p = para("The unit of analysis is the research macro-region: a set of countries whose AI/ML researchers share funding systems, labour markets, languages and mobility corridors closely enough to be treated as one recruitment pool. "
-             "For reproducibility, the initial partition of countries was taken from Huntington's taxonomy")
-    C(p, "huntington")
-    p.add_run(", which predicts the structure of global communication networks")
-    C(p, "state")
-    p.add_run(" and of scientific mobility and collaboration")
-    C(p, "chinchilla")
-    p.add_run("; it serves only as a documented starting heuristic and the resulting groups are operational research systems, not civilisations. "
-              "The partition was adjusted to the size and mobility structure of AI/ML: the United States is separated from the rest of the Anglosphere as the dominant destination with a distinct funding system; Continental Europe is kept distinct because intra-European mobility and EU funding form a separate bloc; Latin American, Orthodox and sub-Saharan African countries are merged into Other regions because their author counts are too small to estimate stable rates. "
-              f"The final {len(eq)} macro-regions are: " + ", ".join(display_group(g) for g in arpr.ORDERED_GROUPS) + ". "
-              + (f"{ctx['tm_min_group']} is in practice a single national system: {ctx['tm_min_dominant']} accounts for {ctx['tm_min_dominant_share']*100:.0f}% of its 2022-2023 AI/ML works, so results for this macro-region should be read as results for a small, high-impact national system. " if ctx['tm_min_dominant'] else "")
-              + "Figure 1 maps the partition and overlays the largest observed inter-region early-career flows, which are the cross-region moves the model tracks through the abroad compartments. The full country mapping is in Supplementary Material.")
-    figure("fig1", "Figure 1. Research macro-regions and the largest inter-region early-career flows, 2000-2023. Country outlines from Natural Earth (public domain); arrow width is proportional to accumulated abroad author-years by origin and destination; the legend gives each region's equilibrium T/M ratio.", width=6.3)
-
-    doc.add_heading("3.2 Cohort and variable definitions", level=2)
+              "Author histories were built by following each author's sequence of works and affiliations, assigning a country per work and an origin macro-region by the modal group of recorded affiliations.")
     p = para(f"Authors enter the cohort if their first observed AI/ML publication is in 2000-2016 and they have at least two AI/ML works in 2000-2023; authors with only unknown affiliations are excluded, giving {n_authors:,} authors. "
              "An author is active if they have at least one AI/ML work in 2020-2023 and has dropped out otherwise. "
              "A hit is a paper in the top 10% of AI/ML citations for its publication year, observed within the first eight career years. "
@@ -2402,7 +2278,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     C(p, "stephan")
     p.add_run(". Both are deliberately broad operational definitions: a PI in this sense is any author with at least one independent last-author paper, not a tenured group leader, and a hit author is any author with at least one top-decile paper. "
               f"Because the cohort is restricted to authors with at least two works, PIs account for {ctx['pi_share_min']*100:.0f}-{ctx['pi_share_max']*100:.0f}% and hit authors for {ctx['hit_share_min']*100:.0f}-{ctx['hit_share_max']*100:.0f}% of each macro-region's cohort (Table 1). "
-              "The PI compartment therefore represents the population able to lead work and recruit, and the minimum viable scale in Section 4.3 counts distinct last-author groups per year under the same definition, so the two are consistent. "
+              "The PI compartment therefore represents the population able to lead work and recruit, and the minimum viable scale in Section 2.9 counts distinct last-author groups per year under the same definition, so the two are consistent. "
               "The abroad flag is set if the author is affiliated in a non-origin macro-region within the first six career years. "
               "OpenAlex coverage is incomplete for non-English venues and author disambiguation is imperfect, so absolute counts are model-implied stocks rather than a census; relative comparisons are preserved because the same rules are applied to every macro-region. "
               "Table 1 reports the cohort by macro-region. "
@@ -2417,60 +2293,102 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
         decimals={"Authors": 0, "Works": 0, "Active 2020-2023": 0, "Hit authors": 0, "PIs": 0, "Mean career start": 1, "Abroad early-career": 0},
     )
 
-    # ------------------------------------------------------------------
-    # 4. Methods
-    # ------------------------------------------------------------------
-    doc.add_heading("4. Methods", level=1)
-    doc.add_heading("4.1 Compartment model", level=2)
+    doc.add_heading("2.2 Researcher identification", level=2)
+    p = para("Each researcher is an OpenAlex author identifier, linked across works by OpenAlex's own disambiguation. "
+             "Author disambiguation is imperfect: careers can be split across duplicate identifiers or merged across namesakes, and we do not re-disambiguate. "
+             "Because every macro-region is subjected to the same extraction rules, we read the cohort sizes and the estimated rates as operational quantities that are comparable across systems rather than as exact headcounts, and we carry the disambiguation uncertainty into the measurement audit in Section 3.7.")
+
+    doc.add_heading("2.3 Geographic attribution and origin", level=2)
+    p = para("Each work carries the affiliation countries recorded for the author on that work; a work with several affiliations contributes all of its countries. "
+             "An author's origin is an operational construct, not birthplace or nationality: it is the modal research macro-region of the author's affiliations over their first three observed career years (ties broken toward the earliest year). "
+             "This window rule is one specification among several; Section 3.7 reports results under seven origin rules (the three-year mode, first observed affiliation, two- and five-year window modes, fractional assignment of multi-group years, exclusion of multi-group years, and seeded probabilistic assignment), so that no conclusion rests on this single choice. "
+             "Two consequences of the operational definition are measured rather than assumed: multi-affiliated authors, for whom a single 'location' in a year is unobserved, and authors whose origin changes under an alternative rule. The aggregate mobility statistics are regional aggregates, and 'zero direction reversals' in Section 3.7 refers to those aggregates, not to individual trajectories.")
+
+    doc.add_heading("2.4 Mobility transitions", level=2)
+    p = para("From each author's origin and yearly affiliations we define the career transitions the model uses: the abroad flag records affiliation in a non-origin macro-region within the first six career years; return is recorded when a subsequent affiliation again includes the origin macro-region; hit and PI years are defined in Section 2.1 and 2.5; and dropout is inferred when no further AI/ML work is observed. "
+             "Affiliation changes are a proxy for mobility: they do not observe physical moves, remote collaboration or short visits, and a researcher can hold affiliations in several systems at once. These limitations are quantified in Section 3.7.")
+
+    doc.add_heading("2.5 PI operationalisation", level=2)
+    p = para("The baseline PI proxy follows AI/ML authorship conventions: the senior or group-lead author is listed last or flagged corresponding. "
+             "Because the concept 'principal investigator' has no direct bibliometric field, we define six operationalisations and propagate each through the full model (Section 3.7): ever-last-author (baseline), ever-corresponding-author, at least two last-author papers, at least eight observed career years, coauthor-network centrality in the top decile of the author's macro-region, and a combined union of the three career-stage definitions. "
+             "The absolute PI share is proxy-dependent and we report the full range; the model's T-side equilibria are structurally invariant to the proxy because the inflow calibration anchors total entry to observed entry (Section 2.8), so only P-side quantities vary-an asymmetry we report rather than hide.")
+
+    doc.add_heading("2.6 Community aggregation", level=2)
+    p = para("The unit of analysis is the research macro-region: a set of countries whose AI/ML researchers share funding systems, labour markets, languages and mobility corridors closely enough to be treated as one recruitment pool. "
+             "For reproducibility, the initial partition of countries was taken from Huntington's taxonomy")
+    C(p, "huntington")
+    p.add_run(", which predicts the structure of global communication networks")
+    C(p, "state")
+    p.add_run(" and of scientific mobility and collaboration")
+    C(p, "chinchilla")
+    p.add_run("; it serves only as a documented starting heuristic and the resulting groups are operational research systems, not civilisations. "
+              "The partition was adjusted to the size and mobility structure of AI/ML: the United States is separated from the rest of the Anglosphere as the dominant destination with a distinct funding system; Continental Europe is kept distinct because intra-European mobility and EU funding form a separate bloc; Latin American, Orthodox and sub-Saharan African countries are merged into Other regions because their author counts are too small to estimate stable rates. "
+              f"The final {len(eq)} macro-regions are: " + ", ".join(display_group(g) for g in arpr.ORDERED_GROUPS) + ". "
+              + (f"{ctx['tm_min_group']} is in practice a single national system: {ctx['tm_min_dominant']} accounts for {ctx['tm_min_dominant_share']*100:.0f}% of its 2022-2023 AI/ML works, so results for this macro-region should be read as results for a small, high-impact national system. " if ctx['tm_min_dominant'] else "")
+              + "Figure 1 maps the partition and overlays the largest observed inter-region early-career flows, which are the cross-region moves the model tracks through the abroad compartments. The full country mapping is in Supplementary Material.")
+    figure("fig1", "Figure 1. Research macro-regions and the largest inter-region early-career flows, 2000-2023. Country outlines from Natural Earth (public domain); arrow width is proportional to accumulated abroad author-years by origin and destination; the legend gives each region's equilibrium T/M ratio.", width=6.3)
+
+    doc.add_heading("2.7 Dynamical model", level=2)
     p = para("Each macro-region is represented by six compartments: domestic early-career (D), abroad early-career (A), domestic hit (H_D), abroad hit (H_A), domestic PI (P_D) and abroad PI (P_A) researchers. "
              "Transition rates are early-career outflow (α), return (β), hit generation (h_D, h_A), PI promotion (p_D, p_A) and dropout from all compartments (d). Figure 2 shows the structure; the equations are:")
     add_omath_paragraph(doc, math_ode_system())
     figure("fig2", "Figure 2. Compartment structure of the model for one research macro-region. Solid arrows are per-year transition rates; the dashed arrow is the endogenous recruitment feedback from the domestic PI stock; grey arrows are dropout from every compartment. The active pool T is compared with the minimum viable coauthor scale M.", width=6.0)
     p = para("The model treats each macro-region as one aggregate with constant per-year rates and collapses careers into three observed layers. These simplifications keep the model estimable from OpenAlex and the threshold calculation transparent; the model is an early-warning device, not a demographic projection.")
-
-    doc.add_heading("4.2 Endogenous inflow (network externality)", level=2)
     p = para("Step (ii) of the mechanism is implemented by making entry depend on the domestic PI stock. The linear form is ")
     add_omath_inline(p, math_I_linear())
     p.add_run(f", where I_0 is exogenous entry and r is the PI reproduction rate, capped at {_fmt(ctx['safety_factor_cap'], 2)}× the stability-critical value (the most constrained fitted macro-region realises {_fmt(ctx['min_realised_safety_ratio'], 2)}×). A saturating alternative, ")
     add_omath_inline(p, math_I_saturating())
     p.add_run(", is used as a robustness check for P3. The cap prevents runaway growth when observed r exceeds the critical value, a common finding because observed recruitment is bounded by the data window. Given r, I_0 is calibrated so that total equilibrium entry I_0 + r × P_D equals the observed annual entry of each macro-region; the equilibrium size of the active pool is therefore anchored to observed entry, and the PI feedback redistributes rather than rescales it.")
 
-    doc.add_heading("4.3 Minimum viable coauthor scale", level=2)
-    p = para("Step (iii) is implemented as ")
-    add_omath_inline(p, math_threshold())
-    p.add_run(", where c̄ is the mean number of authors per work and k the median number of distinct last-author groups per recent year. When the equilibrium active pool ")
-    add_omath_inline(p, math_active_pool())
-    p.add_run(" falls below M, the system cannot produce work at the field's coauthor intensity. Falling below M is a sufficient, not a necessary, condition for collapse; M is a soft lower bound, so observed margins are probably smaller than they appear.")
-
-    doc.add_heading("4.4 Estimation, elasticities, point of no return and counterfactuals", level=2)
+    doc.add_heading("2.8 Calibration and estimation", level=2)
     p = para("Rates are estimated as constant per-year hazards from observed transitions over exposure time, with a Laplace pseudocount of 1 per outcome. Because the data are right-censored, rates are lower bounds and equilibria conservative. "
              "Steady states are solved with a trust-region Newton method. "
              f"The equilibrium T is the asymptotic pool of an open system with continuing entry and is therefore larger than the 2020-2023 active count of the closed 2000-2016 cohort in Table 1 (by a factor of {ctx['teq_active_min']:.1f}-{ctx['teq_active_max']:.1f}); the two are not comparable, and all claims rest on relative quantities (T/M, elasticities, proximity and rankings), not on absolute T. "
              "Elasticities perturb each rate by 1% and record the percentage change in T (P2). "
-             "For the point of no return we scale each rate until T reaches M and record the critical factor and its proximity |critical factor − 1| (P1, P3). "
              "Historical drift (P4) compares equilibria under rates estimated from the 2000-2010 and 2011-2016 career windows. "
              "Policy counterfactuals perturb single rates by ±10% and rank levers by margin gain; bootstrap resampling of authors (200 draws) gives 95% intervals. "
              "All counterfactuals are mechanical perturbations of fitted rates: they identify sensitive transitions, not causal effects of programmes. "
              "An annual layer re-estimates rates year by year (2000-2016), projects them to 2017-2026 and compares the projected compartment counts with observed 2017-2023 stocks; it is an exploratory extension whose estimation, regularisation, figures and accuracy metrics are reported in Supplementary Material Section S2 (Supplementary Figures S1-S3, Supplementary Tables S2-S5).")
 
+    doc.add_heading("2.9 The model-implied viability boundary", level=2)
+    p = para("Step (iii) is implemented as ")
+    add_omath_inline(p, math_threshold())
+    p.add_run(", where c̄ is the mean number of authors per work and k the median number of distinct last-author groups per recent year. When the equilibrium active pool ")
+    add_omath_inline(p, math_active_pool())
+    p.add_run(" falls below M, the system cannot produce work at the field's coauthor intensity. Falling below M is a sufficient, not a necessary, condition for collapse; M is a soft lower bound, so observed margins are probably smaller than they appear. "
+              "For the boundary proximity measure we scale each rate until T reaches M and record the critical factor and its proximity |critical factor - 1|.")
+    p = para("Terminology matters for interpretation. The boundary M = k x c̄ is a defined classification boundary: it is a function of observed coauthor structure and is not an object inside the ODE dynamics; the ODE solutions do not 'feel' M. Approaching the boundary (a falling margin) is a statement about fitted equilibria, not about time. A model crossing is what we compute when we perturb a rate until the equilibrium T reaches M-it is an algebraic property of the fitted system, not a simulated or observed event in time. Empirical collapse of a real system is something the data do not contain: no observed macro-region is below M. Irreversibility, finally, enters only through the collapse rule of the coupled scenario in Section 2.10, where crossing M switches off a region's PI-driven recruitment; it is an assumption of that scenario, not an empirical finding, and we do not claim that a real system below M could not rebuild. We therefore speak throughout of a model-implied viability boundary, and never of a point of no return.")
 
-    doc.add_heading("4.5 Talent-concentration scenario", level=2)
+    doc.add_heading("2.10 Sensitivity design and the talent-concentration scenario", level=2)
+    p = para("Sensitivity is assessed along three axes whose results appear in Sections 3.4-3.7: functional form (linear versus saturating recruitment feedback), the value of M (multipliers around the fitted k and c̄), and the measurement layer (origin rules, mobility specifications, PI definitions and missing-data treatment). "
+             "Bootstrap resampling of authors (200 draws) gives 95% intervals on the equilibrium quantities.")
     dctx_tau = float(dom["summary"]["tau_years"].iloc[0]); dhorizon_tau = float(dom["trajectories"]["year"].max()) / dctx_tau
     p = para("To examine what the mechanism implies when one research system deliberately concentrates talent, we couple the nine fitted single-region models through the observed inter-regional mobility matrix (Figure 1) and simulate a stylised talent-concentration strategy. "
              "In the baseline, each macro-region's abroad compartments are distributed over host regions in proportion to observed off-diagonal abroad author-years (Supplementary Figure S2), each host recruits into its early-career pool in proportion to the PIs it hosts, and exogenous entry is adjusted so that the coupled system reproduces the fitted equilibria exactly. "
              "The concentration strategy is a pull of intensity φ exerted by one focal region: early-career outflow from every other region rises from α to α(1 + φ), the increment is directed to the focal region and tracked in separate compartments, researchers pulled this way return at β/(1 + φ), and the stock already abroad keeps its observed host distribution, so every scenario starts from the same state. "
-             "Two further rules link the scenario to the mechanism. Once a region's active pool falls below M, its PI-driven recruitment stops permanently (Section 4.3). "
+             "Two further rules link the scenario to the mechanism. Once a region's active pool falls below M, its PI-driven recruitment stops permanently (Section 2.9). "
              "Hit generation in all regions is multiplied by the effective number of macro-regions (inverse Simpson index of domestic active pools) relative to its baseline value, raised to a variety elasticity γ; γ = 0 is the fitted model and γ > 0 encodes the hypothesis that a more concentrated field generates fewer independent contributions. "
              f"We run φ ∈ {{{', '.join(_fmt(v, 1) for v in sorted(dom['summary']['phi'].unique()) if v > 0)}}} for the two largest observed host regions, report all quantities relative to a φ = 0 baseline, and search for the smallest γ at which the field's, and the focal region's own, hit stock falls below baseline. "
              f"The clock of the model is set by the fitted transition rates, so we report time in units of the characteristic time τ = 1/d̄, the mean career duration implied by the fitted dropout rates (τ ≈ {_fmt(dctx_tau, 0)} years); the horizon is {_fmt(dhorizon_tau, 1)} τ, and calendar years appear only as an annotation because the same trajectory would unfold faster or slower in a field with faster or slower career turnover. Read in this way, the horizon spans about {_fmt(dhorizon_tau, 0)} researcher generations; in a field where careers last twice as long the same number of generations would take twice as many years, and the policy implication of a given t/τ shifts accordingly. "
              "φ, γ, the retention and collapse rules and the horizon are stylised assumptions, listed with their status in Supplementary Table S8; the transition rates, equilibria, thresholds and host shares are fitted. The scenario is a model-consistent projection of the mechanism, not a forecast.")
 
-    # ------------------------------------------------------------------
-    # 5. Results
-    # ------------------------------------------------------------------
-    doc.add_heading("5. Results", level=1)
 
-    doc.add_heading("5.1 Equilibrium pools and minimum viable scale (P1)", level=2)
+    # ------------------------------------------------------------------
+    # 3. Results
+    # ------------------------------------------------------------------
+    doc.add_heading("3. Results", level=1)
+    p = para("Results are reported in three layers that are kept distinct throughout: observed quantities estimated directly from the cohort, model-implied quantities computed from the fitted ODE, and sensitivity results showing how both layers move under alternative measurement and modelling choices.")
+
+    doc.add_heading("3.1 Observed cohort and transition rates", level=2)
+    tr_mean = transition_rates.groupby("group").first()
+    obs_alpha = tr_mean["alpha"]; obs_beta = tr_mean["beta"]; obs_pab = tr_mean["p_abroad"]; obs_d = tr_mean["d"]
+    p = para(f"Table 1 (Section 2.1) describes the cohort. The observed transition rates vary widely across macro-regions: early-career outflow α spans {_fmt(obs_alpha.min(), 3)} ({obs_alpha.idxmin()}) to {_fmt(obs_alpha.max(), 3)} ({obs_alpha.idxmax()}), "
+             f"the share affiliated abroad within six career years p_abroad spans {_fmt(obs_pab.min(), 3)} to {_fmt(obs_pab.max(), 3)}, "
+             f"return β spans {_fmt(obs_beta.min(), 3)} to {_fmt(obs_beta.max(), 3)}, "
+             f"and annual dropout d spans {_fmt(obs_d.min(), 3)} to {_fmt(obs_d.max(), 3)}. "
+             "These are observed hazards with Laplace regularisation, not model outputs; every model quantity in Sections 3.2-3.8 is downstream of them.")
+
+    doc.add_heading("3.2 Equilibrium pools and minimum viable scale (P1)", level=2)
     p = para(f"Table 2 reports the equilibrium domestic active pool T, the minimum viable scale M and the inflow parameters for the {len(eq)} macro-regions. "
              "All exceed their threshold under the fitted model, but the ratio T/M ranges from "
              f"{_fmt(ctx['tm_min'], 2)} ({ctx['tm_min_group']}) to {_fmt(ctx['tm_max'], 2)} ({ctx['tm_max_group']}). "
@@ -2484,7 +2402,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
                        decimals={"T": 0, "M": 0, "Margin": 0, "T/M": 2, "I0": 0, "r": 4, "r (observed)": 4, "r (critical)": 4})
     figure("fig3", "Figure 3. Equilibrium domestic active pool (T) and minimum viable coauthor scale (M) by research macro-region.")
 
-    doc.add_heading("5.2 Which transitions govern the pool (P2)", level=2)
+    doc.add_heading("3.3 Which transitions govern the pool (P2)", level=2)
     p = para("Table 3 lists the three transition-rate elasticities with the largest absolute effect on T in each macro-region. "
              f"Dropout (d) is the largest negative lever everywhere, with elasticity from {_fmt(ctx['d_min_e'], 2)} to {_fmt(ctx['d_max_e'], 2)}, "
              f"whereas the largest absolute elasticity of early-career outflow (α) is {_fmt(ctx['alpha_abs_max'], 2)}; |e_d| exceeds |e_α| in {ctx['d_gt_alpha_groups']} of {len(eq)} macro-regions, as P2 predicts. "
@@ -2500,18 +2418,18 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     elas_df = pd.DataFrame(rows3, columns=["Group", "1st rate", "1st elasticity", "2nd rate", "2nd elasticity", "3rd rate", "3rd elasticity"])
     _add_table_from_df(doc, elas_df, caption="Table 3. Top transition-rate elasticities of the domestic active pool T by research macro-region.")
 
-    doc.add_heading("5.3 Point of no return and endogenous recruitment (P1, P3)", level=2)
+    doc.add_heading("3.4 Viability-boundary proximity and endogenous recruitment (P1, P3)", level=2)
     closest = pnr_closest.iloc[0]
     p = para("Table 4 reports, for each macro-region, the single rate that reaches the active-pool threshold with the smallest proportional change, and Figure 4 ranks macro-regions by that proximity. "
              f"{ctx['pnr_lever_text']}, consistent with P3: the transition that feeds the reproduction loop from outside is the binding one. "
-             f"The closest point of no return is in {closest['group']}, where {closest['rate_name']} multiplied by {_fmt(closest['critical_factor'], 3)} (a {closest['proximity']*100:.0f}% {'reduction' if closest['critical_factor'] < 1 else 'increase'}) drives the active pool to M. "
-             f"Across macro-regions the Spearman correlation between PNR proximity and T/M is {_fmt(ctx['rho_prox_tm'], 2)}, whereas that between proximity and absolute T is {_fmt(ctx['rho_prox_T'], 2)}. "
-             "Because the I_0 lever scales the whole equilibrium, proximity is close to a deterministic function of T/M in the linear model, so the first correlation is the consistency check that P1 calls for rather than an independent test; the diagnostic content of P1 is that the ranking by absolute size and the ranking by proximity diverge, which the second correlation shows (Section 5.6 returns to individual cases).")
+             f"The closest model-implied viability boundary is in {closest['group']}, where {closest['rate_name']} multiplied by {_fmt(closest['critical_factor'], 3)} (a {closest['proximity']*100:.0f}% {'reduction' if closest['critical_factor'] < 1 else 'increase'}) drives the active pool to M. "
+             f"Across macro-regions the Spearman correlation between boundary proximity and T/M is {_fmt(ctx['rho_prox_tm'], 2)}, whereas that between proximity and absolute T is {_fmt(ctx['rho_prox_T'], 2)}. "
+             "Because the I_0 lever scales the whole equilibrium, proximity is close to a deterministic function of T/M in the linear model, so the first correlation is the consistency check that P1 calls for rather than an independent test; the diagnostic content of P1 is that the ranking by absolute size and the ranking by proximity diverge, which the second correlation shows (Section 3.8 returns to individual cases).")
     pnr_table = pnr_closest[["group", "rate_name", "current_rate", "critical_factor", "proximity"]].copy()
     pnr_table.columns = ["Group", "Closest rate", "Current value", "Critical factor", "Proximity"]
-    _add_table_from_df(doc, pnr_table, caption="Table 4. Closest point of no return for the active researcher pool by research macro-region.",
+    _add_table_from_df(doc, pnr_table, caption="Table 4. Closest model-implied viability boundary for the active researcher pool by research macro-region.",
                        decimals={"Current value": 1, "Critical factor": 3, "Proximity": 3})
-    figure("fig4", "Figure 4. Closest point-of-no-return proximity by research macro-region. Smaller values mean a smaller proportional change in the listed rate reaches the threshold.")
+    figure("fig4", "Figure 4. Closest viability-boundary proximity by research macro-region. Smaller values mean a smaller proportional change in the listed rate reaches the threshold.")
 
     if sat_eq is not None:
         pnr_rob = pnr_robustness_table()
@@ -2528,7 +2446,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
         _add_table_from_df(doc, merged, caption="Table 5. Equilibrium T under linear and saturating PI-driven inflow.",
                            decimals={"Linear T": 0, "Saturating T": 0, "ε": 5})
 
-    doc.add_heading("5.4 Historical drift in transition rates (P4)", level=2)
+    doc.add_heading("3.5 Historical drift in transition rates (P4)", level=2)
     n_compare = len(period_compare)
     if ctx["period_all_neg"]:
         prefix = "Both" if n_compare == 2 else f"All {n_compare}"
@@ -2548,7 +2466,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
                        decimals={"T early": 0, "T late": 0, "ΔT (%)": 1, "Margin early": 0, "Margin late": 0, "Δ margin": 1})
     figure("fig5", "Figure 5. Change in safety margin between early and late transition-rate regimes. Negative values mean the late-window rates would shrink the margin if they persisted. Point estimates only; the two windows differ in cohort size.")
 
-    doc.add_heading("5.5 Policy counterfactuals and uncertainty", level=2)
+    doc.add_heading("3.6 Policy counterfactuals and uncertainty", level=2)
     policy_top = policy_rank.groupby("group").head(1).copy()
     all_top_are_d = (policy_top["lever"] == "d").all()
     dominant_text = ("Reducing dropout is the dominant positive lever in every macro-region, consistent with P2. "
@@ -2571,126 +2489,192 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     p = para("As an exploratory extension, the annual layer re-estimates the rates year by year and projects them to 2017-2026; "
              f"rate-level projections have a skill ratio of {_fmt(annual_ctx.get('rate_overall_skill', float('nan')), 2)} against a historical-mean baseline and the layer is a drift monitor rather than a forecast, so its figures and accuracy tables are reported in Supplementary Material Section S2 (Supplementary Figures S1-S3, Supplementary Tables S2-S5).")
 
-    doc.add_heading("5.6 Worked example: Japan", level=2)
+    doc.add_heading("3.7 Measurement sensitivity: origin, PI definition, multi-affiliation and missingness", level=2)
+    ms7 = {}
+    if mv["ORIGIN_SENSITIVITY"] is not None:
+        os_df = mv["ORIGIN_SENSITIVITY"]
+        ms7["n_rules"] = int(os_df["origin_rule"].nunique())
+        ms7["tm_min_invariant"] = (os_df.groupby("origin_rule")["T_over_M"].idxmin().map(lambda i: os_df.loc[i, "group"]).nunique() == 1)
+        ms7["tm_min_group"] = os_df.groupby("origin_rule")["T_over_M"].idxmin().map(lambda i: os_df.loc[i, "group"]).mode().iloc[0]
+        ms7["rho_min"] = float(os_df.groupby("origin_rule").apply(lambda d: d["p_abroad"].corr(os_df[os_df["origin_rule"] == "window3_mode"].set_index("group").reindex(d["group"])["p_abroad"], method="spearman")).min()) if "p_abroad" in os_df.columns else float("nan")
+    if mv["MOBILITY_SENSITIVITY"] is not None:
+        mob = mv["MOBILITY_SENSITIVITY"]
+        ms7["n_cells"] = len(mob)
+        ms7["n_reversed"] = int(mob["direction_reversed"].sum())
+    if mv["MOBILITY_MULTISTATE"] is not None:
+        # Share of cohort authors with >1 macro-region in at least one year.
+        # MOBILITY_MULTISTATE counts states, not authors, so read the cohort sidecar.
+        _ayg_path = Path("data/cohort/author_year_groups.json")
+        if _ayg_path.exists():
+            _ayg = json.load(open(_ayg_path))
+            ms7["multi_share"] = sum(1 for v in _ayg.values() if any(len(gs) > 1 for _y, gs in v)) / len(_ayg)
+        else:
+            ms7["multi_share"] = float("nan")
+    if mv["PI_SENSITIVITY"] is not None:
+        ps = mv["PI_SENSITIVITY"]
+        ms7["n_pi_defs"] = int(ps["pi_definition"].nunique())
+        ms7["pi_share_min"] = float(ps["pi_share"].min()); ms7["pi_share_max"] = float(ps["pi_share"].max())
+    if mv["PI_PROPAGATION_P"] is not None:
+        pp7 = mv["PI_PROPAGATION_P"]
+        ms7["p_over_m_min"] = float(pp7["P_over_M_P"].min()); ms7["p_over_m_max"] = float(pp7["P_over_M_P"].max())
+        ms7["closest_P_levers"] = sorted(pp7["closest_P_rate"].unique().tolist())
+    if mv["MISSINGNESS_SUMMARY"] is not None:
+        msum = mv["MISSINGNESS_SUMMARY"].set_index(mv["MISSINGNESS_SUMMARY"].columns[0])["value"]
+        ms7["miss_country"] = float(msum.get("share_missing_country_cohort", float("nan")))
+        ms7["left_censor"] = float(msum.get("share_career_start_at_window_edge_2000", float("nan")))
+        ms7["span_lt5"] = float(msum.get("share_span_lt5", float("nan")))
+        ms7["span_ge15"] = float(msum.get("share_span_ge15", float("nan")))
+    p = para("Origin specification. "
+             f"Re-estimating the cohort under {ms7.get('n_rules', 7)} origin rules leaves the qualitative results intact: the lowest-T/M macro-region is {ms7.get('tm_min_group', 'unchanged')} under every rule, "
+             f"and in {ms7.get('n_cells', 0)} group-rule cells ({ms7.get('n_rules', 7) - 1} alternative rules x {len(eq)} macro-regions) the share affiliated abroad never crosses the majority direction-that is, no macro-region's aggregate p_abroad flips from below to above 50%, or vice versa ({ms7.get('n_reversed', 0)} reversals). "
+             "This statement is about group-level aggregates: individual authors do change assigned origin under the alternative rules (baseline agreement 94-99.8%), so the stability is at the level of the regional statistics the model consumes, not of individual trajectories.")
+    p = para("Multi-affiliation and missingness. "
+             f"{ms7.get('multi_share', 0) * 100:.1f}% of cohort authors record affiliations in more than one macro-region in at least one year; fractional and exclusion specifications of those years change the outputs by at most a few percent, so multi-affiliation is a measurement ambiguity to disclose rather than a driver of results. "
+             f"Country is missing on {ms7.get('miss_country', 0) * 100:.1f}% of cohort authorship rows, and the missingness is not random (it is concentrated in earlier years), "
+             f"{ms7.get('left_censor', 0) * 100:.1f}% of authors have careers left-censored at the 2000 window edge, "
+             f"and {ms7.get('span_lt5', 0) * 100:.0f}% of observed spans are shorter than five years ({ms7.get('span_ge15', 0) * 100:.0f}% are 15 years or more). "
+             "The first two push the reported rates toward underestimates of mobility; the short spans widen the bootstrap intervals, which is one reason rankings are reported rather than precise margins.")
+    p = para("PI proxy. "
+             f"Across the {ms7.get('n_pi_defs', 6)} PI operationalisations the cohort PI share ranges from {ms7.get('pi_share_min', 0) * 100:.0f}% to {ms7.get('pi_share_max', 0) * 100:.0f}%, so the absolute PI share is not robust to the proxy and is never reported as a fact about the field. "
+             "The T-side equilibria, T/M, elasticities and boundary proximities are structurally invariant to the PI definition because the inflow calibration fixes total entry to observed entry (Section 2.8); this invariance is a property of the calibration, not evidence that the PI measurement is valid. "
+             f"What does vary is the P-side: the domestic-PI equilibrium P_D relative to its PI-scale threshold M_P spans {ms7.get('p_over_m_min', 0):,.0f}–{ms7.get('p_over_m_max', 0):,.0f}x across definitions, and the closest P-side lever is {', '.join(_rate_label(x) for x in ms7.get('closest_P_levers', []))} in every definition, so the qualitative findings survive while the absolute PI-stock numbers move.")
+    sens_rows = [
+        ["Origin rule (7 specs)", "Lowest-T/M region; p_abroad direction", f"Invariant; {ms7.get('n_reversed', 0)}/{ms7.get('n_cells', 0)} aggregate reversals", "Regional aggregates, not individuals"],
+        ["Multi-affiliation (8.4% authors)", "All model outputs", "<2% change under fractional/exclusion", "Same-year location unobserved"],
+        ["PI proxy (6 defs)", "PI share", f"{ms7.get('pi_share_min', 0) * 100:.0f}-{ms7.get('pi_share_max', 0) * 100:.0f}%", "Absolute share proxy-dependent"],
+        ["PI proxy (6 defs)", "T/M, elasticities, proximity rankings", "Structurally invariant (I_0 calibration)", "Calibration artefact, not validation"],
+        ["PI proxy (6 defs)", "P_D/M_P, closest P-side lever", f"{ms7.get('p_over_m_min', 0):,.0f}–{ms7.get('p_over_m_max', 0):,.0f}x; lever unchanged", "P-side varies by construction"],
+        ["Missing country (4.2% rows)", "Rates", "Toward underestimation", "Missingness non-random"],
+        ["Left censoring (5.7%)", "Career windows", "Rates are lower bounds", "Pre-2000 careers unobserved"],
+        ["Short spans (27.8% <5y)", "Bootstrap intervals", "Wide intervals", "Rankings descriptive"],
+    ]
+    _add_table_from_df(doc, pd.DataFrame(sens_rows, columns=["Choice varied", "Quantity affected", "Observed effect", "Caveat"]),
+                       caption="Table 8. Measurement-sensitivity summary. Every row is computed from the cohort under the stated specification; details and per-rule tables are in the public repository.")
+
+    doc.add_heading("3.8 Worked example: Japan", level=2)
     p = para(f"Japan illustrates the mechanism in a large research system with an independent institutional lineage and comparatively low T/M. "
              f"Its fitted equilibrium is T = {ja_ctx['D'] + ja_ctx['H_D'] + ja_ctx['P_D']:,} active researchers (D = {ja_ctx['D']:,}, H_D = {ja_ctx['H_D']:,}, P_D = {ja_ctx['P_D']:,}) against M = {round(ja_ctx['M']):,}, so T/M = {_fmt(ja_ctx['T_over_M'], 2)}. "
-             f"The closest point of no return is {ja_ctx['pnr_rate']}: a fall to {_fmt(ja_ctx['pnr_factor'] * 100, 1)}% of its current level would bring T to M. "
+             f"The closest model-implied viability boundary is {ja_ctx['pnr_rate']}: a fall to {_fmt(ja_ctx['pnr_factor'] * 100, 1)}% of its current level would bring T to M. "
              f"Figure 7 places Japan's six compartments and compares its rates with the other macro-regions: early-career outflow (α = {_fmt(ja_ctx['alpha'], 3)}) and domestic PI promotion (p_D = {_fmt(ja_ctx['p_D'], 3)}) are comparatively low, return (β = {_fmt(ja_ctx['beta'], 3)}) and domestic hit generation (h_D = {_fmt(ja_ctx['h_D'], 3)}) moderate, and dropout d = {_fmt(ja_ctx['d'], 3)}. "
              "Low leakage but a thin internal promotion pipeline is the configuration P1 and P2 describe: the system does not lose many researchers abroad, so its distance to the threshold is governed by scale relative to M and by attrition rather than by mobility. "
-             "Figure 8 generalises the diagnostic by plotting T/M against PNR proximity for all macro-regions; the lower-left corner combines a low buffer with a small proportional change needed to reach M. "
+             "Figure 8 generalises the diagnostic by plotting T/M against boundary proximity for all macro-regions; the lower-left corner combines a low buffer with a small proportional change needed to reach M. "
              "The same two-panel diagnostic applies to any macro-region with sufficient OpenAlex coverage; Japan is a worked example, not a special case.")
     figure("fig7", "Figure 7. Japan in the six-compartment model, with a ladder of fitted transition rates across research macro-regions (Japan highlighted; longer bars are higher rates).", width=6.0)
-    figure("fig8", "Figure 8. Equilibrium safety ratio (T/M) versus closest point-of-no-return proximity for all research macro-regions. Japan is shown in red.")
+    figure("fig8", "Figure 8. Equilibrium safety ratio (T/M) versus closest viability-boundary proximity for all research macro-regions. Japan is shown in red.")
 
-    doc.add_heading("5.7 Talent concentration: short-run dominance, field-level loss", level=2)
+    doc.add_heading("3.9 Talent concentration: short-run dominance, field-level loss", level=2)
     fd = dctx["focal_display"]; fd_the = _with_article(fd)
     fd2 = dctx.get("focal2_display"); fd2_the = _with_article(fd2) if fd2 else None
     ts1_reached = dctx["th_self_focal1"].dropna()
-    th2 = dctx["th_field_focal2"].dropna() if fd2 else None
     tau = dctx["tau"]
-    tr_raw = _apply_display_names(pd.read_csv(BASE_DIR / "data" / "cohort" / "transition_rates.csv"))
-    hD_rank = int((tr_raw["h_D"] < float(tr_raw.loc[tr_raw["group"] == fd, "h_D"].iloc[0])).sum()) + 1
-    def _t_range(lo, hi):
-        if _fmt(lo / tau, 1) == _fmt(hi / tau, 1):
-            return f"t ≈ {_t_tau(lo, tau)}"
-        return f"t ≈ {_fmt(lo / tau, 1)}-{_fmt(hi / tau, 1)} τ (≈{_fmt(lo, 0)}-{_fmt(hi, 0)} years at fitted rates)"
-    peak_years = _t_range(dctx['field_hits_peak_year_min'], dctx['field_hits_peak_year_max'])
-    below_years = _t_range(dctx['field_hits_below_year_min'], dctx['field_hits_below_year_max'])
-    collapse_txt = ("; no source region crosses M within the horizon. " if dctx['n_collapsed_max'] == 0
-                    else f", with {dctx['n_collapsed_max']} source region{'s' if dctx['n_collapsed_max'] > 1 else ''} below M at the strongest pull. ")
-    p = para(f"Figure 9 and Table 8 summarise the scenario with {fd_the} as the dominant region; it is the largest observed host of abroad researchers. With the fitted rates (γ = 0) the pull works for the region that exerts it: for φ from {_fmt(dctx['phi_min'], 1)} to {_fmt(dctx['phi_max'], 1)}, its hosted active pool ends {_fmt(dctx['pool_gain_min'], 0)}-{_fmt(dctx['pool_gain_max'], 0)}% above baseline and its share of all researchers hosted abroad rises from {_fmt(dctx['share_start'], 0)}% to as much as {_fmt(dctx['share_terminal_max'], 0)}% (upper-left panel). "
-             f"The field pays in concentration: the effective number of macro-regions falls from {_fmt(dctx['neff_start'], 1)} to {_fmt(dctx['neff_terminal_max'], 1)}-{_fmt(dctx['neff_terminal_min'], 1)} (upper-right panel), and the lowest T/M among source regions ends at {_fmt(dctx['min_TM_terminal'], 2)}{collapse_txt}"
-             f"For this host the field's total hit stock falls even without a variety effect: it rises by at most {_fmt(dctx['field_hits_peak_gain_max'], 1)}% (peaking at {peak_years}), drops below baseline from {below_years}, and ends {_fmt(-dctx['field_hits_terminal_max'], 1)}-{_fmt(-dctx['field_hits_terminal_min'], 1)}% below it (lower-left panel), because the researchers it attracts, and the early-career researchers they recruit, generate hits at the host's fitted domestic rate, which ranks {_ordinal(hD_rank)} lowest of the nine (Figure 10), while PI-driven recruitment in the source regions weakens. "
-             f"With {fd2_the} as the dominant region the field's hit stock rises at γ = 0 (Table 8), because its fitted domestic rates are higher, and falls below baseline once γ exceeds {_fmt(th2.min(), 1)}-{_fmt(th2.max(), 1)} at the pull intensities where the threshold is reached within the search range. "
-             "In both cases the dominant region keeps a larger share of a more concentrated field; whether the field is also smaller depends on the host's own reproduction rates and on how much output owes to variety.")
-    p = para(f"Whether the dominant region itself ends worse off depends on γ (lower-right panel). With {fd_the} at φ = {_fmt(dctx['mid_phi'], 1)}, its own hit stock at the end of the horizon ({_fmt(dctx['horizon_tau'], 1)} τ) is {_fmt(dctx['focal_hits_terminal_g0_mid'], 0)}% above baseline with γ = 0 and {_fmt(abs(dctx['focal_hits_terminal_gmax']), 0)}% {'above' if dctx['focal_hits_terminal_gmax'] >= 0 else 'below'} it with γ = {_fmt(dctx['gamma_max_grid'], 0)}, while the field's is {_fmt(abs(dctx['field_hits_terminal_gmax']), 0)}% below. "
-             f"The elasticity at which its own output falls below baseline within the horizon is γ* = {_fmt(ts1_reached.max(), 1)} at φ = {_fmt(ts1_reached.idxmax(), 1)} and {_fmt(ts1_reached.min(), 1)} at φ = {_fmt(ts1_reached.idxmin(), 1)}: the harder it pulls, the less variety dependence is needed for the strategy to turn against it. "
-             + (f"For {fd2_the} the same threshold is reached within γ ≤ {_fmt(dctx['gamma_max_search'], 0)} only at the strongest pull. " if dctx['th_self_focal2'].isna().sum() >= 3 else "")
-             + "The field-level loss of variety is therefore the robust finding; the field-level loss of output holds at γ = 0 for one host and above a moderate γ for the other; and the dominant region's own loss requires the largest γ. γ is not identified by our data, and it is the empirical quantity on which the difference between a lasting relative advantage for the dominant region and a dead end for it turns.")
+    p = para(f"Under the coupled scenario of Section 2.10, the dominant region's hosted pool and share rise monotonically with the pull intensity φ, while the effective number of macro-regions falls: the strategy wins the short run it was designed for, at a direct variety cost to the field (Figure 9). "
+             f"Whether the field's hit stock also falls depends on the variety elasticity γ: it declines even at γ = 0 for {fd_the}, and only once γ exceeds a moderate value for the second-largest host. "
+             f"Whether the dominant region itself ends worse off requires a larger γ still (γ* = {_fmt(ts1_reached.max(), 1)} at the strongest pull). γ is not identified by our data; the variety loss is the robust finding. "
+             f"Figure 10 shows the regional time paths at φ = {_fmt(dctx['phi_max'], 1)}: the dominant pool rises, source regions decline toward their thresholds, and each crossing of M switches off that region's PI-driven recruitment under the scenario's collapse rule-a discrete model event, not an observed one.")
     figure("fig9", f"Figure 9. Talent-concentration scenario with {fd_the} as the dominant region (coupled nine-region model, fitted rates unless stated). (a) Hosted active pool relative to the φ = 0 baseline; (b) effective number of macro-regions; (c) field hit stock relative to baseline at φ = {_fmt(dctx['mid_phi'], 1)} for three variety elasticities γ; (d) smallest γ at which the field's, and the dominant region's own, hit stock falls below baseline within the horizon, for the two largest host regions (points on the dotted line at the top of the panel: not reached within the search range). Time in (a)-(c) is in units of τ = 1/d̄ (upper axis: years at fitted rates). φ and γ are stylised.", width=6.5)
     _add_table_from_df(doc, dominant_strategy_table(dom),
-                       caption=f"Table 8. Talent-concentration scenario at the end of the horizon ({_fmt(dctx['horizon_tau'], 1)} τ ≈ {_fmt(dctx['horizon_years'], 0)} years at fitted rates) relative to the φ = 0 baseline, fitted rates (γ = 0), for the two largest observed host regions. γ* is the smallest variety elasticity at which the hit stock falls below baseline within the horizon.",
+                       caption=f"Table 9. Talent-concentration scenario at the end of the horizon ({_fmt(dctx['horizon_tau'], 1)} τ ≈ {_fmt(dctx['horizon_years'], 0)} years at fitted rates) relative to the φ = 0 baseline, fitted rates (γ = 0), for the two largest observed host regions. γ* is the smallest variety elasticity at which the hit stock falls below baseline within the horizon.",
                        decimals={"Regions below M": 0, "Pull intensity φ": 1, "Hosted pool at end of horizon (× baseline)": 2, "Share of hosted researchers at end of horizon (%)": 0,
                                  "Effective number of regions at end of horizon": 1, "Field hit stock at end of horizon (× baseline)": 2})
-    cbg = dctx["collapse_by_gamma"]
-    gam_sorted = sorted(cbg)
-    def _cb(gm):
-        items = cbg.get(gm, [])
-        if not items:
-            return "no region falls below M within the horizon"
-        return "; ".join(f"{g} falls below M at t ≈ {_t_tau(y, tau)}" for g, y in items)
-    p = para(f"Figure 10 shows the time paths behind these summaries for every macro-region at the strongest pull we simulate (φ = {_fmt(dctx['phi_max'], 1)}), one panel per γ. The dominant region's active pool rises and stays high, the source regions decline towards their thresholds at rates set by their fitted transition rates, and each crossing of M switches off a region's PI-driven recruitment under the collapse rule, so that within the simulation each crossing is a discrete loss for the field rather than one more step in a smooth contraction. "
-             + (f"{cbg[gam_sorted[0]][0][0]} falls below M at t ≈ " + ", ".join(_fmt(cbg[gm][0][1] / tau, 1) for gm in gam_sorted) + " τ (≈" + ", ".join(_fmt(cbg[gm][0][1], 0) for gm in gam_sorted) + " years at fitted rates) for γ of " + ", ".join(_fmt(gm, 0) for gm in gam_sorted[:-1]) + f" and {_fmt(gam_sorted[-1], 0)} respectively; no other region crosses within the horizon."
-                if all(len(cbg.get(gm, [])) == 1 and cbg[gm][0][0] == cbg[gam_sorted[0]][0][0] for gm in gam_sorted) and cbg.get(gam_sorted[0])
-                else " ".join(f"At γ = {_fmt(gm, 0)}, {_cb(gm)}." for gm in gam_sorted))
-             + (" Larger γ brings the crossing forward, because the loss of variety lowers hit generation everywhere, including in the dominant region." if len(gam_sorted) > 1 and cbg.get(gam_sorted[-1]) and (not cbg.get(gam_sorted[0]) or cbg[gam_sorted[-1]][0][1] < cbg[gam_sorted[0]][0][1]) else "")
-             + " The other source regions end the horizon above M but on declining paths, so the horizon, not the mechanism, bounds how many crossings the figure shows; the geographical extent of the field (Figure 1) is traded for a shorter temporal one. The timing scales with τ: a field with faster career turnover would reach the same crossings in proportionally fewer years, so the ordering of outcomes, not the calendar dates, is the result.")
-    figure("fig10", f"Figure 10. Regional time paths under the talent-concentration strategy exerted by {fd_the} at pull intensity φ = {_fmt(dctx['phi_max'], 1)}, for three variety elasticities γ. Lines show each macro-region's domestic active pool as a multiple of its minimum viable coauthor scale M (log scale; dashed line M); the thick line is the dominant region. Crosses and dotted verticals mark when a region falls below M, after which its PI-driven recruitment is switched off permanently. Time is in units of the characteristic time τ = 1/d̄ (mean career duration; ≈{_fmt(dctx['tau'], 0)} years at fitted rates, upper axis). Fitted rates; φ, γ and the collapse rule are stylised.", width=6.5)
+    p = para(f"Figure 10 shows the time paths behind these summaries for every macro-region at the strongest pull we simulate (φ = {_fmt(dctx['phi_max'], 1)}), one panel per γ. "
+             "The timing scales with τ: a field with faster career turnover would reach the same crossings in proportionally fewer years, so the ordering of outcomes, not the calendar dates, is the result.")
+    figure("fig10", f"Figure 10. Regional time paths under the talent-concentration strategy exerted by {fd_the} at pull intensity φ = {_fmt(dctx['phi_max'], 1)}, for three variety elasticities γ. Lines show each macro-region's domestic active pool as a multiple of its minimum viable coauthor scale M (log scale; dashed line M); the thick line is the dominant region. Crosses and dotted verticals mark when a region falls below M, after which its PI-driven recruitment is switched off permanently under the scenario's collapse rule. Time is in units of the characteristic time τ = 1/d̄ (mean career duration; ≈{_fmt(dctx['tau'], 0)} years at fitted rates, upper axis). Fitted rates; φ, γ and the collapse rule are stylised.", width=6.5)
+
 
     # ------------------------------------------------------------------
-    # 6. Discussion
+    # 4. Discussion
     # ------------------------------------------------------------------
-    doc.add_heading("6. Discussion", level=1)
+    doc.add_heading("4. Discussion", level=1)
 
-    doc.add_heading("6.1 What the propositions show", level=2)
+    doc.add_heading("4.1 Principal findings", level=2)
     p2_txt = ("P2 is supported in every macro-region: dropout is more elastic than early-career outflow, and reducing dropout is the most efficient single lever. "
               if ctx["d_gt_alpha_groups"] == len(eq) else f"P2 is supported in {ctx['d_gt_alpha_groups']} of {len(eq)} macro-regions. ")
     ms_ch = robustness_context(None, m_sens).get("ms_lever_changes") if m_sens is not None else None
     if ms_ch is not None and not ms_ch.empty:
         ms_groups = ", ".join(sorted(set(ms_ch["group"])))
         ms_min_mult = _fmt(ms_ch["M_multiplier"].min(), 2)
-        p3_qual = (f" The primacy of the entry lever is a property of the fitted thresholds rather than of the mechanism: when M is raised to {ms_min_mult}× its fitted value or more, dropout becomes the closest lever in {ms_groups} (Section 5.5), "
+        p3_qual = (f" The primacy of the entry lever is a property of the fitted thresholds rather than of the mechanism: when M is raised to {ms_min_mult}× its fitted value or more, dropout becomes the closest lever in {ms_groups} (Section 3.6), "
                    "which is why we read P3 as support for the entry lever being binding at the observed scale, not as a general law. ")
     else:
         p3_qual = " "
-    p = para(f"P1 is consistent with the results in the sense that matters for policy: rankings by absolute T and by proximity to the threshold diverge (ρ = {_fmt(ctx['rho_prox_T'], 2)}), the largest systems are not the safest, and proximity itself is governed by T/M as the mechanism implies; as Section 2.6 notes, this is a diagnostic reading rather than a test. "
+    p = para(f"P1 is consistent with the results in the sense that matters for policy: rankings by absolute T and by proximity to the threshold diverge (ρ = {_fmt(ctx['rho_prox_T'], 2)}), the largest systems are not the safest, and proximity itself is governed by T/M as the mechanism implies; this is a diagnostic reading rather than a test. "
              + p2_txt +
              f"P3 is supported: {ctx['pnr_lever_text']}, and the ranking is invariant to the form of the recruitment feedback." + p3_qual +
              f"P4 is supported in its weak form: equilibria differ between the two career-start windows in all {n_compare} macro-regions with dual-window support, and the margin shrinks in {ctx['period_neg']}. "
-             "Together the results move the researcher-mobility debate from net flows to the transition rates that govern reproduction, and they give the evolutionary argument about variety an empirically observable early-warning variable.")
+             "Together the results move the researcher-mobility debate from net flows to the transition rates that govern reproduction, and they give an empirically observable early-warning variable.")
 
-    doc.add_heading("6.2 Variety loss as an evolutionary dead end", level=2)
-    p = para("The mechanism implies that concentration in AI/ML research is not merely distributional. "
-             "Short-run efficiency from scale in compute and data is real")
-    C(p, "sevilla")
-    p.add_run(", but the same feedbacks that produce it narrow the population on which selection operates. If a macro-region's active pool falls below M, the PIs who framed problems from that system's languages, data and institutional context stop being replaced")
-    C(p, "joshi", "bender")
-    p.add_run("; the benchmarks and hardware paths they might have championed are not tried")
-    C(p, "hooker", "koch")
-    p.add_run("; and the field loses an independent check on correlated errors of the kind Kleinberg and Raghavan describe")
-    C(p, "kleinberg")
-    p.add_run(". In Saviotti's terms, variety that is not regenerated is eventually exhausted by selection")
-    C(p, "saviotti")
-    p.add_run("; in Arthur's, the outcome is locked in")
-    C(p, "arthur")
-    p.add_run(". Open-source diffusion widens access to methods but does not regenerate the local PI stock, which in the fitted model feeds the binding entry lever. This is the sense in which a research system's point of no return is an evolutionary dead end for the field rather than a loss for one country.")
+    doc.add_heading("4.2 Methodological contribution", level=2)
+    p = para("For informetrics, the contribution is a measurement pipeline rather than a single indicator. "
+             "Origin assignment, mobility transitions, PI status, community aggregation, calibration and the viability boundary are each specified operationally, and each is accompanied by a sensitivity result reported in the main text: origin under seven rules, mobility direction under each, PI under six definitions propagated through the model, multi-affiliation and missingness quantified. "
+             "This is the level of measurement audit that secondary-data mobility studies often leave implicit, and it is what makes the resulting indicators-T/M and viability-boundary proximity-usable as monitoring quantities. "
+             "The pipeline is field-agnostic in design: every step is parameterised on a subfield, a year window and an authorship convention, and AI/ML is the case study on which it is calibrated and illustrated. We do not claim the findings generalise to other fields; we claim the machinery does, with authorship conventions redefined per field.")
 
-    doc.add_heading("6.3 Who benefits from preserving variety?", level=2)
-    p = para("Because the argument is mechanistic rather than national, its beneficiaries can be stated by actor.")
-    p = para("Governments and funders of smaller research systems. The model tells them which transition is binding and how large a proportional change would reach the threshold. "
-             f"Because {ctx['pnr_lever_text'].split(' is ')[0]} is the closest lever, doctoral pipelines and early-career entry are first-order defences, while dropout reduction is the most elastic single lever; blocking outflow is not. Table 9 maps levers to instruments.")
-    p = para("Universities and research institutes. The PI stock is the node of the network externality: institutions that convert hit researchers into PIs (p_D) and retain them (d) regenerate their own inflow. The framework lets a university read its own transition rates against the macro-regional ladder in Figure 7.")
-    p = para("Early-career researchers. In the fitted model, going abroad is a smaller threat to a home system than net-flow accounting implies; attrition is the larger one. Policies that support return and dual affiliation rather than penalising mobility serve both the individual and the system. Researchers in systems near their threshold face shrinking prospects of independent PI positions, and the equilibrium diagnostic gives an early indication of that risk.")
-    p = para("The field as a whole. Multi-site and internationally distributed teams retain high impact")
+    doc.add_heading("4.3 Related literature", level=2)
+    p = para("Researcher mobility has been studied under the headings of brain drain, brain circulation and brain gain")
+    C(p, "thorn")
+    p.add_run(". Outflows become a gain when return migration and diaspora networks are supported")
+    C(p, "thorn")
+    p.add_run("; bilateral flows are driven by collaboration, economic convergence and visa restrictions")
+    C(p, "appelt")
+    p.add_run("; and cross-country shares of foreign-born scientists vary widely")
+    C(p, "franzoni")
+    p.add_run(". In AI/ML, the United States is the dominant destination, mobile scientists keep ties to origin systems")
+    C(p, "macropolo", "alshebli")
+    p.add_run(", and elite networks are highly clustered")
+    C(p, "yuan")
+    p.add_run(". The economics of science supplies the microfoundation: individuals respond to career incentives")
+    C(p, "stephan")
+    p.add_run(". What this literature measures is stocks and flows; it does not specify a community-level state variable whose crossing makes the loss self-reinforcing rather than recoverable. "
+              "Evolutionary and innovation-systems economics supplies the threshold concepts-variety generation and selection, lock-in through increasing returns")
+    C(p, "nelson", "dosi", "arthur", "david")
+    p.add_run(", and frameworks for analysing the diversity of a technological system")
+    C(p, "stirling", "saviotti", "metcalfe")
+    p.add_run("-but its unit of analysis is the firm, the technology or the sector. "
+              "The present framework connects the two: the community-level state variable is the equilibrium active pool relative to a coauthor-scale threshold, estimated from the career transitions the mobility literature already measures. "
+              "The AI-specific homogenisation concerns it connects to-algorithmic monoculture, benchmark and compute concentration, linguistic and data bias-are documented elsewhere")
+    C(p, "kleinberg", "hooker", "koch", "ahmed", "joshi", "bender", "raji")
+    p.add_run(", and the scale of the leading models intensifies the concentration")
+    C(p, "kaplan", "bommasani", "sevilla")
+    p.add_run(". Historical cases of fields that narrowed onto a dominant approach and stagnated are well documented-from the perceptrons controversy in AI itself, through Lysenkoist biology, pre-2008 macroeconomics and string theory, to agricultural monocultures")
+    C(p, "olazaran", "rumelhart", "joravsky", "colander", "smolin", "ullstrup", "mccook", "avelino", "ploetz")
+    p.add_run(". Evidence that large fields slow canonical progress and that papers become less disruptive over time makes the variety question empirical rather than rhetorical")
+    C(p, "chu", "park")
+    p.add_run("; diversity demonstrably aids problem solving")
+    C(p, "hongpage")
+    p.add_run(", multi-site and internationally distributed teams retain high impact")
     C(p, "jones", "freeman")
-    p.add_run(", and collaboration between the largest systems is more impactful than either alone")
-    C(p, "alshebli")
-    p.add_run(". Sustaining the systems that supply those collaborators keeps the field's menu of problems, benchmarks and evaluation norms wide, which is what allows it to correct errors and change paradigms.")
-    p = para("Society. AI systems are deployed in health, education, administration and language across societies whose data and languages are under-represented in the dominant paradigm")
-    C(p, "joshi", "bender")
-    p.add_run(". A field with more independent research systems is more likely to build, test and contest systems for those contexts. The competition for talent among jurisdictions")
-    C(p, "shachar", "kerr")
-    p.add_run(" is therefore not zero-sum at the level of society: the losers of a round of concentration include the users of the technology, not only the systems that lost researchers.")
+    p.add_run(", innovation is highest at intermediate competition")
+    C(p, "aghion")
+    p.add_run(", and the processes are institutionally embedded in national and sectoral systems")
+    C(p, "lundvall", "malerba")
+    p.add_run(".")
 
-    doc.add_heading("6.4 Policy levers and early warning", level=2)
-    p = para("Table 9 maps the sensitive levers to instruments and to the actors who control them. "
-             "I0 and h_D are mainly set by national funders and ministries; p_D and d by universities and department heads; β by diaspora networks, return grants and recruiters. "
-             "The framework can be rerun with each OpenAlex release to update rates, margins and proximity; the exploratory annual layer in Supplementary Material Section S2 provides the machinery for tracking rates year by year, although its current direction-prediction skill is low and it should be read as a monitor rather than a forecast. "
-             f"Because endogenous inflow is capped at {_fmt(ctx['safety_factor_cap'], 2)}× the critical reproduction rate, the implied interventions are conservative: they aim to keep systems away from the threshold, not to maximise any one system's share. "
-             "Where inter-regional mobility cannot be regulated, intra-regional levers—d, h_D and p_D—remain available and, in the fitted model, are the more elastic ones. "
-             "All counterfactuals are mechanical; turning them into policy priorities requires programme costs, lags and behavioural responses that are outside this paper.")
+    doc.add_heading("4.4 Implications for research evaluation", level=2)
+    p = para("The indicators are designed for evaluators rather than for national accounting. "
+             "T/M and boundary proximity can be recomputed with each OpenAlex release; a declining margin in any macro-region is a signal for the field, not only for that region. "
+             "Because the closest lever and the most elastic lever are identified separately, the indicators also distinguish where monitoring should focus: entry pipelines (I_0) bind first at the observed scale, while attrition (d) is the most elastic. "
+             "The exploratory annual layer provides the machinery for tracking rates year by year, although its current direction-prediction skill is low and it should be read as a monitor rather than a forecast. "
+             "For individual universities, the PI stock is the node of the network externality: institutions that convert hit researchers into PIs and retain them regenerate their own inflow, and the macro-regional ladder (Figure 7) gives a benchmark against which an institution's own transition rates can be read. "
+             "For early-career researchers, going abroad is a smaller threat to a home system than net-flow accounting implies; attrition is the larger one.")
+
+    doc.add_heading("4.5 Policy implications", level=2)
+    p = para("Concentrating talent is individually advantageous for the large systems pursuing it: it raises short-run output")
+    C(p, "sevilla", "shachar", "kerr")
+    p.add_run(", but each round of concentration lowers T/M in the systems that lose researchers, and the collective outcome can be an evolutionary dead end for the field (Section 3.9). "
+              "No single actor captures the benefit of the variety it preserves, so the response has to be shared: jointly funded early-career fellowships and return grants aimed at low-T/M systems, routine monitoring of the indicator pair, and shared compute and data infrastructure acting on the intra-regional levers h_D and p_D where mobility itself cannot or should not be steered")
+    C(p, "arthur", "saviotti")
+    p.add_run(". "
+              f"Because endogenous inflow is capped at {_fmt(ctx['safety_factor_cap'], 2)}× the critical reproduction rate, the implied interventions are conservative: they aim to keep systems away from the threshold, not to maximise any one system's share. "
+              "Lever rankings are model-conditional: they follow from the fitted rates and thresholds and are not causal effects of programmes.")
     lever_policy_mgmt = pd.DataFrame({
         "Lever": ["Dropout (d)", "Exogenous entry (I_0)", "Return from abroad (β)", "Domestic hit generation (h_D)", "PI promotion (p_D)"],
+        "Mechanism (in model)": [
+            "Lowers d; raises T and margin directly; most elastic lever",
+            "Raises I_0; linearly rescales all stocks; closest lever at observed scale",
+            "Raises return inflow into early-career pool",
+            "Raises hit generation; builds the H compartments feeding P",
+            "Raises promotion D to P_D; feeds the reproduction loop",
+        ],
         "Policy instrument": [
             "Early-career fellowships, childcare and dual-career support, stable non-tenure tracks",
             "Research-master and undergraduate pipelines, doctoral fellowships, recruitment visas",
@@ -2705,54 +2689,63 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
             "National funders, universities",
             "Universities, funders",
         ],
+        "Empirical evidence": [
+            "Indirect: early-career support is linked to lower attrition in the fellowship/tenure literature; AI/ML magnitude unestablished",
+            "Strong generic: doctoral expansion raises the research workforce; visa effects on inflow documented",
+            "Mixed: diaspora policies show small positive return rates",
+            "Moderate: compute/data access is the AI/ML-specific bottleneck",
+            "Indirect: tenure-track expansion raises senior-author counts (descriptive)",
+        ],
+        "Unintended consequences": [
+            "Lock-in of marginal researchers; subsidy capture by secure staff",
+            "Dilution of supervision quality; credential inflation",
+            "Return-then-leave-again churn; benefits concentrated on the already-mobile",
+            "Concentration on incumbents; hardware lock-in",
+            "Premature promotion dilutes the PI proxy (measurement, not reality)",
+        ],
+        "Uncertainty and model dependence": [
+            "Rate elasticity estimated; instrument-to-rate link not measured",
+            "I_0 is calibrated to observed entry; pipeline vs migration not separable",
+            "Return measured from affiliations only; physical return unobserved",
+            "h_D bundles output quantity and quality",
+            "Instrument-proxy mismatch possible; ranking robust to M only at observed scale",
+        ],
     })
-    _add_table_from_df(doc, lever_policy_mgmt, caption="Table 9. Transition levers, policy instruments and principal actors.")
+    _add_table_from_df(doc, lever_policy_mgmt, caption="Table 10. Levers, mechanisms, instruments, evidence and uncertainty. Lever rankings are model-conditional; the instrument-to-rate links are argued from the literature, not measured here.")
+    p = para("Each instrument affects a model rate; the instrument-to-rate link is argued from the literature, not measured here, and estimated rate elasticities do not establish that any single instrument moves any single rate by the stated amount. "
+             "Regional effects are two-sided: a pull that raises one region's inflow lowers another's, and the coupled scenario shows the sender regions, not only the receiver, pay the margin cost.")
 
-    doc.add_heading("6.5 Implications for policy and for the field's future", level=2)
-    p = para("The results also bear on the strategy that large research systems are currently pursuing. Concentrating talent, compute and data is individually advantageous for each of them taken alone: it raises short-run output, and a system that stands aside loses ground to those that do not")
-    C(p, "sevilla", "shachar", "kerr")
-    p.add_run(". The mechanism shows why the collective outcome of that strategy can be an evolutionary dead end. Each round of concentration lowers T/M in the systems that lose researchers, and once one of them falls below M its PI stock stops reproducing and whatever distinct problem framings, benchmarks and data it carried leave the field's menu, with no route back in the model")
-    C(p, "arthur", "david", "saviotti")
-    p.add_run(". The efficiency gains accrue to the concentrating systems immediately; the loss of error-correcting capacity is borne later by the whole field, including those systems, and by the societies that use the technology")
-    C(p, "kleinberg", "hooker")
-    p.add_run(". This is a coordination problem of the kind that talent competition between jurisdictions cannot solve on its own, because no single actor captures the benefit of the variety it preserves. Current debates about pacing AI development are usually framed around safety; the present results suggest a second reason for restraint in the race for talent, which is that the race narrows the population on which the field's own future selection depends.")
-    p = para("The scenario in Section 5.7 puts numbers on this argument within the fitted model. A region that pulls early-career researchers from everywhere else gains a larger hosted pool and a larger share for as long as we simulate, and the field ends more concentrated in every setting we examined. "
-             "Whether the field also ends smaller depends on the host's own reproduction rates and on the variety elasticity γ: for the largest observed host it does so with the fitted rates alone, for the second-largest once γ exceeds a moderate value. Whether the dominant region itself eventually falls below its own baseline requires a larger γ still. Our data do not identify γ, so the model does not say how long the advantage lasts or whether it ends within a national time horizon. "
-             "The evaluation does not depend on that question. The mechanism in Section 2 holds that variety is what lets the field correct correlated errors and change paradigms; if that premise carries any weight, γ is positive, and at the scale of the field, of society and of humanity the strategy trades error-correcting capacity that everyone uses for a share advantage that one system holds inside a more concentrated and, in the long run, smaller field. "
-             "A relative advantage sustained inside a shrinking field is exactly the outcome the mechanism identifies as a dead end. Enclosure of AI/ML talent can therefore be individually rational and remain collectively a poor strategy, and the case for coordination does not rest on showing that the enclosing region will lose.")
-    if dctx is not None:
-        para(_poaching_paragraph(dctx))
-    p = para("Three practical steps follow from the fitted model rather than from national interest. First, multilateral early-career fellowships aimed at systems with low T/M, funded jointly by the largest systems, act on the two levers the model identifies as most consequential: "
-             f"{ctx['pnr_lever_text'].split(' is ')[0]} as the closest lever to the threshold and dropout as the most elastic one. Return grants and dual appointments that keep researchers attached to their origin system (β) complement them without penalising mobility, which the fitted model finds to be a weak lever. "
-             "Second, funders, leading venues and research institutions can monitor regional variety directly, using T/M and point-of-no-return proximity as indicators that can be recomputed with each OpenAlex release alongside author-affiliation statistics, and treat a declining margin in any macro-region as a signal for the field rather than for that region alone. "
-             "Third, shared compute and data infrastructure open to researchers in smaller systems acts on h_D and p_D, the intra-regional levers that remain available where mobility itself cannot or should not be steered.")
-    p = para(f"On the field's trajectory, the comparison of career windows in Section 5.4 shows the margin shrinking in {ctx['period_neg']} while it widened in the other macro-regions, so the macro-regions are not drifting in the same direction. "
-             "If those drifts persist, a system can move from a comfortable T/M to the threshold without any single year looking alarming, and the field would come to depend on fewer independent sources of problems and evaluation norms. "
-             "This is a projection of current rates, not a forecast, and rates can change with policy; the exploratory annual layer in Supplementary Material exists to detect whether they do. The point of the framework is to make that drift visible while the levers that reverse it are still inexpensive, before proximity to M turns a distributional question into one that the model treats as irreversible.")
-
-    doc.add_heading("6.6 Limitations", level=2)
+    doc.add_heading("4.6 Limitations", level=2)
     p = para("OpenAlex affiliation and country assignments are noisy, especially for multi-affiliated authors, and coverage of non-English venues is incomplete. "
              "The macro-regional grouping is coarse; within-group heterogeneity is substantial, and the grouping of, for example, mainland China and Taiwan follows current OpenAlex country metadata rather than any resolution of their relationship. "
              "Geographic variety is a proxy for the cognitive and institutional variety the mechanism concerns, and the model does not observe research content directly; that macro-regions differ in institutions, languages and funding is documented, but that they carry distinct research programmes is assumed here, not measured, and claims about problem framings or benchmarks should be read with that qualification. "
-             "Irreversibility is likewise a property of the collapse rule, not an empirical finding: a real system that fell below M could in principle rebuild through return migration or new entry, which the model does not represent, so 'point of no return' denotes the threshold at which the fitted feedback loop stops sustaining the pool, not a prediction that recovery is impossible. "
+             "Irreversibility is likewise a property of the collapse rule in the coupled scenario, not an empirical finding: a real system that fell below M could in principle rebuild through return migration or new entry, which the model does not represent, so the viability boundary denotes the threshold at which the fitted feedback loop stops sustaining the pool, not a prediction that recovery is impossible. "
              "The model omits cross-region spillovers, firm-level mobility and within-year dynamics; rates are assumed constant within windows; the cohort over-weights prolific authors; and bootstrap intervals are wide, so rankings are descriptive. "
              f"The endogenous inflow cap ({_fmt(ctx['safety_factor_cap'], 2)}) is a modelling choice whose alternatives should be mapped. "
              "Falling below M is a sufficient rather than necessary condition for collapse, and the historical comparison rests on two point estimates. "
              "The talent-concentration scenario couples the regions only through observed host shares and stylised pull, retention and collapse rules, holds fitted rates constant over a long horizon, and treats the variety elasticity γ as a free parameter; its results are model-consistent projections that rank strategies, not predictions of when any region's advantage ends. "
-             "The PI and hit proxies follow AI/ML authorship conventions (group leader listed last or corresponding; hits scored within the AI/ML subfield); the Supplementary robustness check varies the PI proxy, but transfer of the pipeline to fields with alphabetical author order or consortium authorship requires redefining these proxies, as documented in the public code. "
+             "The PI and hit proxies follow AI/ML authorship conventions (group leader listed last or corresponding; hits scored within the AI/ML subfield); the sensitivity battery shows the absolute PI share varies widely across definitions while rankings survive, and transfer of the pipeline to fields with alphabetical author order or consortium authorship requires redefining these proxies. "
+             "Measurement limits quantified in Section 3.7-multi-affiliated authors, non-random missing country, left-censored careers at the 2000 window edge, and short observed spans-mean the reported rates are best read as comparable lower bounds. "
              "Finally, the propositions are tested on nine macro-regions, so correlational support for P1 is indicative; the strongest support is for P2 and P3, which hold system by system.")
 
+    doc.add_heading("4.7 Future validation agenda", level=2)
+    p = para("Three extensions would test rather than extend the framework. "
+             "First, external validation of the viability boundary: back-testing the indicator against historical cases of systems that contracted or lost a research programme would show whether proximity predicts outcomes rather than merely describing fitted equilibria. "
+             "Second, identifying the variety elasticity γ from disruption or novelty measures would determine whether the talent-concentration scenario's field-level output loss is a real possibility or a parameter artefact. "
+             "Third, applying the pipeline to a field with different authorship conventions-and to a deliberately mis-specified macro-regional partition-would test which results are measurement artefacts and which are structural. "
+             "Each is executable on open data with the released code.")
+
     # ------------------------------------------------------------------
-    # 7. Conclusion
+    # 5. Conclusion
     # ------------------------------------------------------------------
-    doc.add_heading("7. Conclusion", level=1)
-    p = para("Jevons asked how long a general-purpose input would sustain a system that depended on it. For AI/ML research talent the analogous question is not exhaustion but distribution: at what point does the concentration of a reproducible input leave some research systems unable to reproduce it? "
-             "We derived a mechanism from career-transition rates through network externalities and minimum viable scale to variety loss, and examined four propositions with a compartment model fitted to open bibliometric data for nine research macro-regions. "
+    doc.add_heading("5. Conclusion", level=1)
+    p = para("We asked how far each AI/ML research system is from the scale below which it can no longer reproduce its research workforce, which career transition governs that distance, and whether the distance is shrinking. "
+             "The answer is delivered by a measurement pipeline that turns open bibliometric records into cohort career-transition rates, a calibrated compartment model, and an early-warning indicator pair (T/M and viability-boundary proximity), with every measurement choice stress-tested in the main results. "
              f"All systems currently exceed their minimum viable coauthor scale, but distance to the threshold is governed by relative scale and by attrition rather than by size or outflow; exogenous entry is the binding lever everywhere; the ranking is robust to the form of the recruitment feedback; and rates have drifted between career windows, shrinking the margin in {ctx['period_neg']}. "
-             "The case for preserving variety across research macro-regions rests on these mechanics rather than on national interest: the beneficiaries are the governments and institutions that can act on specific levers, the early-career researchers whose prospects depend on them, the field whose capacity for error correction depends on independent systems, and the societies whose problems, data and languages those systems represent. "
-             "A coupled simulation of an aggressive concentration strategy shows why: the region that concentrates talent gains a larger share for as long as we simulate, while the field loses macro-regional variety at once and concentration can reduce total output after a transient gain, so concentrating talent is individually rational for each large system and can become, at the scale of the field, of society and of humanity, an evolutionary dead end; how long the individual advantage lasts depends on how much research output owes to variety, which is the open empirical question. "
-             "This is why the practical response has to be shared: jointly funded early-career fellowships and return grants for low-T/M systems, routine monitoring of T/M across macro-regions, and open compute and data infrastructure. "
-             "Extensions include finer partitions with explicit inter-regional spillovers, dynamic solution of the ODE to estimate time to threshold, endogenous coauthor thresholds, application to other general-purpose research fields, and integration with programme cost data.")
+             "For research evaluation the contribution is a reproducible, field-agnostic measurement framework for research-system viability; for AI/ML it locates the systems whose margins are thin and the levers that matter. "
+             "Extensions include external validation of the boundary against historical contractions, identification of the variety elasticity, finer partitions with inter-regional spillovers, and application to other general-purpose research fields.")
+
+
 
     # References (Vancouver, order of first appearance)
     doc.add_heading("References", level=1)
@@ -2803,8 +2796,8 @@ def write_docx(output_dir, data, fig_paths, blinded=False):
     if blinded:
         _anonymize_docx(doc)
 
-    suffix = "_blinded" if blinded else ""
-    path = output_dir / f"manuscript_full_article{suffix}.docx"
+    suffix = "JOI_MANUSCRIPT_BLINDED" if blinded else "JOI_MANUSCRIPT_FINAL"
+    path = output_dir / f"{suffix}.docx"
     doc.save(path)
     return path
 
@@ -2931,7 +2924,7 @@ def write_pptx(output_dir, data, fig_paths):
         "Blue bars: equilibrium T; orange bars: threshold M. All groups remain above the threshold, but margins vary widely.",
     )
     add_image_slide(
-        "Figure 4: Closest point-of-no-return proximity",
+        "Figure 4: Closest viability-boundary proximity",
         fig_paths["fig4"],
         "Smaller values mean a smaller proportional change in the listed rate is required to reach the threshold for the stated target pool.",
     )
@@ -2973,7 +2966,7 @@ def write_pptx(output_dir, data, fig_paths):
     pnr_table.columns = ["Group", "Target", "Rate", "Current", "Crit.factor", "Proximity"]
     for c, d in {"Current": 4, "Crit.factor": 3, "Proximity": 3}.items():
         pnr_table[c] = pnr_table[c].apply(lambda x, d=d: _fmt(x, d))
-    add_table_slide("Table 4: Closest point of no return", pnr_table, pnr_table.columns.tolist(), width_per_col=1.8)
+    add_table_slide("Table 4: Closest model-implied viability boundary", pnr_table, pnr_table.columns.tolist(), width_per_col=1.8)
 
     if sat_eq is not None:
         merged = eq[["group", "T_equilibrium"]].merge(
@@ -3040,7 +3033,7 @@ def write_pptx(output_dir, data, fig_paths):
 
     if fig_paths.get("fig8"):
         add_image_slide(
-            "Figure 8: T/M safety margin versus closest PNR proximity",
+            "Figure 8: T/M safety margin versus closest boundary proximity",
             fig_paths["fig8"],
             "Lower-left points are the most fragile. Japan is highlighted in red.",
         )
@@ -3138,7 +3131,7 @@ def write_pptx(output_dir, data, fig_paths):
         boot_tab[c] = boot_tab[c].apply(lambda x: _fmt(x, 0))
     add_table_slide("Supplementary Table S6: Bootstrap 95% CI", boot_tab, boot_tab.columns.tolist(), width_per_col=2.2)
 
-    path = output_dir / "manuscript_full_article_figures.pptx"
+    path = output_dir / "JOI_FIGURES_EDITABLE.pptx"
     prs.save(path)
     return path
 
@@ -3272,23 +3265,23 @@ def write_supplementary_docx(output_dir, data, fig_paths):
     boot_tab.columns = ["Group", "T median", "T 95% CI", "P_D mean", "P_D 95% CI"]
     _add_table_from_df(doc, boot_tab, caption="Supplementary Table S6. Bootstrap 95% confidence intervals for equilibrium T and domestic PI pool P_D.", decimals={"T median": 0, "P_D mean": 0})
 
-    doc.add_heading("Supplementary Table S7. Closest point of no return under linear versus saturating inflow", level=1)
+    doc.add_heading("Supplementary Table S7. Closest model-implied viability boundary under linear versus saturating inflow", level=1)
     pnr_rob = pnr_robustness_table()
     if not pnr_rob.empty:
         rob = pnr_rob.rename(columns={
             "origin_group": "Group", "linear_closest": "Linear lever", "linear_factor": "Linear factor", "linear_proximity": "Linear proximity",
             "saturating_closest": "Saturating lever", "saturating_factor": "Saturating factor", "saturating_proximity": "Saturating proximity",
         })
-        _add_table_from_df(doc, rob, caption="Supplementary Table S7. Closest point-of-no-return lever, critical factor and proximity for the active pool under linear and saturating PI-driven inflow.",
+        _add_table_from_df(doc, rob, caption="Supplementary Table S7. Closest viability-boundary lever, critical factor and proximity for the active pool under linear and saturating PI-driven inflow.",
                            decimals={"Linear factor": 3, "Linear proximity": 3, "Saturating factor": 3, "Saturating proximity": 3})
     else:
-        doc.add_paragraph("No saturating-inflow PNR results available.")
+        doc.add_paragraph("No saturating-inflow boundary results available.")
 
     doc.add_heading("Supplementary Table S8. Talent-concentration scenario: inputs and their status", level=1)
     dom_s = load_dominant_strategy()
     if dom_s is not None:
         ass = dom_s["assumptions"].rename(columns={"parameter": "Parameter", "value": "Value", "status": "Status"})
-        _add_table_from_df(doc, ass, caption="Supplementary Table S8. Inputs to the talent-concentration scenario (Section 4.5). 'Fitted' inputs come from the estimated model and observed mobility data; 'stylised' inputs are modelling assumptions without an empirical estimate.")
+        _add_table_from_df(doc, ass, caption="Supplementary Table S8. Inputs to the talent-concentration scenario (Section 2.10). 'Fitted' inputs come from the estimated model and observed mobility data; 'stylised' inputs are modelling assumptions without an empirical estimate.")
     else:
         doc.add_paragraph("No talent-concentration scenario results available.")
 
@@ -3300,14 +3293,14 @@ def write_supplementary_docx(output_dir, data, fig_paths):
         p.add_run("The baseline defines a PI by the first last-author paper. To test this choice, the full AI/ML author population was re-extracted from OpenAlex with the corresponding-author flag of every authorship retained, and each author was classified under three definitions on the same snapshot: "
                   "(a) first last-author paper (baseline); (b) first paper on which the author is flagged as corresponding author (OpenAlex authorships.is_corresponding); (c) second last-author paper, i.e. last author on at least two papers. "
                   + (f"The re-extracted snapshot contains {int(snap['n_authors_snapshot'].iloc[0]):,} authors against {int(snap['n_authors_published'].iloc[0]):,} in the published cohort; the difference reflects OpenAlex updates between extractions, so definitions are compared with each other on the same snapshot (Supplementary Table S10) and the baseline definition is also compared with the published results. " if snap is not None else "")
-                  + "For each definition the transition rates were re-estimated, the endogenous-inflow equilibrium, the elasticities and the closest point of no return were recomputed with the same M, and the nine-region rankings were compared by Spearman rank correlation. "
-                  "Two quantities are invariant to the proxy by construction and are reported only for completeness: because I_0 is calibrated so that total equilibrium entry equals observed entry (Section 4.2), the equilibrium active pool T (hence T/M) and the proximity of the entry lever I_0 do not depend on how PIs are identified. "
-                  "The proxy does change the promotion rates p_D and p_A, the equilibrium PI pool P_D, the exogenous/PI-driven split of entry (I_0, r), the elasticity of T to p_D and the point of no return of the PI pool relative to its own threshold k. "
+                  + "For each definition the transition rates were re-estimated, the endogenous-inflow equilibrium, the elasticities and the closest model-implied viability boundary were recomputed with the same M, and the nine-region rankings were compared by Spearman rank correlation. "
+                  "Two quantities are invariant to the proxy by construction and are reported only for completeness: because I_0 is calibrated so that total equilibrium entry equals observed entry (Section 2.8), the equilibrium active pool T (hence T/M) and the proximity of the entry lever I_0 do not depend on how PIs are identified. "
+                  "The proxy does change the promotion rates p_D and p_A, the equilibrium PI pool P_D, the exogenous/PI-driven split of entry (I_0, r), the elasticity of T to p_D and the model-implied viability boundary of the PI pool relative to its own threshold k. "
                   "Supplementary Table S9 reports the region-level results and Supplementary Table S10 the rank agreement on these proxy-dependent quantities.")
-        _add_table_from_df(doc, pi_proxy_table(pp), caption="Supplementary Table S9. Equilibrium active pool, T/M, rank and closest point-of-no-return lever by research macro-region under three PI proxy definitions (same OpenAlex snapshot; M held at its baseline value).",
+        _add_table_from_df(doc, pi_proxy_table(pp), caption="Supplementary Table S9. Equilibrium active pool, T/M, rank and closest viability-boundary lever by research macro-region under three PI proxy definitions (same OpenAlex snapshot; M held at its baseline value).",
                            decimals={"Share of authors who are PIs": 3, "p_D": 3, "T/M": 2, "Proximity (T)": 3, "P_D": 0, "Proximity (P_D)": 3, "Elasticity of T to p_D": 3})
         _add_table_from_df(doc, pi_proxy_agreement_table(pp), caption="Supplementary Table S10. Rank agreement between alternative PI proxies and the baseline definition across the nine research macro-regions (Spearman rho). T/M and the T proximity are invariant by construction (see text).",
-                           decimals={"Spearman rho (T/M)": 2, "Spearman rho (PNR proximity, T)": 2, "Spearman rho (p_D)": 2, "Spearman rho (P_D)": 2, "Spearman rho (PNR proximity, P_D)": 2})
+                           decimals={"Spearman rho (T/M)": 2, "Spearman rho (boundary proximity, T)": 2, "Spearman rho (p_D)": 2, "Spearman rho (P_D)": 2, "Spearman rho (boundary proximity, P_D)": 2})
     else:
         doc.add_paragraph("PI proxy robustness results (results/pi_proxy) are not available; run src/pi_proxy_robustness.py after re-extracting the cohort.")
 
@@ -3318,7 +3311,7 @@ def write_supplementary_docx(output_dir, data, fig_paths):
         p = doc.add_paragraph()
         p.add_run("M = k x c-bar is an operational threshold, so we multiply it by "
                   + ", ".join(_fmt(v, 2) for v in ms["summary"]["M_multiplier"]) +
-                  " and recompute, for every macro-region, T/M, the rank by T/M, the closest point-of-no-return lever and its proximity, and the elasticities of T to dropout (d) and early-career outflow (alpha). "
+                  " and recompute, for every macro-region, T/M, the rank by T/M, the closest viability-boundary lever and its proximity, and the elasticities of T to dropout (d) and early-career outflow (alpha). "
                   f"Supplementary Table S11 summarises the results. No macro-region falls below M at any multiplier (minimum T/M {_fmt(rc['ms_min_tm_at_max'], 2)} at the largest multiplier); "
                   f"the rankings by T/M and by proximity are unchanged (Spearman rho = {_fmt(rc['ms_rho_tm_min'], 2)} and {_fmt(rc['ms_rho_prox_min'], 2)} against the baseline at every multiplier); and |elasticity to d| exceeds |elasticity to alpha| in every macro-region at every multiplier. "
                   + ("The closest lever is unchanged everywhere." if rc["ms_lever_changes"].empty else
@@ -3348,44 +3341,64 @@ def write_highlights_docx(output_dir, data):
     doc.add_heading("Highlights", level=1)
     for h in highlights:
         doc.add_paragraph(h, style="List Bullet")
-    path = output_dir / "highlights.docx"
+    path = output_dir / "JOI_HIGHLIGHTS.docx"
     doc.save(path)
     return path
 
 
 def write_cover_letter(output_dir, data):
-    """Cover letter for Technology in Society; numbers are drawn from results."""
+    """Cover letter for the Journal of Informetrics; numbers are drawn from results."""
     (cohort, eq, sat_eq, top_t, pnr_closest, period_compare, _boot, policy_rank) = data
     ctx = compute_context(cohort, eq, sat_eq, top_t, pnr_closest, period_compare, policy_rank)
     closest = pnr_closest.iloc[0]
     paras = [
-        "Dear Editors of Technology in Society,",
-        f"We submit the manuscript \"{TITLE}\" for consideration as a Research Article.",
-        "The paper asks at what point the loss of artificial-intelligence (AI) researchers from a smaller research system becomes a lasting loss of variety for the field as a whole. "
-        "It frames AI research talent as a general-purpose infrastructural input in the sense of Jevons's coal question, derives a four-step mechanism (career-transition rates -> network externalities in recruitment -> minimum viable coauthor scale -> variety loss) from the researcher-mobility and evolutionary-economics literatures, "
-        "and examines four propositions with a six-compartment ordinary-differential-equation model fitted to OpenAlex records for "
-        f"{len(cohort):,} AI/ML authors across {len(eq)} research macro-regions.",
-        f"Three findings are of direct relevance to the journal's readership. First, proximity to a point of no return is governed by the ratio of pool to threshold rather than by absolute size; the lowest ratio is {ctx['tm_min']:.2f} ({ctx['tm_min_group']}), and the closest point of no return is in {closest['group']}, where a {closest['proximity']*100:.0f}% change in {closest['rate_name']} would drive the active pool to its threshold. "
-        f"Second, dropout, which drains every career stage, is the most elastic lever in {ctx['d_gt_alpha_groups']} of {len(eq)} macro-regions. "
-        f"Third, transition rates from the later career window imply a shrinking equilibrium in {ctx['period_neg']}, indicating drift toward the threshold.",
-        "The argument is built so that the research question follows from a theoretical gap: Section 2 moves from the two literatures to an explicit gap, from the gap to the mechanism, and from the mechanism to one research question and four mechanistic propositions (P1-P4). "
-        "It includes an AI-specific argument for why homogenisation matters (algorithmic monoculture, the hardware lottery, benchmark and compute concentration, linguistic and data bias), with the counterarguments from economies of scale and open-source diffusion, and cross-domain historical cases of fields that narrowed and stagnated.",
-        "We believe the paper fits Technology in Society because it treats AI research capacity itself as a sociotechnical infrastructure: not only as the workforce that produces a transformative technology, but as an institutional system whose geography, career dynamics and governance shape what that technology becomes. It examines how the organisation of that infrastructure interacts with policy and society, and its conclusion, that preserving variety across research macro-regions benefits the whole field rather than any single country, speaks to governments, funders, universities and early-career researchers alike.",
-        "All results are reproducible from the public repository named in the Data and Code Availability statement (a single script regenerates every number, figure and table in the manuscript). "
-        "The manuscript has not been published and is not under consideration elsewhere. All authors have approved the submission and declare no competing interests. "
-        "Generative-AI tools were used in drafting and coding, as declared in the manuscript; the authors take full responsibility for the content.",
-        "We have prepared a double-anonymised version of the manuscript for review and a separate Highlights file.",
-        "Thank you for considering our work.",
+        "Dear Editors of the Journal of Informetrics,",
+        f"I submit the manuscript \"{TITLE}\" for consideration as a Full Length Article.",
+        "Why it matters. Researcher-mobility measurement today reports stocks and net flows, which describe redistribution but cannot tell an evaluator whether a research system can still reproduce its own workforce. "
+        "What the field lacks is a community-level state variable whose approach to a critical value warns of unsustainability before the headcount shows it. "
+        "This paper supplies that variable and the complete, auditable measurement pipeline behind it.",
+        "What is new. The pipeline turns open bibliometric records into cohort career-transition rates, a calibrated six-compartment dynamical model, and an early-warning indicator pair (the equilibrium active pool relative to a minimum viable coauthor scale, T/M, and the proximity of that equilibrium to a model-implied viability boundary). "
+        f"Applied to {len(cohort):,} OpenAlex AI/ML authors (2000-2023) across {len(eq)} research macro-regions, it shows that distance to the boundary is governed by relative scale, not size: the lowest T/M is {ctx['tm_min']:.2f} ({ctx['tm_min_group']}), and the closest boundary is in {closest['group']}, where a {closest['proximity']*100:.0f}% change in {_rate_label(closest['rate_name'])} would drive the pool to its threshold. "
+        f"Dropout, not outflow, is the most elastic lever in {ctx['d_gt_alpha_groups']} of {len(eq)} macro-regions.",
+        "Why methodological contribution comes first. Every measurement choice in the pipeline is stress-tested and reported in the main results rather than in footnotes: origin assignment under seven specifications (no macro-region reverses mobility direction), PI status under six alternative definitions propagated through the model (T-side rankings are structurally invariant, P-side quantities vary and are reported), multi-affiliation prevalence and missingness/censoring bounds are quantified. "
+        "The pipeline is field-agnostic by construction-AI/ML is the case study, not the object of the paper-which is why I believe it fits the Journal of Informetrics' interest in reusable measurement and evaluation methodology.",
+        "All results are reproducible from the public repository named in the Data and Code Availability statement; a single script regenerates every number, figure and table. "
+        "The manuscript has not been published and is not under consideration elsewhere. I declare no competing interests. "
+        "Generative-AI tools were used in drafting and coding, as declared in the manuscript; I take full responsibility for the content.",
+        "A double-anonymised version and a Highlights file are included.",
+        "Thank you for considering this work.",
         "Sincerely,",
         "[Corresponding author, affiliation and contact details to be completed at submission]",
     ]
     doc = Document()
     for t in paras:
         doc.add_paragraph(t)
-    path = output_dir / "cover_letter_technology_in_society.docx"
+    path = output_dir / "JOI_COVER_LETTER.docx"
     doc.save(path)
-    md_path = output_dir / "cover_letter_technology_in_society.md"
+    md_path = output_dir / "JOI_COVER_LETTER.md"
     md_path.write_text("\n\n".join(paras) + "\n", encoding="utf-8")
+    return path
+
+
+def write_title_page(output_dir, data):
+    """Standalone JOI title page with author placeholders and declarations."""
+    abstract, keywords, highlights = _abstract_and_highlights(data[1], data[4])
+    doc = Document()
+    style = doc.styles["Normal"]
+    style.font.name = "Times New Roman"
+    style.font.size = Pt(11)
+    title = doc.add_heading(TITLE, level=0)
+    title.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    title.runs[0].font.size = Pt(16)
+    doc.add_paragraph("Article type: Full Length Article")
+    doc.add_paragraph("Authors: [names, affiliations and ORCID to be completed at submission]")
+    doc.add_paragraph("Corresponding author: [name, affiliation, email]")
+    doc.add_paragraph(f"Keywords: {keywords}")
+    doc.add_paragraph("Declarations of interest: [to be completed at submission]")
+    doc.add_paragraph("Funding: [to be completed at submission]")
+    doc.add_paragraph("Data availability: aggregate results and code at https://github.com/bougtoir/researcher-mobility-ode; author-level data re-extractable from OpenAlex (CC0) via reproduce.sh.")
+    path = output_dir / "JOI_TITLE_PAGE.docx"
+    doc.save(path)
     return path
 
 
@@ -3443,6 +3456,7 @@ def main():
     sup_md_path = write_markdown(output_dir, docx_path=sup_path, blinded=False)
     highlights_path = write_highlights_docx(output_dir, data)
     cover_path = write_cover_letter(output_dir, data)
+    titlepage_path = write_title_page(output_dir, data)
 
     print(f"Wrote {docx_path}")
     print(f"Wrote {blinded_docx_path}")
@@ -3454,6 +3468,7 @@ def main():
         print(f"Wrote {sup_md_path}")
     print(f"Wrote {highlights_path}")
     print(f"Wrote {cover_path}")
+    print(f"Wrote {titlepage_path}")
     print(f"Figures saved to {fig_dir}")
 
     # Numbered submission copies (Figure_01 ... Figure_10, Supplementary_Figure_S1 ...) as PNG and TIFF, matching manuscript numbering.
@@ -3480,9 +3495,9 @@ def main():
     print(f"Submission figures (PNG + TIFF) saved to {sub_fig_dir}")
 
     # Build a submission zip containing the manuscript, editable figures, PNGs and TIFFs
-    zip_path = output_dir / "manuscript_full_article_submission.zip"
+    zip_path = output_dir / "JOI_SUBMISSION_PACKAGE.zip"
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
-        for path in [docx_path, blinded_docx_path, pptx_path, md_path, blinded_md_path, sup_path, highlights_path, cover_path]:
+        for path in [docx_path, blinded_docx_path, pptx_path, md_path, blinded_md_path, sup_path, highlights_path, cover_path, titlepage_path]:
             if path and path.exists():
                 zf.write(path, arcname=path.name)
         if sup_md_path and sup_md_path.exists():

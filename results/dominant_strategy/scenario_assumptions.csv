@@ -2,8 +2,8 @@
 phi_grid,"0.0,0.5,1.0,2.0,4.0,8.0",stylised
 gamma_grid,"0.0,1.0,2.0",stylised
 horizon_years,100.0,stylised
-tau_years,24.313891490486423,fitted (1 / mean d)
-horizon_in_tau,4.112875145433965,derived
+tau_years,23.705942916378024,fitted (1 / mean d)
+horizon_in_tau,4.218351505896512,derived
 pull_rule,additional outflow alpha_i phi from D_i to separate compartments hosted by the focal region (i != focal); pre-existing abroad stock keeps observed host shares W,stylised
 retention_rule,beta_i/(1+phi) for researchers pulled to the focal region,stylised
 host_recruitment_rule,each host recruits r_j x hosted abroad PIs; I0_j reduced so the fitted equilibrium is unchanged,stylised

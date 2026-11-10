@@ -133,31 +133,24 @@ accumulated cross-region abroad author-years by origin and destination
 (a lower-bound proxy for inter-regional pipelines, used as the host
 distribution of the talent-concentration scenario in the main text), and
 Supplementary Figure S3 compares the 2017-2023 projection with observed
-compartment counts. Rate-level projections have RMSE 0.0892 and a skill
-ratio (baseline RMSE / model RMSE) of 0.99 against a historical-mean
+compartment counts. Rate-level projections have RMSE 0.0876 and a skill
+ratio (baseline RMSE / model RMSE) of 0.77 against a historical-mean
 baseline, so they do not improve on simply carrying the historical mean
-forward; stock-level errors are larger (RMSE 10,190). Year-to-year
-direction agreement is 21.6%. The observed compartment series of the
-closed cohort falls below $M$ in 5 macro-region-years (Other Western
-(Israel); Supplementary Table S2), whereas the projection flags 0. These
-observed alarms are an artefact of cohort closure, not evidence that the
-system is below its threshold: the observed series excludes everyone who
-entered after 2016, so it declines by construction, while the
-equilibrium $T$ of the main text includes continuing entry. The alarm
-metrics are reported for completeness only.
+forward; stock-level errors are larger (RMSE 29). Year-to-year direction
+agreement is 44.8%.
 
 ![](media/image1.png){width="6.0in" height="5.1962259405074365in"}
 
 *Supplementary Figure S1. Observed (solid) and projected (dashed)
 transition rates by research macro-region, 2000-2026.*
 
-![](media/image2.png){width="5.8in" height="4.703937007874016in"}
+![](media/image2.png){width="5.8in" height="4.790865048118985in"}
 
 *Supplementary Figure S2. Cross-region abroad author-year accumulation
 by origin (rows) and destination (columns); same-region cells and
 Unknown destinations excluded (lower-bound proxy).*
 
-![](media/image3.png){width="6.0in" height="3.8268711723534556in"}
+![](media/image3.png){width="6.0in" height="3.827672790901137in"}
 
 *Supplementary Figure S3. Observed (solid) and projected (dashed)
 compartment counts by research macro-region, 2017-2023. The dotted line
@@ -169,26 +162,26 @@ marks the end of the training period (2016).*
   **Group**       **RMSE**   **MAPE**   **Direction   **Alarm      **Alarm         **Alarm         **Alarm       **Alarm years  **Alarm years
                                         agreement**   Accuracy**   Sensitivity**   Specificity**   Precision**   (observed)**   (projected)**
   --------------- ---------- ---------- ------------- ------------ --------------- --------------- ------------- -------------- ---------------
-  Anglosphere     3544.26    86.2%      19.4%         100.0%       ---             100.0%          ---           0.00           0.00
+  Anglosphere     14.97      159.5%     52.8%         100.0%       ---             100.0%          ---           0.00           0.00
   ex-US                                                                                                                         
 
-  Continental     11674.84   103.1%     19.4%         100.0%       ---             100.0%          ---           0.00           0.00
+  Continental     18.73      137.6%     33.3%         100.0%       ---             100.0%          ---           0.00           0.00
   Europe                                                                                                                        
 
-  South Asia      7915.72    188.4%     16.7%         100.0%       ---             100.0%          ---           0.00           0.00
+  South Asia      52.11      201.3%     47.2%         100.0%       ---             100.0%          ---           0.00           0.00
 
-  Islamic world   16757.46   273.0%     22.2%         100.0%       ---             100.0%          ---           0.00           0.00
+  Islamic world   42.66      233.7%     25.0%         100.0%       ---             100.0%          ---           0.00           0.00
 
-  Japan           1677.63    69.9%      27.8%         100.0%       ---             100.0%          ---           0.00           0.00
+  Japan           8.16       74.8%      63.9%         100.0%       ---             100.0%          ---           0.00           0.00
 
-  Other regions   6149.73    132.4%     16.7%         100.0%       ---             100.0%          ---           0.00           0.00
+  Other regions   27.84      154.9%     47.2%         100.0%       ---             100.0%          ---           0.00           0.00
 
-  Other Western   256.88     98.7%      27.8%         28.6%        0.0%            100.0%          ---           5.00           0.00
+  Other Western   11.57      201.9%     41.7%         100.0%       ---             100.0%          ---           0.00           0.00
   (Israel)                                                                                                                      
 
-  China-centred   18771.59   132.3%     19.4%         100.0%       ---             100.0%          ---           0.00           0.00
+  China-centred   29.28      104.1%     41.7%         100.0%       ---             100.0%          ---           0.00           0.00
 
-  United States   7013.54    77.4%      25.0%         100.0%       ---             100.0%          ---           0.00           0.00
+  United States   25.26      133.7%     50.0%         100.0%       ---             100.0%          ---           0.00           0.00
   ---------------------------------------------------------------------------------------------------------------------------------------------
 
 *Supplementary Table S2. Projection accuracy by research macro-region,
@@ -200,17 +193,17 @@ marks the end of the training period (2016).*
   **Compartment**   **RMSE**          **MAPE**          **Direction
                                                         agreement**
   ----------------- ----------------- ----------------- -----------------
-  A                 849.47            215.1%            7.4%
+  A                 4.45              256.1%            70.4%
 
-  $D$               19801.25          263.3%            1.9%
+  $D$               56.60             442.3%            7.4%
 
-  $H_{A}$           394.83            50.1%             38.9%
+  $H_{A}$           2.09              45.7%             68.5%
 
-  $H_{D}$           8094.10           171.6%            9.3%
+  $H_{D}$           24.68             143.7%            24.1%
 
-  $P_{A}$           1744.50           36.4%             25.9%
+  $P_{A}$           12.21             30.6%             50.0%
 
-  $P_{D}$           12709.83          37.7%             46.3%
+  $P_{D}$           32.68             16.0%             48.1%
   -----------------------------------------------------------------------
 
 *Supplementary Table S3. Projection accuracy by compartment, 2017-2023.*
@@ -220,26 +213,26 @@ marks the end of the training period (2016).*
   ------------------------------------------------------------------------------------
   **Group**       $\alpha$   $\beta$    $h_{D}$    $p_{D}$    $d$        $I_{total}$
   --------------- ---------- ---------- ---------- ---------- ---------- -------------
-  Anglosphere     0.012      0.034      0.046      0.087      0.046      3771.88
+  Anglosphere     0.063      0.110      0.136      0.171      0.018      13.65
   ex-US                                                                  
 
-  China-centred   0.007      0.027      0.026      0.091      0.034      11179.47
+  China-centred   0.028      0.101      0.078      0.139      0.010      25.65
 
-  Continental     0.007      0.036      0.051      0.094      0.046      9935.94
+  Continental     0.043      0.088      0.105      0.195      0.010      24.65
   Europe                                                                 
 
-  Islamic world   0.013      0.038      0.025      0.095      0.030      3002.53
+  Islamic world   0.060      0.165      0.088      0.176      0.009      14.47
 
-  Japan           0.007      0.038      0.024      0.070      0.055      1882.76
+  Japan           0.041      0.174      0.094      0.166      0.021      12.06
 
-  Other Western   0.015      0.033      0.059      0.068      0.044      258.65
+  Other Western   0.063      0.099      0.134      0.109      0.015      9.82
   (Israel)                                                               
 
-  Other regions   0.009      0.035      0.026      0.078      0.042      2955.29
+  Other regions   0.047      0.159      0.087      0.149      0.019      13.71
 
-  South Asia      0.009      0.033      0.027      0.082      0.028      1651.12
+  South Asia      0.063      0.190      0.086      0.194      0.007      12.12
 
-  United States   0.009      0.033      0.047      0.086      0.046      7929.82
+  United States   0.042      0.082      0.136      0.160      0.012      23.29
   ------------------------------------------------------------------------------------
 
 *Supplementary Table S4. Mean observed annual transition rates by
@@ -250,25 +243,25 @@ research macro-region, 2000-2016.*
   -----------------------------------------------------------------------
   **Origin**              **Destination**         **Author-years**
   ----------------------- ----------------------- -----------------------
-  United States           China-centred           52689
+  United States           China-centred           326
 
-  United States           Continental Europe      21968
+  Continental Europe      United States           221
 
-  Anglosphere ex-US       China-centred           20534
+  United States           Anglosphere ex-US       176
 
-  China-centred           United States           18505
+  Anglosphere ex-US       Continental Europe      170
 
-  Continental Europe      Anglosphere ex-US       18156
+  Continental Europe      Anglosphere ex-US       167
 
-  United States           Anglosphere ex-US       17719
+  China-centred           United States           159
 
-  Continental Europe      United States           15459
+  China-centred           Anglosphere ex-US       157
 
-  Anglosphere ex-US       Continental Europe      15003
+  Anglosphere ex-US       China-centred           152
 
-  Anglosphere ex-US       United States           14422
+  Japan                   China-centred           152
 
-  Continental Europe      China-centred           10535
+  United States           Other Western (Israel)  146
   -----------------------------------------------------------------------
 
 *Supplementary Table S5. Top cross-region origin-destination abroad
@@ -280,66 +273,66 @@ author-year pairs.*
   **Group**       $T$ **median** $T$ **95% CI** $P_{D}$        $P_{D}$ **95%
                                                 **mean**       CI**
   --------------- -------------- -------------- -------------- --------------
-  Anglosphere     67546          \[66728,       29814          \[29158,
-  ex-US                          68334\]                       30486\]
+  Anglosphere     57460          \[56692,       25801          \[25154,
+  ex-US                          58061\]                       26345\]
 
-  Continental     195077         \[193718,      83476          \[82421,
-  Europe                         196316\]                      84527\]
+  Continental     172433         \[171191,      75531          \[74446,
+  Europe                         173627\]                      76593\]
 
-  South Asia      53407          \[52402,       30277          \[29348,
-                                 54515\]                       31258\]
+  South Asia      50534          \[49394,       28261          \[27346,
+                                 51488\]                       29182\]
 
-  Islamic world   88428          \[87356,       47264          \[46155,
-                                 89880\]                       48511\]
+  Islamic world   73447          \[72351,       36927          \[35927,
+                                 74502\]                       37819\]
 
-  Japan           29372          \[28932,       7387           \[7128, 7662\]
-                                 29757\]                       
+  Japan           26382          \[25978,       6420           \[6161, 6728\]
+                                 26816\]                       
 
-  Other regions   59396          \[58590,       22326          \[21715,
-                                 60178\]                       22975\]
+  Other regions   56514          \[55876,       19287          \[18809,
+                                 57346\]                       19861\]
 
-  Other Western   4829           \[4602, 5077\] 2163           \[1981, 2370\]
+  Other Western   4238           \[4003, 4460\] 1865           \[1681, 2054\]
   (Israel)                                                     
 
-  China-centred   303843         \[301809,      133015         \[131418,
-                                 305720\]                      134567\]
+  China-centred   279924         \[278113,      128708         \[127109,
+                                 282145\]                      130687\]
 
-  United States   146991         \[145947,      63906          \[62994,
-                                 148235\]                      64906\]
+  United States   120403         \[119426,      52998          \[52252,
+                                 121245\]                      53680\]
   ---------------------------------------------------------------------------
 
 *Supplementary Table S6. Bootstrap 95% confidence intervals for
 equilibrium* $T$ *and domestic PI pool* $P_{D}$*.*
 
-# Supplementary Table S7. Closest point of no return under linear versus saturating inflow
+# Supplementary Table S7. Closest model-implied viability boundary under linear versus saturating inflow
 
   ------------------------------------------------------------------------------------------------
   **Group**       **Linear   **Linear   **Linear      **Saturating   **Saturating   **Saturating
                   lever**    factor**   proximity**   lever**        factor**       proximity**
   --------------- ---------- ---------- ------------- -------------- -------------- --------------
-  United States   $I_{0}$    0.013      0.988         $I_{0}$        0.011          0.989
+  United States   $I_{0}$    0.004      0.996         $I_{0}$        0.003          0.997
 
-  Anglosphere     $I_{0}$    0.047      0.953         $I_{0}$        0.042          0.958
+  Anglosphere     $I_{0}$    0.005      0.995         $I_{0}$        0.004          0.996
   ex-US                                                                             
 
-  Continental     $I_{0}$    0.020      0.980         $I_{0}$        0.018          0.982
+  Continental     $I_{0}$    0.003      0.997         $I_{0}$        0.003          0.997
   Europe                                                                            
 
-  China-centred   $I_{0}$    0.010      0.990         $I_{0}$        0.009          0.991
+  China-centred   $I_{0}$    0.003      0.998         $I_{0}$        0.002          0.998
 
-  Japan           $I_{0}$    0.061      0.939         $I_{0}$        0.059          0.942
+  Japan           $I_{0}$    0.003      0.997         $I_{0}$        0.003          0.997
 
-  South Asia      $I_{0}$    0.042      0.958         $I_{0}$        0.034          0.966
+  South Asia      $I_{0}$    0.003      0.997         $I_{0}$        0.003          0.997
 
-  Islamic world   $I_{0}$    0.025      0.975         $I_{0}$        0.021          0.979
+  Islamic world   $I_{0}$    0.004      0.996         $I_{0}$        0.003          0.997
 
-  Other Western   $I_{0}$    0.332      0.668         $I_{0}$        0.307          0.693
+  Other Western   $I_{0}$    0.004      0.996         $I_{0}$        0.004          0.996
   (Israel)                                                                          
 
-  Other regions   $I_{0}$    0.035      0.965         $I_{0}$        0.031          0.969
+  Other regions   $I_{0}$    0.003      0.997         $I_{0}$        0.003          0.997
   ------------------------------------------------------------------------------------------------
 
-*Supplementary Table S7. Closest point-of-no-return lever, critical
+*Supplementary Table S7. Closest viability-boundary lever, critical
 factor and proximity for the active pool under linear and saturating
 PI-driven inflow.*
 
@@ -354,9 +347,9 @@ PI-driven inflow.*
 
   horizon_years           100.00                                       stylised
 
-  tau_years               24.31                                        fitted (1 / mean $d$)
+  tau_years               23.71                                        fitted (1 / mean $d$)
 
-  horizon_in_tau          4.11                                         derived
+  horizon_in_tau          4.22                                         derived
 
   pull_rule               additional outflow alpha_i phi from $D_{i}$  stylised
                           to separate compartments hosted by the focal 
@@ -393,7 +386,7 @@ PI-driven inflow.*
   --------------------------------------------------------------------------------------------
 
 *Supplementary Table S8. Inputs to the talent-concentration scenario
-(Section 4.5). \'Fitted\' inputs come from the estimated model and
+(Section 2.10). \'Fitted\' inputs come from the estimated model and
 observed mobility data; \'stylised\' inputs are modelling assumptions
 without an empirical estimate.*
 
@@ -407,158 +400,158 @@ each author was classified under three definitions on the same snapshot:
 author is flagged as corresponding author (OpenAlex
 authorships.is_corresponding); (c) second last-author paper, i.e. last
 author on at least two papers. The re-extracted snapshot contains
-719,173 authors against 723,647 in the published cohort; the difference
+623,176 authors against 623,176 in the published cohort; the difference
 reflects OpenAlex updates between extractions, so definitions are
 compared with each other on the same snapshot (Supplementary Table S10)
 and the baseline definition is also compared with the published results.
 For each definition the transition rates were re-estimated, the
-endogenous-inflow equilibrium, the elasticities and the closest point of
-no return were recomputed with the same $M$, and the nine-region
-rankings were compared by Spearman rank correlation. Two quantities are
-invariant to the proxy by construction and are reported only for
-completeness: because $I_{0}$ is calibrated so that total equilibrium
-entry equals observed entry (Section 4.2), the equilibrium active pool
-$T$ (hence $T/M$) and the proximity of the entry lever $I_{0}$ do not
-depend on how PIs are identified. The proxy does change the promotion
-rates $p_{D}$ and $p_{A}$, the equilibrium PI pool $P_{D}$, the
-exogenous/PI-driven split of entry ($I_{0}$, $r$), the elasticity of $T$
-to $p_{D}$ and the point of no return of the PI pool relative to its own
-threshold $k$. Supplementary Table S9 reports the region-level results
-and Supplementary Table S10 the rank agreement on these proxy-dependent
-quantities.
+endogenous-inflow equilibrium, the elasticities and the closest
+model-implied viability boundary were recomputed with the same $M$, and
+the nine-region rankings were compared by Spearman rank correlation. Two
+quantities are invariant to the proxy by construction and are reported
+only for completeness: because $I_{0}$ is calibrated so that total
+equilibrium entry equals observed entry (Section 2.8), the equilibrium
+active pool $T$ (hence $T/M$) and the proximity of the entry lever
+$I_{0}$ do not depend on how PIs are identified. The proxy does change
+the promotion rates $p_{D}$ and $p_{A}$, the equilibrium PI pool
+$P_{D}$, the exogenous/PI-driven split of entry ($I_{0}$, $r$), the
+elasticity of $T$ to $p_{D}$ and the model-implied viability boundary of
+the PI pool relative to its own threshold $k$. Supplementary Table S9
+reports the region-level results and Supplementary Table S10 the rank
+agreement on these proxy-dependent quantities.
 
-  -----------------------------------------------------------------------------------------------------------------------------------------------------------
-  **PI proxy**           **Group**       **Share   $p_{D}$   $T/M$   **Closest     **Proximity   $P_{D}$   **Closest lever   **Proximity       **Elasticity
-                                         of                          lever         (**$T$**)**             (**$P_{D}$**)**   (**$P_{D}$**)**   of** $T$
-                                         authors                     (**$T$**)**                                                               **to** $p_{D}$
-                                         who are                                                                                               
-                                         PIs**                                                                                                 
-  ---------------------- --------------- --------- --------- ------- ------------- ------------- --------- ----------------- ----------------- --------------
-  First last-author      Anglosphere     0.667     0.073     21.57   exogenous     0.954         30773     exogenous entry   0.980             0.338
-  paper (baseline)       ex-US                                       entry rate                            rate ($I_{0}$)                      
-                                                                     ($I_{0}$)                                                                 
+  ------------------------------------------------------------------------------------------------------------------------------------------------------------
+  **PI proxy**           **Group**       **Share   $p_{D}$   $T/M$    **Closest     **Proximity   $P_{D}$   **Closest lever   **Proximity       **Elasticity
+                                         of                           lever         (**$T$**)**             (**$P_{D}$**)**   (**$P_{D}$**)**   of** $T$
+                                         authors                      (**$T$**)**                                                               **to** $p_{D}$
+                                         who are                                                                                                
+                                         PIs**                                                                                                  
+  ---------------------- --------------- --------- --------- -------- ------------- ------------- --------- ----------------- ----------------- --------------
+  First last-author      Anglosphere     0.675     0.075     215.76   exogenous     0.995         25809     exogenous entry   0.997             0.347
+  paper (baseline)       ex-US                                        entry rate                            rate ($I_{0}$)                      
+                                                                      ($I_{0}$)                                                                 
 
-  First last-author      Continental     0.666     0.073     49.68   exogenous     0.980         83975     exogenous entry   0.991             0.355
-  paper (baseline)       Europe                                      entry rate                            rate ($I_{0}$)                      
-                                                                     ($I_{0}$)                                                                 
+  First last-author      Continental     0.684     0.077     330.60   exogenous     0.997         75612     exogenous entry   0.998             0.357
+  paper (baseline)       Europe                                       entry rate                            rate ($I_{0}$)                      
+                                                                      ($I_{0}$)                                                                 
 
-  First last-author      South Asia      0.734     0.088     23.93   exogenous     0.958         30608     exogenous entry   0.982             0.211
-  paper (baseline)                                                   entry rate                            rate ($I_{0}$)                      
-                                                                     ($I_{0}$)                                                                 
+  First last-author      South Asia      0.755     0.094     311.91   exogenous     0.997         28219     exogenous entry   0.998             0.213
+  paper (baseline)                                                    entry rate                            rate ($I_{0}$)                      
+                                                                      ($I_{0}$)                                                                 
 
-  First last-author      Islamic world   0.744     0.091     39.33   exogenous     0.975         47906     exogenous entry   0.988             0.220
-  paper (baseline)                                                   entry rate                            rate ($I_{0}$)                      
-                                                                     ($I_{0}$)                                                                 
+  First last-author      Islamic world   0.744     0.091     250.94   exogenous     0.996         36876     exogenous entry   0.997             0.240
+  paper (baseline)                                                    entry rate                            rate ($I_{0}$)                      
+                                                                      ($I_{0}$)                                                                 
 
-  First last-author      Japan           0.618     0.064     16.88   exogenous     0.941         7642      exogenous entry   0.945             0.265
-  paper (baseline)                                                   entry rate                            rate ($I_{0}$)                      
-                                                                     ($I_{0}$)                                                                 
+  First last-author      Japan           0.614     0.063     292.95   exogenous     0.997         6428      exogenous entry   0.996             0.301
+  paper (baseline)                                                    entry rate                            rate ($I_{0}$)                      
+                                                                      ($I_{0}$)                                                                 
 
-  First last-author      Other regions   0.672     0.074     28.67   exogenous     0.965         22513     exogenous entry   0.978             0.315
-  paper (baseline)                                                   entry rate                            rate ($I_{0}$)                      
-                                                                     ($I_{0}$)                                                                 
+  First last-author      Other regions   0.696     0.079     291.60   exogenous     0.997         19285     exogenous entry   0.997             0.324
+  paper (baseline)                                                    entry rate                            rate ($I_{0}$)                      
+                                                                      ($I_{0}$)                                                                 
 
-  First last-author      Other Western   0.597     0.060     2.94    exogenous     0.660         2099      exogenous entry   0.823             0.355
-  paper (baseline)       (Israel)                                    entry rate                            rate ($I_{0}$)                      
-                                                                     ($I_{0}$)                                                                 
+  First last-author      Other Western   0.579     0.058     238.05   exogenous     0.996         1868      exogenous entry   0.997             0.368
+  paper (baseline)       (Israel)                                     entry rate                            rate ($I_{0}$)                      
+                                                                      ($I_{0}$)                                                                 
 
-  First last-author      China-centred   0.707     0.082     96.96   exogenous     0.990         136375    exogenous entry   0.995             0.256
-  paper (baseline)                                                   entry rate                            rate ($I_{0}$)                      
-                                                                     ($I_{0}$)                                                                 
+  First last-author      China-centred   0.716     0.084     404.87   exogenous     0.998         128635    exogenous entry   0.998             0.253
+  paper (baseline)                                                    entry rate                            rate ($I_{0}$)                      
+                                                                      ($I_{0}$)                                                                 
 
-  First last-author      United States   0.662     0.072     80.16   exogenous     0.988         64884     exogenous entry   0.995             0.356
-  paper (baseline)                                                   entry rate                            rate ($I_{0}$)                      
-                                                                     ($I_{0}$)                                                                 
+  First last-author      United States   0.658     0.072     263.11   exogenous     0.996         52999     exogenous entry   0.997             0.374
+  paper (baseline)                                                    entry rate                            rate ($I_{0}$)                      
+                                                                      ($I_{0}$)                                                                 
 
-  First                  Anglosphere     0.515     0.048     21.57   exogenous     0.954         26050     exogenous entry   0.976             0.428
-  corresponding-author   ex-US                                       entry rate                            rate ($I_{0}$)                      
-  paper                                                              ($I_{0}$)                                                                 
+  First                  Anglosphere     0.523     0.049     215.76   exogenous     0.995         21796     exogenous entry   0.996             0.439
+  corresponding-author   ex-US                                        entry rate                            rate ($I_{0}$)                      
+  paper                                                               ($I_{0}$)                                                                 
 
-  First                  Continental     0.544     0.052     49.68   exogenous     0.980         73375     exogenous entry   0.989             0.430
-  corresponding-author   Europe                                      entry rate                            rate ($I_{0}$)                      
-  paper                                                              ($I_{0}$)                                                                 
+  First                  Continental     0.563     0.055     330.60   exogenous     0.997         66208     exogenous entry   0.997             0.432
+  corresponding-author   Europe                                       entry rate                            rate ($I_{0}$)                      
+  paper                                                               ($I_{0}$)                                                                 
 
-  First                  South Asia      0.549     0.053     23.93   exogenous     0.958         26708     exogenous entry   0.980             0.305
-  corresponding-author                                               entry rate                            rate ($I_{0}$)                      
-  paper                                                              ($I_{0}$)                                                                 
+  First                  South Asia      0.572     0.057     311.91   exogenous     0.997         24706     exogenous entry   0.998             0.306
+  corresponding-author                                                entry rate                            rate ($I_{0}$)                      
+  paper                                                               ($I_{0}$)                                                                 
 
-  First                  Islamic world   0.543     0.052     39.33   exogenous     0.975         41082     exogenous entry   0.986             0.322
-  corresponding-author                                               entry rate                            rate ($I_{0}$)                      
-  paper                                                              ($I_{0}$)                                                                 
+  First                  Islamic world   0.549     0.053     250.94   exogenous     0.996         31481     exogenous entry   0.997             0.342
+  corresponding-author                                                entry rate                            rate ($I_{0}$)                      
+  paper                                                               ($I_{0}$)                                                                 
 
-  First                  Japan           0.451     0.040     16.88   exogenous     0.941         6083      exogenous entry   0.930             0.513
-  corresponding-author                                               entry rate                            rate ($I_{0}$)                      
-  paper                                                              ($I_{0}$)                                                                 
+  First                  Japan           0.456     0.041     292.95   exogenous     0.997         5138      exogenous entry   0.995             0.543
+  corresponding-author                                                entry rate                            rate ($I_{0}$)                      
+  paper                                                               ($I_{0}$)                                                                 
 
-  First                  Other regions   0.514     0.048     28.67   exogenous     0.965         19126     exogenous entry   0.974             0.405
-  corresponding-author                                               entry rate                            rate ($I_{0}$)                      
-  paper                                                              ($I_{0}$)                                                                 
+  First                  Other regions   0.528     0.050     291.60   exogenous     0.997         16202     exogenous entry   0.996             0.421
+  corresponding-author                                                entry rate                            rate ($I_{0}$)                      
+  paper                                                               ($I_{0}$)                                                                 
 
-  First                  Other Western   0.482     0.044     2.94    exogenous     0.660         1824      dropout rate      0.728             0.427
-  corresponding-author   (Israel)                                    entry rate                            ($d$)                               
-  paper                                                              ($I_{0}$)                                                                 
+  First                  Other Western   0.472     0.043     238.05   exogenous     0.996         1638      exogenous entry   0.996             0.433
+  corresponding-author   (Israel)                                     entry rate                            rate ($I_{0}$)                      
+  paper                                                               ($I_{0}$)                                                                 
 
-  First                  China-centred   0.559     0.055     96.96   exogenous     0.990         120427    exogenous entry   0.995             0.337
-  corresponding-author                                               entry rate                            rate ($I_{0}$)                      
-  paper                                                              ($I_{0}$)                                                                 
+  First                  China-centred   0.564     0.055     404.87   exogenous     0.998         113336    exogenous entry   0.998             0.336
+  corresponding-author                                                entry rate                            rate ($I_{0}$)                      
+  paper                                                               ($I_{0}$)                                                                 
 
-  First                  United States   0.461     0.041     80.16   exogenous     0.988         50906     exogenous entry   0.993             0.482
-  corresponding-author                                               entry rate                            rate ($I_{0}$)                      
-  paper                                                              ($I_{0}$)                                                                 
+  First                  United States   0.457     0.041     263.11   exogenous     0.996         41141     exogenous entry   0.996             0.505
+  corresponding-author                                                entry rate                            rate ($I_{0}$)                      
+  paper                                                               ($I_{0}$)                                                                 
 
-  Second last-author     Anglosphere     0.472     0.043     21.57   exogenous     0.954         24564     exogenous entry   0.975             0.456
-  paper (recurrent last  ex-US                                       entry rate                            rate ($I_{0}$)                      
-  author)                                                            ($I_{0}$)                                                                 
+  Second last-author     Anglosphere     0.495     0.046     215.76   exogenous     0.995         20970     exogenous entry   0.996             0.458
+  paper (recurrent last  ex-US                                        entry rate                            rate ($I_{0}$)                      
+  author)                                                             ($I_{0}$)                                                                 
 
-  Second last-author     Continental     0.481     0.044     49.68   exogenous     0.980         67407     exogenous entry   0.988             0.472
-  paper (recurrent last  Europe                                      entry rate                            rate ($I_{0}$)                      
-  author)                                                            ($I_{0}$)                                                                 
+  Second last-author     Continental     0.511     0.048     330.60   exogenous     0.997         61862     exogenous entry   0.997             0.468
+  paper (recurrent last  Europe                                       entry rate                            rate ($I_{0}$)                      
+  author)                                                             ($I_{0}$)                                                                 
 
-  Second last-author     South Asia      0.536     0.051     23.93   exogenous     0.958         26351     exogenous entry   0.980             0.314
-  paper (recurrent last                                              entry rate                            rate ($I_{0}$)                      
-  author)                                                            ($I_{0}$)                                                                 
+  Second last-author     South Asia      0.580     0.058     311.91   exogenous     0.997         24799     exogenous entry   0.998             0.305
+  paper (recurrent last                                               entry rate                            rate ($I_{0}$)                      
+  author)                                                             ($I_{0}$)                                                                 
 
-  Second last-author     Islamic world   0.535     0.051     39.33   exogenous     0.975         40550     exogenous entry   0.986             0.332
-  paper (recurrent last                                              entry rate                            rate ($I_{0}$)                      
-  author)                                                            ($I_{0}$)                                                                 
+  Second last-author     Islamic world   0.547     0.053     250.94   exogenous     0.996         31196     exogenous entry   0.997             0.350
+  paper (recurrent last                                               entry rate                            rate ($I_{0}$)                      
+  author)                                                             ($I_{0}$)                                                                 
 
-  Second last-author     Japan           0.460     0.041     16.88   exogenous     0.941         6151      exogenous entry   0.931             0.478
-  paper (recurrent last                                              entry rate                            rate ($I_{0}$)                      
-  author)                                                            ($I_{0}$)                                                                 
+  Second last-author     Japan           0.468     0.042     292.95   exogenous     0.997         5216      exogenous entry   0.995             0.497
+  paper (recurrent last                                               entry rate                            rate ($I_{0}$)                      
+  author)                                                             ($I_{0}$)                                                                 
 
-  Second last-author     Other regions   0.471     0.042     28.67   exogenous     0.965         17994     exogenous entry   0.973             0.437
-  paper (recurrent last                                              entry rate                            rate ($I_{0}$)                      
-  author)                                                            ($I_{0}$)                                                                 
+  Second last-author     Other regions   0.514     0.048     291.60   exogenous     0.997         15821     exogenous entry   0.996             0.436
+  paper (recurrent last                                               entry rate                            rate ($I_{0}$)                      
+  author)                                                             ($I_{0}$)                                                                 
 
-  Second last-author     Other Western   0.440     0.039     2.94    exogenous     0.660         1731      dropout rate      0.680             0.447
-  paper (recurrent last  (Israel)                                    entry rate                            ($d$)                               
-  author)                                                            ($I_{0}$)                                                                 
+  Second last-author     Other Western   0.431     0.038     238.05   exogenous     0.996         1548      exogenous entry   0.996             0.456
+  paper (recurrent last  (Israel)                                     entry rate                            rate ($I_{0}$)                      
+  author)                                                             ($I_{0}$)                                                                 
 
-  Second last-author     China-centred   0.479     0.044     96.96   exogenous     0.990         110377    exogenous entry   0.994             0.388
-  paper (recurrent last                                              entry rate                            rate ($I_{0}$)                      
-  author)                                                            ($I_{0}$)                                                                 
+  Second last-author     China-centred   0.507     0.047     404.87   exogenous     0.998         106604    exogenous entry   0.998             0.374
+  paper (recurrent last                                               entry rate                            rate ($I_{0}$)                      
+  author)                                                             ($I_{0}$)                                                                 
 
-  Second last-author     United States   0.460     0.041     80.16   exogenous     0.988         50768     exogenous entry   0.993             0.484
-  paper (recurrent last                                              entry rate                            rate ($I_{0}$)                      
-  author)                                                            ($I_{0}$)                                                                 
-  -----------------------------------------------------------------------------------------------------------------------------------------------------------
+  Second last-author     United States   0.472     0.043     263.11   exogenous     0.996         42079     exogenous entry   0.997             0.495
+  paper (recurrent last                                               entry rate                            rate ($I_{0}$)                      
+  author)                                                             ($I_{0}$)                                                                 
+  ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *Supplementary Table S9. Equilibrium active pool,* $T/M$*, rank and
-closest point-of-no-return lever by research macro-region under three PI
+closest viability-boundary lever by research macro-region under three PI
 proxy definitions (same OpenAlex snapshot;* $M$ *held at its baseline
 value).*
 
   -----------------------------------------------------------------------------------------------------------------------------------------------------
   **PI proxy**           **Spearman rho  **Spearman rho **Spearman rho    **Spearman rho    **Spearman rho **Same        **Regions**   **Same
-                         (**$T/M$**)**   (PNR           (**$p_{D}$**)**   (**$P_{D}$**)**   (PNR           closest lever               lowest-**$T/M$
+                         (**$T/M$**)**   (boundary      (**$p_{D}$**)**   (**$P_{D}$**)**   (boundary      closest lever               lowest-**$T/M$
                                          proximity,**                                       proximity,**   (regions)**                 **region**
                                          $T$**)**                                           $P_{D}$**)**                               
   ---------------------- --------------- -------------- ----------------- ----------------- -------------- ------------- ------------- ----------------
-  First                  1.00            1.00           0.73              0.98              1.00           9.00          9.00          yes
+  First                  1.00            1.00           0.87              1.00              1.00           9.00          9.00          yes
   corresponding-author                                                                                                                 
   paper                                                                                                                                
 
-  Second last-author     1.00            1.00           0.87              0.98              1.00           9.00          9.00          yes
+  Second last-author     1.00            1.00           0.95              1.00              1.00           9.00          9.00          yes
   paper (recurrent last                                                                                                                
   author)                                                                                                                              
   -----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -572,50 +565,40 @@ construction (see text).*
 
 $M\  = \ k$ x c-bar is an operational threshold, so we multiply it by
 0.50, 0.75, 1.00, 1.25, 1.50, 2.00 and recompute, for every
-macro-region, $T/M$, the rank by $T/M$, the closest point-of-no-return
+macro-region, $T/M$, the rank by $T/M$, the closest viability-boundary
 lever and its proximity, and the elasticities of $T$ to dropout ($d$)
 and early-career outflow (alpha). Supplementary Table S11 summarises the
 results. No macro-region falls below $M$ at any multiplier (minimum
-$T/M$ 1.51 at the largest multiplier); the rankings by $T/M$ and by
+$T/M$ 107.88 at the largest multiplier); the rankings by $T/M$ and by
 proximity are unchanged (Spearman rho = 1.00 and 1.00 against the
 baseline at every multiplier); and \|elasticity to $d$\| exceeds
 \|elasticity to alpha\| in every macro-region at every multiplier. The
-closest lever changes only where a larger $M$ brings the dropout lever
-closer than exogenous entry: Other Western (Israel) at multiplier 1.25
-(dropout rate ($d$), proximity 0.533); Other Western (Israel) at
-multiplier 1.50 (dropout rate ($d$), proximity 0.374); Other Western
-(Israel) at multiplier 2.00 (dropout rate ($d$), proximity 0.184).
+closest lever is unchanged everywhere.
 
-  -------------------------------------------------------------------------------------------------------------------------------------------
-  $M$              **Regions   **Minimum**   **Lowest-**$T/M$   **Closest   **Spearman    **Spearman    **Closest     **Regions with**
-  **multiplier**   below** $M$ $T/M$         **region**         region**    rho (**$T/M$  rho           lever         $|e_{d}|$ **\>
-                                                                            **vs          (proximity vs unchanged     \|**$e_{alpha}$**\|**
-                                                                            baseline)**   baseline)**   (regions)**   
-  ---------------- ----------- ------------- ------------------ ----------- ------------- ------------- ------------- -----------------------
-  0.50             0.00        6.03          Other Western      Other       1.00          1.00          9.00          9.00
-                                             (Israel)           Western                                               
-                                                                (Israel)                                              
+  ---------------------------------------------------------------------------------------------------------------------------------------------
+  $M$              **Regions   **Minimum**   **Lowest-**$T/M$   **Closest     **Spearman    **Spearman    **Closest     **Regions with**
+  **multiplier**   below** $M$ $T/M$         **region**         region**      rho (**$T/M$  rho           lever         $|e_{d}|$ **\>
+                                                                              **vs          (proximity vs unchanged     \|**$e_{alpha}$**\|**
+                                                                              baseline)**   baseline)**   (regions)**   
+  ---------------- ----------- ------------- ------------------ ------------- ------------- ------------- ------------- -----------------------
+  0.50             0.00        431.52        Anglosphere ex-US  Anglosphere   1.00          1.00          9.00          9.00
+                                                                ex-US                                                   
 
-  0.75             0.00        4.02          Other Western      Other       1.00          1.00          9.00          9.00
-                                             (Israel)           Western                                               
-                                                                (Israel)                                              
+  0.75             0.00        287.68        Anglosphere ex-US  Anglosphere   1.00          1.00          9.00          9.00
+                                                                ex-US                                                   
 
-  1.00             0.00        3.01          Other Western      Other       1.00          1.00          9.00          9.00
-                                             (Israel)           Western                                               
-                                                                (Israel)                                              
+  1.00             0.00        215.76        Anglosphere ex-US  Anglosphere   1.00          1.00          9.00          9.00
+                                                                ex-US                                                   
 
-  1.25             0.00        2.41          Other Western      Other       1.00          1.00          8.00          9.00
-                                             (Israel)           Western                                               
-                                                                (Israel)                                              
+  1.25             0.00        172.61        Anglosphere ex-US  Anglosphere   1.00          1.00          9.00          9.00
+                                                                ex-US                                                   
 
-  1.50             0.00        2.01          Other Western      Other       1.00          1.00          8.00          9.00
-                                             (Israel)           Western                                               
-                                                                (Israel)                                              
+  1.50             0.00        143.84        Anglosphere ex-US  Anglosphere   1.00          1.00          9.00          9.00
+                                                                ex-US                                                   
 
-  2.00             0.00        1.51          Other Western      Other       1.00          1.00          8.00          9.00
-                                             (Israel)           Western                                               
-                                                                (Israel)                                              
-  -------------------------------------------------------------------------------------------------------------------------------------------
+  2.00             0.00        107.88        Anglosphere ex-US  Anglosphere   1.00          1.00          9.00          9.00
+                                                                ex-US                                                   
+  ---------------------------------------------------------------------------------------------------------------------------------------------
 
 *Supplementary Table S11. Sensitivity of the steady-state results to the
 level of the minimum viable coauthor scale* $M$ *(multipliers applied to
@@ -625,216 +608,219 @@ every macro-region).*
   **Group**       $M$              $T/M$    $T/M$      **Closest   **Proximity**   **Elasticity   **Elasticity
                   **multiplier**            **rank**   lever**                     (**$d$**)**    (alpha)**
   --------------- ---------------- -------- ---------- ----------- --------------- -------------- --------------
-  Anglosphere     0.50             42.43    3.00       exogenous   0.976           -2.680         -0.267
+  Anglosphere     0.50             431.52   1.00       exogenous   0.998           -2.658         -0.235
   ex-US                                                entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Anglosphere     0.75             28.28    3.00       exogenous   0.965           -2.680         -0.267
+  Anglosphere     0.75             287.68   1.00       exogenous   0.997           -2.658         -0.235
   ex-US                                                entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Anglosphere     1.00             21.21    3.00       exogenous   0.953           -2.680         -0.267
+  Anglosphere     1.00             215.76   1.00       exogenous   0.995           -2.658         -0.235
   ex-US                                                entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Anglosphere     1.25             16.97    3.00       exogenous   0.941           -2.680         -0.267
+  Anglosphere     1.25             172.61   1.00       exogenous   0.994           -2.658         -0.235
   ex-US                                                entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Anglosphere     1.50             14.14    3.00       exogenous   0.929           -2.680         -0.267
+  Anglosphere     1.50             143.84   1.00       exogenous   0.993           -2.658         -0.235
   ex-US                                                entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Anglosphere     2.00             10.61    3.00       exogenous   0.906           -2.680         -0.267
+  Anglosphere     2.00             107.88   1.00       exogenous   0.991           -2.658         -0.235
   ex-US                                                entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Continental     0.50             99.45    7.00       exogenous   0.990           -2.681         -0.134
+  Continental     0.50             661.21   8.00       exogenous   0.998           -2.647         -0.100
   Europe                                               entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Continental     0.75             66.30    7.00       exogenous   0.985           -2.681         -0.134
+  Continental     0.75             440.80   8.00       exogenous   0.998           -2.647         -0.100
   Europe                                               entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Continental     1.00             49.72    7.00       exogenous   0.980           -2.681         -0.134
+  Continental     1.00             330.60   8.00       exogenous   0.997           -2.647         -0.100
   Europe                                               entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Continental     1.25             39.78    7.00       exogenous   0.975           -2.681         -0.134
+  Continental     1.25             264.48   8.00       exogenous   0.996           -2.647         -0.100
   Europe                                               entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Continental     1.50             33.15    7.00       exogenous   0.970           -2.681         -0.134
+  Continental     1.50             220.40   8.00       exogenous   0.995           -2.647         -0.100
   Europe                                               entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Continental     2.00             24.86    7.00       exogenous   0.960           -2.681         -0.134
+  Continental     2.00             165.30   8.00       exogenous   0.994           -2.647         -0.100
   Europe                                               entry rate                                 
                                                        ($I_{0}$)                                  
 
-  South Asia      0.50             47.52    4.00       exogenous   0.979           -2.535         -0.123
+  South Asia      0.50             623.82   7.00       exogenous   0.998           -2.516         -0.113
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  South Asia      0.75             31.68    4.00       exogenous   0.968           -2.535         -0.123
+  South Asia      0.75             415.88   7.00       exogenous   0.998           -2.516         -0.113
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  South Asia      1.00             23.76    4.00       exogenous   0.958           -2.535         -0.123
+  South Asia      1.00             311.91   7.00       exogenous   0.997           -2.516         -0.113
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  South Asia      1.25             19.01    4.00       exogenous   0.947           -2.535         -0.123
+  South Asia      1.25             249.53   7.00       exogenous   0.996           -2.516         -0.113
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  South Asia      1.50             15.84    4.00       exogenous   0.937           -2.535         -0.123
+  South Asia      1.50             207.94   7.00       exogenous   0.995           -2.516         -0.113
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  South Asia      2.00             11.88    4.00       exogenous   0.916           -2.535         -0.123
+  South Asia      2.00             155.96   7.00       exogenous   0.994           -2.516         -0.113
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Islamic world   0.50             78.52    6.00       exogenous   0.987           -2.579         -0.134
+  Islamic world   0.50             501.89   3.00       exogenous   0.998           -2.600         -0.137
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Islamic world   0.75             52.35    6.00       exogenous   0.981           -2.579         -0.134
+  Islamic world   0.75             334.59   3.00       exogenous   0.997           -2.600         -0.137
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Islamic world   1.00             39.26    6.00       exogenous   0.975           -2.579         -0.134
+  Islamic world   1.00             250.94   3.00       exogenous   0.996           -2.600         -0.137
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Islamic world   1.25             31.41    6.00       exogenous   0.968           -2.579         -0.134
+  Islamic world   1.25             200.75   3.00       exogenous   0.995           -2.600         -0.137
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Islamic world   1.50             26.17    6.00       exogenous   0.962           -2.579         -0.134
+  Islamic world   1.50             167.30   3.00       exogenous   0.994           -2.600         -0.137
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Islamic world   2.00             19.63    6.00       exogenous   0.949           -2.579         -0.134
+  Islamic world   2.00             125.47   3.00       exogenous   0.992           -2.600         -0.137
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Japan           0.50             32.72    2.00       exogenous   0.969           -2.274         -0.156
+  Japan           0.50             585.91   6.00       exogenous   0.998           -2.305         -0.117
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Japan           0.75             21.82    2.00       exogenous   0.954           -2.274         -0.156
+  Japan           0.75             390.61   6.00       exogenous   0.997           -2.305         -0.117
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Japan           1.00             16.36    2.00       exogenous   0.939           -2.274         -0.156
+  Japan           1.00             292.95   6.00       exogenous   0.997           -2.305         -0.117
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Japan           1.25             13.09    2.00       exogenous   0.924           -2.274         -0.156
+  Japan           1.25             234.36   6.00       exogenous   0.996           -2.305         -0.117
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Japan           1.50             10.91    2.00       exogenous   0.908           -2.274         -0.156
+  Japan           1.50             195.30   6.00       exogenous   0.995           -2.305         -0.117
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Japan           2.00             8.18     2.00       exogenous   0.878           -2.274         -0.156
+  Japan           2.00             146.48   6.00       exogenous   0.993           -2.305         -0.117
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Other regions   0.50             57.38    5.00       exogenous   0.983           -2.790         -0.187
+  Other regions   0.50             583.19   5.00       exogenous   0.998           -2.795         -0.094
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Other regions   0.75             38.25    5.00       exogenous   0.974           -2.790         -0.187
+  Other regions   0.75             388.79   5.00       exogenous   0.997           -2.795         -0.094
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Other regions   1.00             28.69    5.00       exogenous   0.965           -2.790         -0.187
+  Other regions   1.00             291.60   5.00       exogenous   0.997           -2.795         -0.094
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Other regions   1.25             22.95    5.00       exogenous   0.956           -2.790         -0.187
+  Other regions   1.25             233.28   5.00       exogenous   0.996           -2.795         -0.094
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Other regions   1.50             19.13    5.00       exogenous   0.948           -2.790         -0.187
+  Other regions   1.50             194.40   5.00       exogenous   0.995           -2.795         -0.094
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Other regions   2.00             14.34    5.00       exogenous   0.930           -2.790         -0.187
+  Other regions   2.00             145.80   5.00       exogenous   0.993           -2.795         -0.094
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Other Western   0.50             6.03     1.00       exogenous   0.834           -2.744         -0.191
+  Other Western   0.50             476.10   2.00       exogenous   0.998           -2.726         -0.133
   (Israel)                                             entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Other Western   0.75             4.02     1.00       exogenous   0.751           -2.744         -0.191
+  Other Western   0.75             317.40   2.00       exogenous   0.997           -2.726         -0.133
   (Israel)                                             entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Other Western   1.00             3.01     1.00       exogenous   0.668           -2.744         -0.191
+  Other Western   1.00             238.05   2.00       exogenous   0.996           -2.726         -0.133
   (Israel)                                             entry rate                                 
                                                        ($I_{0}$)                                  
 
-  Other Western   1.25             2.41     1.00       dropout     0.533           -2.744         -0.191
-  (Israel)                                             rate ($d$)                                 
+  Other Western   1.25             190.44   2.00       exogenous   0.995           -2.726         -0.133
+  (Israel)                                             entry rate                                 
+                                                       ($I_{0}$)                                  
 
-  Other Western   1.50             2.01     1.00       dropout     0.374           -2.744         -0.191
-  (Israel)                                             rate ($d$)                                 
+  Other Western   1.50             158.70   2.00       exogenous   0.994           -2.726         -0.133
+  (Israel)                                             entry rate                                 
+                                                       ($I_{0}$)                                  
 
-  Other Western   2.00             1.51     1.00       dropout     0.184           -2.744         -0.191
-  (Israel)                                             rate ($d$)                                 
+  Other Western   2.00             119.02   2.00       exogenous   0.992           -2.726         -0.133
+  (Israel)                                             entry rate                                 
+                                                       ($I_{0}$)                                  
 
-  China-centred   0.50             194.24   9.00       exogenous   0.995           -2.685         -0.063
+  China-centred   0.50             809.74   9.00       exogenous   0.999           -2.634         -0.041
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  China-centred   0.75             129.50   9.00       exogenous   0.992           -2.685         -0.063
+  China-centred   0.75             539.83   9.00       exogenous   0.998           -2.634         -0.041
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  China-centred   1.00             97.12    9.00       exogenous   0.990           -2.685         -0.063
+  China-centred   1.00             404.87   9.00       exogenous   0.998           -2.634         -0.041
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  China-centred   1.25             77.70    9.00       exogenous   0.987           -2.685         -0.063
+  China-centred   1.25             323.90   9.00       exogenous   0.997           -2.634         -0.041
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  China-centred   1.50             64.75    9.00       exogenous   0.985           -2.685         -0.063
+  China-centred   1.50             269.91   9.00       exogenous   0.996           -2.634         -0.041
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  China-centred   2.00             48.56    9.00       exogenous   0.979           -2.685         -0.063
+  China-centred   2.00             202.44   9.00       exogenous   0.995           -2.634         -0.041
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  United States   0.50             159.50   8.00       exogenous   0.994           -2.665         -0.227
+  United States   0.50             526.21   4.00       exogenous   0.998           -2.640         -0.146
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  United States   0.75             106.34   8.00       exogenous   0.991           -2.665         -0.227
+  United States   0.75             350.81   4.00       exogenous   0.997           -2.640         -0.146
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  United States   1.00             79.75    8.00       exogenous   0.987           -2.665         -0.227
+  United States   1.00             263.11   4.00       exogenous   0.996           -2.640         -0.146
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  United States   1.25             63.80    8.00       exogenous   0.984           -2.665         -0.227
+  United States   1.25             210.49   4.00       exogenous   0.995           -2.640         -0.146
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  United States   1.50             53.17    8.00       exogenous   0.981           -2.665         -0.227
+  United States   1.50             175.40   4.00       exogenous   0.994           -2.640         -0.146
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
 
-  United States   2.00             39.88    8.00       exogenous   0.975           -2.665         -0.227
+  United States   2.00             131.55   4.00       exogenous   0.992           -2.640         -0.146
                                                        entry rate                                 
                                                        ($I_{0}$)                                  
   --------------------------------------------------------------------------------------------------------------

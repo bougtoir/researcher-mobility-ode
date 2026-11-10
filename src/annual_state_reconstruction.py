@@ -71,6 +71,18 @@ def _work_groups(work, target_aid, a2g):
     return set()
 
 
+def _load_author_year_groups(cohort_author_ids):
+    """Load per-author year->groups map from the compact sidecar when present.
+
+    Returns a dict {aid: {year: frozenset(groups)}} or None when absent."""
+    sidecar = COHORT_DIR / "author_year_groups.json"
+    if not sidecar.exists():
+        return None
+    with open(sidecar, "r", encoding="utf-8") as f:
+        raw = json.load(f)
+    return {aid: {int(y): frozenset(g) for y, g in entries} for aid, entries in raw.items() if aid in cohort_author_ids}
+
+
 def _load_author_works(cohort_author_ids):
     a2g = load_group_mapping()
     author_works = defaultdict(list)
@@ -93,7 +105,8 @@ def reconstruct_annual_states():
     cohort["active"] = cohort["active"].apply(_parse_bool)
 
     author_ids = set(cohort["author_id"].astype(str).tolist())
-    author_works, a2g = _load_author_works(author_ids)
+    sidecar = _load_author_year_groups(author_ids)
+    author_works, a2g = ({}, None) if sidecar is not None else _load_author_works(author_ids)
 
     rows = []
     for _, row in cohort.iterrows():
@@ -110,15 +123,17 @@ def reconstruct_annual_states():
         final_year = 2023 if active else end
 
         aid = str(row["author_id"])
-        works = author_works.get(aid, [])
-        works_by_year = {}
-        for w in works:
-            y = w.get("publication_year")
-            if y is None:
-                continue
-            groups = _work_groups(w, aid, a2g)
-            if groups:
-                works_by_year[int(y)] = groups
+        if sidecar is not None:
+            works_by_year = dict(sidecar.get(aid, {}))
+        else:
+            works_by_year = {}
+            for w in author_works.get(aid, []):
+                y = w.get("publication_year")
+                if y is None:
+                    continue
+                groups = _work_groups(w, aid, a2g)
+                if groups:
+                    works_by_year[int(y)] = groups
 
         abroad = _parse_bool(row["abroad"])
         abroad_year = int(row["abroad_year"]) if abroad and pd.notna(row["abroad_year"]) else None
