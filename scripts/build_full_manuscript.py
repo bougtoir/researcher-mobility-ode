@@ -2277,10 +2277,10 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
              "(ii) Recruitment exhibits a network externality: principal investigators (PIs) train students and attract post-doctoral researchers, so inflow rises with the PI stock")
     C(p, "katz")
     p.add_run(", making the pool self-reinforcing. "
-             "(iii) A research system must exceed a minimum viable coauthor scale M-an operational quantity computed from the field's observed number of independent last-author groups and its coauthor intensity")
+             "(iii) From the field's observed coauthor structure we construct an operational benchmark, the minimum viable coauthor scale M (the median number of independent last-author groups times the mean number of coauthors per work)")
     C(p, "shaffer")
-    p.add_run("-to sustain its norms of production. "
-             "(iv) Below M, the system can no longer reproduce its PI stock, and the research programme it carried leaves the field's menu of variety, a loss that is path-dependent in Arthur's sense")
+    p.add_run(", against which each system's equilibrium scale can be normalised. "
+             "(iv) In the model, an equilibrium active pool below M classifies the system as sub-scale relative to the field's observed coauthor intensity. Whether a real community that crosses such a benchmark stops reproducing its PI stock, loses research programmes, or fails irreversibly is an empirical question this paper does not claim to have answered; the path-dependent intuition behind such losses is Arthur's")
     C(p, "arthur", "nelson", "dosi")
     p.add_run(". The research question is: for each research system, how far is the active pool from its minimum viable scale, which transition governs that distance, and has the distance been shrinking?")
     p = para("Four propositions are derived from the mechanism before seeing the results. "
@@ -2394,7 +2394,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     add_omath_inline(p, math_threshold())
     p.add_run(", where c̄ is the mean number of authors per work and k the median number of distinct last-author groups per recent year. When the equilibrium active pool ")
     add_omath_inline(p, math_active_pool())
-    p.add_run(" falls below M, the system cannot produce work at the field's coauthor intensity. Falling below M is a sufficient, not a necessary, condition for collapse; M is a soft lower bound, so observed margins are probably smaller than they appear. "
+    p.add_run(" falls below M, the system is classified as sub-scale relative to the field's observed coauthor intensity-a model-implied, operational condition, not a demonstrated failure. Crossing M does not by itself establish that research production stops, that the community collapses, or that any loss is irreversible: M is a benchmark built from coauthor structure, not an empirically validated survival threshold, and it enters the model only as a comparison target, not as part of the fitted dynamics. "
               "For the boundary proximity measure we scale each rate until T reaches M and record the critical factor and its proximity |critical factor - 1|.")
     p = para("Terminology matters for interpretation. The boundary M = k x c̄ is a defined classification boundary: it is a function of observed coauthor structure and is not an object inside the ODE dynamics; the ODE solutions do not 'feel' M. Approaching the boundary (a falling margin) is a statement about fitted equilibria, not about time. A model crossing is what we compute when we perturb a rate until the equilibrium T reaches M-it is an algebraic property of the fitted system, not a simulated or observed event in time. Empirical collapse of a real system is something the data do not contain: no observed macro-region is below M. Irreversibility, finally, enters only through the collapse rule of the coupled scenario in Section 2.10, where crossing M switches off a region's PI-driven recruitment; it is an assumption of that scenario, not an empirical finding, and we do not claim that a real system below M could not rebuild. We therefore speak throughout of a model-implied viability boundary, and never of a point of no return.")
 
@@ -2626,7 +2626,9 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
                                  "Effective number of regions at end of horizon": 1, "Field hit stock at end of horizon (× baseline)": 2})
     p = para(f"Figure 10 shows the time paths behind these summaries for every macro-region at the strongest pull we simulate (φ = {_fmt(dctx['phi_max'], 1)}), one panel per γ. "
              "The timing scales with τ: a field with faster career turnover would reach the same crossings in proportionally fewer years, so the ordering of outcomes, not the calendar dates, is the result.")
-    figure("fig10", f"Figure 10. Regional time paths under the talent-concentration strategy exerted by {fd_the} at pull intensity φ = {_fmt(dctx['phi_max'], 1)}, for three variety elasticities γ. Lines show each macro-region's domestic active pool as a multiple of its minimum viable coauthor scale M (log scale; dashed line M); the thick line is the dominant region. Crosses and dotted verticals mark when a region falls below M, after which its PI-driven recruitment is switched off permanently under the scenario's collapse rule. Time is in units of the characteristic time τ = 1/d̄ (mean career duration; ≈{_fmt(dctx['tau'], 0)} years at fitted rates, upper axis). Fitted rates; φ, γ and the collapse rule are stylised.", width=6.5)
+    _traj = pd.read_csv(DOM / "trajectories.csv")
+    _tm_min_traj = float(_traj[[c for c in _traj.columns if c.startswith("T_over_M__")]].astype(float).min().min())
+    figure("fig10", f"Figure 10. Regional time paths under the talent-concentration strategy exerted by {fd_the} at pull intensity φ = {_fmt(dctx['phi_max'], 1)}, for three variety elasticities γ. Lines show each macro-region's domestic active pool as a multiple of its minimum viable coauthor scale M (log scale; dashed line M); the thick line is the dominant region. Were a region to fall below M, a cross and dotted vertical would mark the crossing and its PI-driven recruitment would be switched off permanently under the scenario's collapse rule; in every simulated run no region crosses M within the horizon (minimum trajectory value {_fmt(_tm_min_traj, 1)}), so no crosses appear and the collapse rule is never activated. Time is in units of the characteristic time τ = 1/d̄ (mean career duration; ≈{_fmt(dctx['tau'], 0)} years at fitted rates, upper axis). Fitted rates; φ, γ and the collapse rule are stylised.", width=6.5)
 
 
     # ------------------------------------------------------------------
@@ -2708,7 +2710,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     doc.add_heading("4.5 Policy implications", level=2)
     p = para("Concentrating talent is individually advantageous for the large systems pursuing it: it raises short-run output")
     C(p, "sevilla", "shachar", "kerr")
-    p.add_run(", but each round of concentration lowers T/M in the systems that lose researchers, and the collective outcome can be an evolutionary dead end for the field (Section 3.9). "
+    p.add_run(", but each round of concentration lowers T/M in the systems that lose researchers; within the stylised scenario this is a model-dependent risk of reduced field-level diversity, not an unconditional forecast of field decline-whether research quality or novelty actually degrades depends on the unidentified variety elasticity γ (Section 3.9). "
               "No single actor captures the benefit of the variety it preserves, so the response has to be shared: jointly funded early-career fellowships and return grants aimed at low-T/M systems, routine monitoring of the indicator pair, and shared compute and data infrastructure acting on the intra-regional levers h_D and p_D where mobility itself cannot or should not be steered")
     C(p, "arthur", "saviotti")
     p.add_run(". "
@@ -2794,7 +2796,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     # 5. Conclusion
     # ------------------------------------------------------------------
     doc.add_heading("5. Conclusion", level=1)
-    p = para("We asked how far each AI/ML research system is from the scale below which it can no longer reproduce its research workforce, which career transition governs that distance, and whether the distance is shrinking. "
+    p = para("We asked how far each AI/ML research system is from an operational benchmark scale derived from observed coauthor structure-below which, in model terms, it would be classified as sub-scale-which career transition governs that distance, and whether the distance is shrinking. "
              "The answer is delivered by a measurement pipeline that turns open bibliometric records into cohort career-transition rates, a calibrated compartment model, and a monitoring diagnostic pair (T/M and its closest-lever reading, viability-boundary proximity), with every measurement choice stress-tested in the main results. "
              f"All systems currently exceed their minimum viable coauthor scale, but distance to the threshold is governed by relative scale and by attrition rather than by size or outflow; exogenous entry is the binding lever everywhere; the ranking is robust to the form of the recruitment feedback; and rates have drifted between career windows, shrinking the margin in {ctx['period_neg']}. "
              "For research evaluation the contribution is a reproducible, field-agnostic measurement framework for research-system viability; for AI/ML it locates the systems whose margins are thin and the levers that matter. "
@@ -2851,7 +2853,7 @@ def write_docx(output_dir, data, fig_paths, blinded=False):
     if blinded:
         _anonymize_docx(doc)
 
-    suffix = "JOI_MANUSCRIPT_BLINDED_FINAL_LOCK" if blinded else "JOI_MANUSCRIPT_FINAL_LOCK"
+    suffix = "JOI_MANUSCRIPT_BLINDED_FINAL_LOCK_v3" if blinded else "JOI_MANUSCRIPT_FINAL_LOCK_v3"
     path = output_dir / f"{suffix}.docx"
     doc.save(path)
     return path
@@ -3103,7 +3105,7 @@ def write_pptx(output_dir, data, fig_paths):
         add_image_slide(
             "Figure 10: Regional time paths under the talent-concentration strategy",
             fig_paths["fig10"],
-            "Domestic active pool of each macro-region as a multiple of its minimum viable scale M, one panel per variety elasticity; time in units of the characteristic time τ = 1/d̄; crosses mark when a region falls below M and loses PI-driven recruitment permanently.",
+            "Domestic active pool of each macro-region as a multiple of its minimum viable scale M, one panel per variety elasticity; time in units of the characteristic time τ = 1/d̄; crosses would mark a crossing below M and loss of PI-driven recruitment under the scenario's collapse rule, but no region crosses within the horizon in any run.",
         )
     dom_ = load_dominant_strategy()
     if dom_ is not None:
@@ -3186,7 +3188,7 @@ def write_pptx(output_dir, data, fig_paths):
         boot_tab[c] = boot_tab[c].apply(lambda x: _fmt(x, 0))
     add_table_slide("Supplementary Table S6: Bootstrap 95% CI", boot_tab, boot_tab.columns.tolist(), width_per_col=2.2)
 
-    path = output_dir / "JOI_FIGURES_EDITABLE_FINAL_LOCK.pptx"
+    path = output_dir / "JOI_FIGURES_EDITABLE_FINAL_LOCK_v3.pptx"
     prs.save(path)
     return path
 
@@ -3396,7 +3398,7 @@ def write_highlights_docx(output_dir, data):
     doc.add_heading("Highlights", level=1)
     for h in highlights:
         doc.add_paragraph(h, style="List Bullet")
-    path = output_dir / "JOI_HIGHLIGHTS_FINAL_LOCK.docx"
+    path = output_dir / "JOI_HIGHLIGHTS_FINAL_LOCK_v3.docx"
     doc.save(path)
     return path
 
@@ -3428,9 +3430,9 @@ def write_cover_letter(output_dir, data):
     doc = Document()
     for t in paras:
         doc.add_paragraph(t)
-    path = output_dir / "JOI_COVER_LETTER_FINAL_LOCK.docx"
+    path = output_dir / "JOI_COVER_LETTER_FINAL_LOCK_v3.docx"
     doc.save(path)
-    md_path = output_dir / "JOI_COVER_LETTER_FINAL_LOCK.md"
+    md_path = output_dir / "JOI_COVER_LETTER_FINAL_LOCK_v3.md"
     md_path.write_text("\n\n".join(paras) + "\n", encoding="utf-8")
     return path
 
@@ -3452,7 +3454,7 @@ def write_title_page(output_dir, data):
     doc.add_paragraph("Declarations of interest: [to be completed at submission]")
     doc.add_paragraph("Funding: [to be completed at submission]")
     doc.add_paragraph("Data availability: aggregate results and code at https://github.com/bougtoir/researcher-mobility-ode; author-level data re-extractable from OpenAlex (CC0) via reproduce.sh.")
-    path = output_dir / "JOI_TITLE_PAGE_FINAL_LOCK.docx"
+    path = output_dir / "JOI_TITLE_PAGE_FINAL_LOCK_v3.docx"
     doc.save(path)
     return path
 
@@ -3550,7 +3552,7 @@ def main():
     print(f"Submission figures (PNG + TIFF) saved to {sub_fig_dir}")
 
     # Build a submission zip containing the manuscript, editable figures, PNGs and TIFFs
-    zip_path = output_dir / "JOI_SUBMISSION_FINAL_LOCK.zip"
+    zip_path = output_dir / "JOI_SUBMISSION_FINAL_v3.zip"
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
         for path in [docx_path, blinded_docx_path, pptx_path, md_path, blinded_md_path, sup_path, highlights_path, cover_path, titlepage_path]:
             if path and path.exists():
