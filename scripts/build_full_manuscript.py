@@ -39,7 +39,8 @@ import docx.text.paragraph
 from docx import Document
 from lxml import etree as ET
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
-from docx.shared import Inches, Pt
+from docx.enum.section import WD_SECTION, WD_ORIENT
+from docx.shared import Inches, Pt, RGBColor
 from pptx import Presentation
 from pptx.util import Inches as PptxInches
 
@@ -1992,14 +1993,14 @@ def _abstract_and_highlights(eq, pnr_closest):
     smallest_tm = eq.assign(tm=eq["T_equilibrium"] / eq["M_threshold"]).sort_values("tm").iloc[0]
     abstract = (
         "Researcher mobility is measured as stocks and net flows, but those quantities do not say whether a research system can still reproduce its own workforce. "
-        "We build a reproducible measurement pipeline that turns open bibliometric records into cohort career-transition rates, a six-compartment dynamical model, and an early-warning indicator pair: the equilibrium active pool relative to a minimum viable coauthor scale (T/M) and the proximity of that equilibrium to a model-implied viability boundary. "
+        "We build a reproducible measurement pipeline that turns open bibliometric records into cohort career-transition rates, a six-compartment dynamical model, and a monitoring indicator pair: the equilibrium active pool relative to a minimum viable coauthor scale (T/M) and the proximity of that equilibrium to a model-implied viability boundary. The two are linked by construction-T/M is the margin scale and boundary proximity is its closest-lever reading-so they form one diagnostic scale, not two independent tests. "
         f"Applied to an OpenAlex AI/ML cohort (2000-2023) across {len(eq)} research macro-regions, all systems exceed their minimum scale, but distance to the boundary is governed by relative scale rather than size: "
         f"the lowest T/M is {_fmt(smallest_tm['tm'], 2)} ({display_group(smallest_tm['group'])}), and the closest boundary is in {display_group(closest['group'])}, "
-        f"where a {closest['proximity']*100:.0f}% {'reduction' if closest['critical_factor'] < 1 else 'increase'} in {_rate_label(closest['rate_name'])} would drive the active pool to its threshold. "
+        f"where {_rate_label(closest['rate_name'])} reduced to {closest['critical_factor']*100:.1f}% of its current value-a {closest['proximity']*100:.1f}% reduction-would drive the active pool to its threshold. "
         + lever_text
         + hist_text
-        + "Every measurement choice is audited in the results: seven origin specifications never reverse a macro-region's mobility direction, six PI definitions leave the T-side rankings structurally invariant while the P-side varies, and missingness and censoring bounds are quantified. "
-        "The pipeline is field-agnostic; AI/ML is the case study. The indicators give funders and evaluators a recomputable monitor of research-system viability."
+        + "Seven origin specifications never reverse a macro-region's mobility direction, and six PI definitions leave the T-side rankings structurally invariant while the P-side varies. "
+        "The pipeline is field-agnostic; AI/ML is the case study. The indicators give a recomputable monitoring diagnostic; we claim no validated predictive power."
     )
     keywords = (
         "researcher mobility; research evaluation; science of science; minimum viable scale; "
@@ -2008,7 +2009,7 @@ def _abstract_and_highlights(eq, pnr_closest):
     highlights = [
         "A reproducible pipeline from bibliometric records to research-system viability",
         "Distance to the boundary follows relative scale T/M, not system size",
-        f"Closest boundary: {display_group(closest['group'])}, via {closest['proximity']*100:.0f}% change in {closest['rate_name']}",
+        f"Closest boundary: {display_group(closest['group'])}, {closest['rate_name']} at {closest['critical_factor']*100:.1f}% of baseline",
         highlight_lever,
         "Seven origin rules and six PI definitions audited in the main results",
     ]
@@ -2082,12 +2083,25 @@ def write_markdown(output_dir: Path, data=None, fig_paths=None, docx_path=None, 
 def _add_title_page(doc, word_count=None, blinded=False):
     style = doc.styles["Normal"]
     style.font.name = "Times New Roman"
-    style.font.size = Pt(11)
+    style.font.size = Pt(12)
+    style.font.color.rgb = RGBColor(0, 0, 0)
     style.paragraph_format.line_spacing = 1.5
+    # Journal format: Times New Roman 12pt, black text throughout.
+    for sname in ("Title", "Heading 1", "Heading 2", "Heading 3", "Heading 4",
+                  "Caption", "Title Char", "Heading 1 Char", "Heading 2 Char",
+                  "Heading 3 Char", "Heading 4 Char", "Caption Char"):
+        try:
+            st = doc.styles[sname]
+            st.font.name = "Times New Roman"
+            st.font.color.rgb = RGBColor(0, 0, 0)
+            if sname != "Title":
+                st.font.size = Pt(12)
+        except KeyError:
+            pass
 
     title = doc.add_heading(TITLE, level=0)
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    title.runs[0].font.size = Pt(16)
+    title.runs[0].font.size = Pt(16); title.runs[0].font.color.rgb = RGBColor(0,0,0)
     title.runs[0].font.bold = True
 
     p = doc.add_paragraph()
@@ -2222,7 +2236,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     p = para("The science of science measures researcher mobility as stocks and net flows: how many scientists a country has, how many leave and how many arrive")
     C(p, "thorn", "franzoni", "appelt")
     p.add_run(". Those quantities describe redistribution, but they do not tell an evaluator whether a research system can still reproduce its own workforce. "
-              "What is missing is a community-level state variable-an observable quantity whose approach to a critical value would indicate that a system's research capacity is becoming unsustainable before the headcount shows it. "
+              "What is missing is a community-level state variable-an observable quantity that tracks, in model terms, whether a system retains the capacity to reproduce its workforce before the headcount shows it. "
               "This paper builds that measurement pipeline end to end and applies it to one field where the question is urgent.")
     p = para("Artificial intelligence (AI) and machine learning (ML) research is an informative case. Its methods are a general-purpose technology being embedded across science, industry and public administration")
     C(p, "bresnahan", "macropolo")
@@ -2256,7 +2270,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     p.add_run(". "
               "Each measurement choice is stress-tested: origin assignment under seven specifications, mobility direction under each, PI status under six alternative definitions propagated through the model, and a missingness and censoring audit; the sensitivity results are reported in the Results section alongside the model results, not relegated to footnotes. "
               "Empirically, we provide comparative estimates of career-transition rates, minimum viable scale and proximity to a model-implied viability boundary (MVB) for the macro-regions. "
-              "For research evaluation, the output is an early-warning indicator pair (T/M and MVB proximity) that can be recomputed with each OpenAlex release. "
+              "For research evaluation, the output is a recomputable monitoring diagnostic (T/M and its closest-lever reading, MVB proximity) that can be recomputed with each OpenAlex release. "
               "AI/ML serves as the case study; we make no claim that the specific findings generalise to other fields, only that the pipeline transfers.")
     p = para("Section 2 specifies data and measurement, Section 3 reports observed, model and sensitivity results in that order, Section 4 discusses implications and limitations, and Section 5 concludes.")
 
@@ -2333,7 +2347,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
              "Transition rates are early-career outflow (α), return (β), hit generation (h_D, h_A), PI promotion (p_D, p_A) and dropout from all compartments (d). Figure 2 shows the structure; the equations are:")
     add_omath_paragraph(doc, math_ode_system())
     figure("fig2", "Figure 2. Compartment structure of the model for one research macro-region. Solid arrows are per-year transition rates; the dashed arrow is the endogenous recruitment feedback from the domestic PI stock; grey arrows are dropout from every compartment. The active pool T is compared with the minimum viable coauthor scale M.", width=6.0)
-    p = para("The model treats each macro-region as one aggregate with constant per-year rates and collapses careers into three observed layers. These simplifications keep the model estimable from OpenAlex and the threshold calculation transparent; the model is an early-warning device, not a demographic projection.")
+    p = para("The model treats each macro-region as one aggregate with constant per-year rates and collapses careers into three observed layers. These simplifications keep the model estimable from OpenAlex and the threshold calculation transparent; the model is a diagnostic monitoring device, not a demographic projection, and we do not claim validated predictive performance.")
     p = para("Step (ii) of the mechanism is implemented by making entry depend on the domestic PI stock. The linear form is ")
     add_omath_inline(p, math_I_linear())
     p.add_run(f", where I_0 is exogenous entry and r is the PI reproduction rate, capped at {_fmt(ctx['safety_factor_cap'], 2)}× the stability-critical value (the most constrained fitted macro-region realises {_fmt(ctx['min_realised_safety_ratio'], 2)}×). A saturating alternative, ")
@@ -2396,10 +2410,10 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
              + "Figure 3 visualises the gap between T and M.")
     eq_table = eq[["group", "T_equilibrium", "M_threshold", "margin_to_threshold_T", "I0", "r", "r_obs", "r_critical"]].copy()
     eq_table["T_over_M"] = eq_table["T_equilibrium"] / eq_table["M_threshold"]
-    eq_table = eq_table.rename(columns={"group": "Group", "T_equilibrium": "T", "M_threshold": "M", "margin_to_threshold_T": "Margin", "T_over_M": "T/M", "r_obs": "r (observed)", "r_critical": "r (critical)"})
+    eq_table = eq_table.rename(columns={"group": "Group", "T_equilibrium": "T", "M_threshold": "M", "margin_to_threshold_T": "Margin", "T_over_M": "T/M", "r": "r (fitted)", "r_obs": "r (observed)", "r_critical": "r (critical)"})
     _add_table_from_df(doc, eq_table,
                        caption="Table 2. Equilibrium domestic active pool, minimum viable coauthor scale and endogenous inflow parameters by research macro-region.",
-                       decimals={"T": 0, "M": 0, "Margin": 0, "T/M": 2, "I0": 0, "r": 4, "r (observed)": 4, "r (critical)": 4})
+                       decimals={"T": 0, "M": 0, "Margin": 0, "T/M": 2, "I0": 0, "r (fitted)": 4, "r (observed)": 4, "r (critical)": 4})
     figure("fig3", "Figure 3. Equilibrium domestic active pool (T) and minimum viable coauthor scale (M) by research macro-region.")
 
     doc.add_heading("3.3 Which transitions govern the pool (P2)", level=2)
@@ -2422,7 +2436,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     closest = pnr_closest.iloc[0]
     p = para("Table 4 reports, for each macro-region, the single rate that reaches the active-pool threshold with the smallest proportional change, and Figure 4 ranks macro-regions by that proximity. "
              f"{ctx['pnr_lever_text']}, consistent with P3: the transition that feeds the reproduction loop from outside is the binding one. "
-             f"The closest model-implied viability boundary is in {closest['group']}, where {closest['rate_name']} multiplied by {_fmt(closest['critical_factor'], 3)} (a {closest['proximity']*100:.0f}% {'reduction' if closest['critical_factor'] < 1 else 'increase'}) drives the active pool to M. "
+             f"The closest model-implied viability boundary is in {closest['group']}, where {closest['rate_name']} multiplied by {_fmt(closest['critical_factor'], 4)}-that is, the rate reduced to {closest['critical_factor']*100:.1f}% of its current value, a {closest['proximity']*100:.1f}% reduction-drives the active pool to M. "
              f"Across macro-regions the Spearman correlation between boundary proximity and T/M is {_fmt(ctx['rho_prox_tm'], 2)}, whereas that between proximity and absolute T is {_fmt(ctx['rho_prox_T'], 2)}. "
              "Because the I_0 lever scales the whole equilibrium, proximity is close to a deterministic function of T/M in the linear model, so the first correlation is the consistency check that P1 calls for rather than an independent test; the diagnostic content of P1 is that the ranking by absolute size and the ranking by proximity diverge, which the second correlation shows (Section 3.8 returns to individual cases).")
     pnr_table = pnr_closest[["group", "rate_name", "current_rate", "critical_factor", "proximity"]].copy()
@@ -2494,8 +2508,16 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     if mv["ORIGIN_SENSITIVITY"] is not None:
         os_df = mv["ORIGIN_SENSITIVITY"]
         ms7["n_rules"] = int(os_df["origin_rule"].nunique())
-        ms7["tm_min_invariant"] = (os_df.groupby("origin_rule")["T_over_M"].idxmin().map(lambda i: os_df.loc[i, "group"]).nunique() == 1)
-        ms7["tm_min_group"] = os_df.groupby("origin_rule")["T_over_M"].idxmin().map(lambda i: os_df.loc[i, "group"]).mode().iloc[0]
+        # The sensitivity CSV recomputes M under each rule, which conflates
+        # origin-rule sensitivity with M-construction sensitivity. For the
+        # origin-rule question, hold M at its baseline value and recompute T/M.
+        canonM = eq.set_index("group")["M_threshold"]
+        os_df = os_df.copy()
+        os_df["T_over_M_fixedM"] = os_df["T"] / os_df["group"].map(canonM)
+        _min_per_rule = os_df.groupby("origin_rule")["T_over_M_fixedM"].idxmin().map(lambda i: os_df.loc[i, "group"])
+        ms7["tm_min_invariant"] = (_min_per_rule.nunique() == 1)
+        ms7["tm_min_group"] = _min_per_rule.mode().iloc[0]
+        ms7["tm_min_group_rawM"] = os_df.groupby("origin_rule")["T_over_M"].idxmin().map(lambda i: os_df.loc[i, "group"]).mode().iloc[0]
         ms7["rho_min"] = float(os_df.groupby("origin_rule").apply(lambda d: d["p_abroad"].corr(os_df[os_df["origin_rule"] == "window3_mode"].set_index("group").reindex(d["group"])["p_abroad"], method="spearman")).min()) if "p_abroad" in os_df.columns else float("nan")
     if mv["MOBILITY_SENSITIVITY"] is not None:
         mob = mv["MOBILITY_SENSITIVITY"]
@@ -2525,9 +2547,10 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
         ms7["span_lt5"] = float(msum.get("share_span_lt5", float("nan")))
         ms7["span_ge15"] = float(msum.get("share_span_ge15", float("nan")))
     p = para("Origin specification. "
-             f"Re-estimating the cohort under {ms7.get('n_rules', 7)} origin rules leaves the qualitative results intact: the lowest-T/M macro-region is {ms7.get('tm_min_group', 'unchanged')} under every rule, "
-             f"and in {ms7.get('n_cells', 0)} group-rule cells ({ms7.get('n_rules', 7) - 1} alternative rules x {len(eq)} macro-regions) the share affiliated abroad never crosses the majority direction-that is, no macro-region's aggregate p_abroad flips from below to above 50%, or vice versa ({ms7.get('n_reversed', 0)} reversals). "
-             "This statement is about group-level aggregates: individual authors do change assigned origin under the alternative rules (baseline agreement 94-99.8%), so the stability is at the level of the regional statistics the model consumes, not of individual trajectories.")
+             f"Re-estimating the cohort under {ms7.get('n_rules', 7)} origin rules leaves the qualitative results intact: with M held at its baseline value, the lowest-T/M macro-region is {ms7.get('tm_min_group', 'unchanged')} under every rule, matching Table 2. "
+             f"(When M is instead recomputed inside each rule's re-estimated coauthor structure, {ms7.get('tm_min_group_rawM', 'a different region')} falls lowest because its small pool of independent groups shrinks its M; that variant conflates the origin question with threshold construction, so we report the fixed-M reading here and flag the alternative in the repository tables.) "
+             f"Additionally, in {ms7.get('n_cells', 0)} group-rule cells ({ms7.get('n_rules', 7) - 1} alternative rules x {len(eq)} macro-regions) the share affiliated abroad never crosses the majority direction-that is, no macro-region's aggregate p_abroad flips from below to above 50%, or vice versa ({ms7.get('n_reversed', 0)} reversals). "
+             "This statement is about group-level aggregates: individual authors do change assigned origin under the alternative rules (baseline agreement 94-99.8%), so the stability is at the level of the regional statistics the model consumes, not of individual trajectories, and it is not a full validation of origin estimation.")
     p = para("Multi-affiliation and missingness. "
              f"{ms7.get('multi_share', 0) * 100:.1f}% of cohort authors record affiliations in more than one macro-region in at least one year; fractional and exclusion specifications of those years change the outputs by at most a few percent, so multi-affiliation is a measurement ambiguity to disclose rather than a driver of results. "
              f"Country is missing on {ms7.get('miss_country', 0) * 100:.1f}% of cohort authorship rows, and the missingness is not random (it is concentrated in earlier years), "
@@ -2539,7 +2562,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
              "The T-side equilibria, T/M, elasticities and boundary proximities are structurally invariant to the PI definition because the inflow calibration fixes total entry to observed entry (Section 2.8); this invariance is a property of the calibration, not evidence that the PI measurement is valid. "
              f"What does vary is the P-side: the domestic-PI equilibrium P_D relative to its PI-scale threshold M_P spans {ms7.get('p_over_m_min', 0):,.0f}–{ms7.get('p_over_m_max', 0):,.0f}x across definitions, and the closest P-side lever is {', '.join(_rate_label(x) for x in ms7.get('closest_P_levers', []))} in every definition, so the qualitative findings survive while the absolute PI-stock numbers move.")
     sens_rows = [
-        ["Origin rule (7 specs)", "Lowest-T/M region; p_abroad direction", f"Invariant; {ms7.get('n_reversed', 0)}/{ms7.get('n_cells', 0)} aggregate reversals", "Regional aggregates, not individuals"],
+        ["Origin rule (7 specs)", "Lowest-T/M region (fixed M); p_abroad direction", f"Invariant ({ms7.get('tm_min_group', '?')}); {ms7.get('n_reversed', 0)}/{ms7.get('n_cells', 0)} aggregate reversals", "Regional aggregates, not individuals"],
         ["Multi-affiliation (8.4% authors)", "All model outputs", "<2% change under fractional/exclusion", "Same-year location unobserved"],
         ["PI proxy (6 defs)", "PI share", f"{ms7.get('pi_share_min', 0) * 100:.0f}-{ms7.get('pi_share_max', 0) * 100:.0f}%", "Absolute share proxy-dependent"],
         ["PI proxy (6 defs)", "T/M, elasticities, proximity rankings", "Structurally invariant (I_0 calibration)", "Calibration artefact, not validation"],
@@ -2567,7 +2590,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     fd2 = dctx.get("focal2_display"); fd2_the = _with_article(fd2) if fd2 else None
     ts1_reached = dctx["th_self_focal1"].dropna()
     tau = dctx["tau"]
-    p = para(f"Under the coupled scenario of Section 2.10, the dominant region's hosted pool and share rise monotonically with the pull intensity φ, while the effective number of macro-regions falls: the strategy wins the short run it was designed for, at a direct variety cost to the field (Figure 9). "
+    p = para(f"Under the coupled scenario of Section 2.10, the dominant region's hosted pool and share rise monotonically with the pull intensity φ, while the effective number of macro-regions falls: the strategy wins the short run it was designed for, at a direct variety cost to the field (Figure 9). Within the simulated horizon no region's active pool approaches M (the collapse rule never activates in any run), so these outcomes do not depend on that scenario assumption. "
              f"Whether the field's hit stock also falls depends on the variety elasticity γ: it declines even at γ = 0 for {fd_the}, and only once γ exceeds a moderate value for the second-largest host. "
              f"Whether the dominant region itself ends worse off requires a larger γ still (γ* = {_fmt(ts1_reached.max(), 1)} at the strongest pull). γ is not identified by our data; the variety loss is the robust finding. "
              f"Figure 10 shows the regional time paths at φ = {_fmt(dctx['phi_max'], 1)}: the dominant pool rises, source regions decline toward their thresholds, and each crossing of M switches off that region's PI-driven recruitment under the scenario's collapse rule-a discrete model event, not an observed one.")
@@ -2601,7 +2624,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
              + p2_txt +
              f"P3 is supported: {ctx['pnr_lever_text']}, and the ranking is invariant to the form of the recruitment feedback." + p3_qual +
              f"P4 is supported in its weak form: equilibria differ between the two career-start windows in all {n_compare} macro-regions with dual-window support, and the margin shrinks in {ctx['period_neg']}. "
-             "Together the results move the researcher-mobility debate from net flows to the transition rates that govern reproduction, and they give an empirically observable early-warning variable.")
+             "Together the results move the researcher-mobility debate from net flows to the transition rates that govern reproduction, and they give an empirically observable monitoring variable-one whose predictive value for real community failure is a separate, unvalidated question (Section 4.7).")
 
     doc.add_heading("4.2 Methodological contribution", level=2)
     p = para("For informetrics, the contribution is a measurement pipeline rather than a single indicator. "
@@ -2711,7 +2734,14 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
             "Instrument-proxy mismatch possible; ranking robust to M only at observed scale",
         ],
     })
+    # Table 10 is wide; place it on a landscape page for readability.
+    sec_land = doc.add_section(WD_SECTION.NEW_PAGE)
+    sec_land.orientation = WD_ORIENT.LANDSCAPE
+    sec_land.page_width, sec_land.page_height = sec_land.page_height, sec_land.page_width
     _add_table_from_df(doc, lever_policy_mgmt, caption="Table 10. Levers, mechanisms, instruments, evidence and uncertainty. Lever rankings are model-conditional; the instrument-to-rate links are argued from the literature, not measured here.")
+    sec_port = doc.add_section(WD_SECTION.NEW_PAGE)
+    sec_port.orientation = WD_ORIENT.PORTRAIT
+    sec_port.page_width, sec_port.page_height = sec_port.page_height, sec_port.page_width
     p = para("Each instrument affects a model rate; the instrument-to-rate link is argued from the literature, not measured here, and estimated rate elasticities do not establish that any single instrument moves any single rate by the stated amount. "
              "Regional effects are two-sided: a pull that raises one region's inflow lowers another's, and the coupled scenario shows the sender regions, not only the receiver, pay the margin cost.")
 
@@ -2740,7 +2770,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     # ------------------------------------------------------------------
     doc.add_heading("5. Conclusion", level=1)
     p = para("We asked how far each AI/ML research system is from the scale below which it can no longer reproduce its research workforce, which career transition governs that distance, and whether the distance is shrinking. "
-             "The answer is delivered by a measurement pipeline that turns open bibliometric records into cohort career-transition rates, a calibrated compartment model, and an early-warning indicator pair (T/M and viability-boundary proximity), with every measurement choice stress-tested in the main results. "
+             "The answer is delivered by a measurement pipeline that turns open bibliometric records into cohort career-transition rates, a calibrated compartment model, and a monitoring diagnostic pair (T/M and its closest-lever reading, viability-boundary proximity), with every measurement choice stress-tested in the main results. "
              f"All systems currently exceed their minimum viable coauthor scale, but distance to the threshold is governed by relative scale and by attrition rather than by size or outflow; exogenous entry is the binding lever everywhere; the ranking is robust to the form of the recruitment feedback; and rates have drifted between career windows, shrinking the margin in {ctx['period_neg']}. "
              "For research evaluation the contribution is a reproducible, field-agnostic measurement framework for research-system viability; for AI/ML it locates the systems whose margins are thin and the levers that matter. "
              "Extensions include external validation of the boundary against historical contractions, identification of the variety elasticity, finer partitions with inter-regional spillovers, and application to other general-purpose research fields.")
@@ -2796,7 +2826,7 @@ def write_docx(output_dir, data, fig_paths, blinded=False):
     if blinded:
         _anonymize_docx(doc)
 
-    suffix = "JOI_MANUSCRIPT_BLINDED" if blinded else "JOI_MANUSCRIPT_FINAL"
+    suffix = "JOI_MANUSCRIPT_BLINDED_v2" if blinded else "JOI_MANUSCRIPT_FINAL_v2"
     path = output_dir / f"{suffix}.docx"
     doc.save(path)
     return path
@@ -2826,7 +2856,7 @@ def add_compartment_shape_slide(prs, title):
             rs.font.size = Pt(16); rs.font.bold = True; rs.font.color.rgb = RGBColor(0, 0, 0)
             rs.font._element.set("baseline", "-25000")
         para2 = tf.add_paragraph(); para2.text = COMPARTMENT_LABELS[name].replace("\n", " ")
-        para2.runs[0].font.size = Pt(10); para2.runs[0].font.color.rgb = RGBColor(0x33, 0x33, 0x33)
+        para2.runs[0].font.size = Pt(10); para2.runs[0].font.color.rgb = RGBColor(0,0,0)
         pos[name] = shp
     def connect(a, b, label, dashed=False):
         sa, sb = pos[a], pos[b]
@@ -3131,7 +3161,7 @@ def write_pptx(output_dir, data, fig_paths):
         boot_tab[c] = boot_tab[c].apply(lambda x: _fmt(x, 0))
     add_table_slide("Supplementary Table S6: Bootstrap 95% CI", boot_tab, boot_tab.columns.tolist(), width_per_col=2.2)
 
-    path = output_dir / "JOI_FIGURES_EDITABLE.pptx"
+    path = output_dir / "JOI_FIGURES_EDITABLE_v2.pptx"
     prs.save(path)
     return path
 
@@ -3341,7 +3371,7 @@ def write_highlights_docx(output_dir, data):
     doc.add_heading("Highlights", level=1)
     for h in highlights:
         doc.add_paragraph(h, style="List Bullet")
-    path = output_dir / "JOI_HIGHLIGHTS.docx"
+    path = output_dir / "JOI_HIGHLIGHTS_v2.docx"
     doc.save(path)
     return path
 
@@ -3355,10 +3385,10 @@ def write_cover_letter(output_dir, data):
         "Dear Editors of the Journal of Informetrics,",
         f"I submit the manuscript \"{TITLE}\" for consideration as a Full Length Article.",
         "Why it matters. Researcher-mobility measurement today reports stocks and net flows, which describe redistribution but cannot tell an evaluator whether a research system can still reproduce its own workforce. "
-        "What the field lacks is a community-level state variable whose approach to a critical value warns of unsustainability before the headcount shows it. "
+        "What the field lacks is a community-level state variable that tracks, in model terms, whether a system retains the capacity to reproduce its workforce before the headcount shows it. "
         "This paper supplies that variable and the complete, auditable measurement pipeline behind it.",
-        "What is new. The pipeline turns open bibliometric records into cohort career-transition rates, a calibrated six-compartment dynamical model, and an early-warning indicator pair (the equilibrium active pool relative to a minimum viable coauthor scale, T/M, and the proximity of that equilibrium to a model-implied viability boundary). "
-        f"Applied to {len(cohort):,} OpenAlex AI/ML authors (2000-2023) across {len(eq)} research macro-regions, it shows that distance to the boundary is governed by relative scale, not size: the lowest T/M is {ctx['tm_min']:.2f} ({ctx['tm_min_group']}), and the closest boundary is in {closest['group']}, where a {closest['proximity']*100:.0f}% change in {_rate_label(closest['rate_name'])} would drive the pool to its threshold. "
+        "What is new. The pipeline turns open bibliometric records into cohort career-transition rates, a calibrated six-compartment dynamical model, and a monitoring indicator pair (the equilibrium active pool relative to a minimum viable coauthor scale, T/M, and the proximity of that equilibrium to a model-implied viability boundary); the two are linked by construction and form one diagnostic scale, not two independent tests, and predictive validation is left as future work. "
+        f"Applied to {len(cohort):,} OpenAlex AI/ML authors (2000-2023) across {len(eq)} research macro-regions, it shows that distance to the boundary is governed by relative scale, not size: the lowest T/M is {ctx['tm_min']:.2f} ({ctx['tm_min_group']}), and the closest boundary is in {closest['group']}, where {_rate_label(closest['rate_name'])} reduced to {closest['critical_factor']*100:.1f}% of its current value-a {closest['proximity']*100:.1f}% reduction-would drive the pool to its threshold. "
         f"Dropout, not outflow, is the most elastic lever in {ctx['d_gt_alpha_groups']} of {len(eq)} macro-regions.",
         "Why methodological contribution comes first. Every measurement choice in the pipeline is stress-tested and reported in the main results rather than in footnotes: origin assignment under seven specifications (no macro-region reverses mobility direction), PI status under six alternative definitions propagated through the model (T-side rankings are structurally invariant, P-side quantities vary and are reported), multi-affiliation prevalence and missingness/censoring bounds are quantified. "
         "The pipeline is field-agnostic by construction-AI/ML is the case study, not the object of the paper-which is why I believe it fits the Journal of Informetrics' interest in reusable measurement and evaluation methodology.",
@@ -3373,9 +3403,9 @@ def write_cover_letter(output_dir, data):
     doc = Document()
     for t in paras:
         doc.add_paragraph(t)
-    path = output_dir / "JOI_COVER_LETTER.docx"
+    path = output_dir / "JOI_COVER_LETTER_v2.docx"
     doc.save(path)
-    md_path = output_dir / "JOI_COVER_LETTER.md"
+    md_path = output_dir / "JOI_COVER_LETTER_v2.md"
     md_path.write_text("\n\n".join(paras) + "\n", encoding="utf-8")
     return path
 
@@ -3389,7 +3419,7 @@ def write_title_page(output_dir, data):
     style.font.size = Pt(11)
     title = doc.add_heading(TITLE, level=0)
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    title.runs[0].font.size = Pt(16)
+    title.runs[0].font.size = Pt(16); title.runs[0].font.color.rgb = RGBColor(0,0,0)
     doc.add_paragraph("Article type: Full Length Article")
     doc.add_paragraph("Authors: [names, affiliations and ORCID to be completed at submission]")
     doc.add_paragraph("Corresponding author: [name, affiliation, email]")
@@ -3397,7 +3427,7 @@ def write_title_page(output_dir, data):
     doc.add_paragraph("Declarations of interest: [to be completed at submission]")
     doc.add_paragraph("Funding: [to be completed at submission]")
     doc.add_paragraph("Data availability: aggregate results and code at https://github.com/bougtoir/researcher-mobility-ode; author-level data re-extractable from OpenAlex (CC0) via reproduce.sh.")
-    path = output_dir / "JOI_TITLE_PAGE.docx"
+    path = output_dir / "JOI_TITLE_PAGE_v2.docx"
     doc.save(path)
     return path
 
@@ -3480,7 +3510,7 @@ def main():
     for key, src in fig_paths.items():
         if not src or not Path(src).exists():
             continue
-        stem = re.sub(r"^fig\d+_", "", Path(src).stem)
+        stem = re.sub(r"^fig\d+_", "", Path(src).stem).replace("pnr", "mvb")
         if key.startswith("figS"):
             prefix = f"Supplementary_Figure_{key[3:]}"
         else:
@@ -3495,7 +3525,7 @@ def main():
     print(f"Submission figures (PNG + TIFF) saved to {sub_fig_dir}")
 
     # Build a submission zip containing the manuscript, editable figures, PNGs and TIFFs
-    zip_path = output_dir / "JOI_SUBMISSION_PACKAGE.zip"
+    zip_path = output_dir / "JOI_SUBMISSION_PACKAGE_v2.zip"
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
         for path in [docx_path, blinded_docx_path, pptx_path, md_path, blinded_md_path, sup_path, highlights_path, cover_path, titlepage_path]:
             if path and path.exists():
