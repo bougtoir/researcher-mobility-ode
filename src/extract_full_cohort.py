@@ -496,6 +496,15 @@ def fetch_and_store(client, conn, a2g, state, state_path, subfield_id, start_yea
 
     writer.join()
 
+    # The writer thread dies silently on ERROR signals (e.g. budget exhausted):
+    # its exception never propagates here, so verify completeness explicitly.
+    partitions = state.get("partitions", {})
+    incomplete = [pid for pid, p in partitions.items() if p.get("cursor") != "DONE"]
+    if incomplete:
+        raise OpenAlexBudgetExhausted(
+            f"fetch incomplete: {len(incomplete)}/{len(partitions)} partitions "
+            f"not DONE: {incomplete}")
+
     # Reload partitions from state after writer finishes.
     partitions = state.get("partitions", {})
     total_pages = sum(p.get("pages", 0) for p in partitions.values())

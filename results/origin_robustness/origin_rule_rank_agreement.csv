@@ -1,0 +1,4 @@
+origin_rule,spearman_T_over_M,spearman_T,spearman_proximity,spearman_alpha,spearman_p_abroad,spearman_p_return,same_min_T_over_M_group,same_closest_group
+window3_mode,1.0,1.0,,1.0,1.0,1.0,True,True
+first_year,1.0,1.0,,0.9833333333333333,0.9833333333333333,1.0,True,True
+career_mode,1.0,0.9833333333333333,,0.8333333333333333,0.8333333333333333,0.75,True,True
