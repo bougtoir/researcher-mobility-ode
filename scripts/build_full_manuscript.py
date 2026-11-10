@@ -2286,7 +2286,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     p = para("Four propositions are derived from the mechanism before seeing the results. "
              "P1 (relative scale): distance to the viability boundary is governed by T/M rather than absolute T; because the entry lever rescales the whole equilibrium, this is a structural implication used diagnostically, not a falsifiable hypothesis. "
              "P2 (asymmetric leakage): dropout, which removes researchers from every compartment, is more elastic than early-career outflow, which preserves return. "
-             "P3 (endogenous recruitment): the transition closest to the threshold is the one feeding the reproduction loop from outside (I_0), and the fragility ranking is robust to the form of the recruitment feedback. "
+             "P3 (endogenous recruitment): the transition closest to the defined boundary is the one feeding the reproduction loop from outside (I_0), and the proximity ranking is robust to the form of the recruitment feedback. "
              "P4 (historical drift): later-window rates imply different equilibria from earlier-window rates, so proximity to the threshold is not stationary. "
              "P2-P4 are falsifiable by the fitted model; P1 is checked for consistency.")
     p = para("The contribution is primarily methodological. "
@@ -2317,7 +2317,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     C(p, "stephan")
     p.add_run(". Both are deliberately broad operational definitions: a PI in this sense is any author with at least one independent last-author paper, not a tenured group leader, and a hit author is any author with at least one top-decile paper. "
               f"Because the cohort is restricted to authors with at least two works, PIs account for {ctx['pi_share_min']*100:.0f}-{ctx['pi_share_max']*100:.0f}% and hit authors for {ctx['hit_share_min']*100:.0f}-{ctx['hit_share_max']*100:.0f}% of each macro-region's cohort (Table 1). "
-              "The PI compartment therefore represents the population able to lead work and recruit, and the minimum viable scale in Section 2.9 counts distinct last-author groups per year under the same definition, so the two are consistent. "
+              "The PI compartment therefore represents an operational proxy for the population able to lead work and recruit-last authorship stands in for group leadership rather than demonstrating it-and the minimum viable scale in Section 2.9 counts distinct last-author groups per year under the same definition, so the two are consistent. "
               "The abroad flag is set if the author is affiliated in a non-origin macro-region within the first six career years. "
               "OpenAlex coverage is incomplete for non-English venues and author disambiguation is imperfect, so absolute counts are model-implied stocks rather than a census; relative comparisons are preserved because the same rules are applied to every macro-region. "
               "Table 1 reports the cohort by macro-region. "
@@ -2353,7 +2353,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
              "The absolute PI share is proxy-dependent and we report the full range; the model's T-side equilibria are structurally invariant to the proxy because the inflow calibration anchors total entry to observed entry (Section 2.8), so only P-side quantities vary-an asymmetry we report rather than hide.")
 
     doc.add_heading("2.6 Community aggregation", level=2)
-    p = para("The unit of analysis is the research macro-region: a set of countries whose AI/ML researchers share funding systems, labour markets, languages and mobility corridors closely enough to be treated as one recruitment pool. "
+    p = para("The unit of analysis is the research macro-region: a set of countries treated as one recruitment pool under the modelling assumption that their AI/ML researchers share funding systems, labour markets, languages and mobility corridors closely enough for aggregate rates to be meaningful. "
              "For reproducibility, the initial partition of countries was taken from Huntington's taxonomy")
     C(p, "huntington")
     p.add_run(", which predicts the structure of global communication networks")
@@ -2618,7 +2618,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     p = para(f"Under the coupled scenario of Section 2.10, the dominant region's hosted pool and share rise monotonically with the pull intensity φ, while the effective number of macro-regions falls: the strategy wins the short run it was designed for, at a direct variety cost to the field (Figure 9). Within the simulated horizon no region's active pool approaches M (the collapse rule never activates in any run), so these outcomes do not depend on that scenario assumption. "
              f"Whether the field's hit stock also falls depends on the variety elasticity γ: it declines even at γ = 0 for {fd_the}, and only once γ exceeds a moderate value for the second-largest host. "
              f"Whether the dominant region itself ends worse off requires a larger γ still (γ* = {_fmt(ts1_reached.max(), 1)} at the strongest pull). γ is not identified by our data; the variety loss is the robust finding. "
-             f"Figure 10 shows the regional time paths at φ = {_fmt(dctx['phi_max'], 1)}: the dominant pool rises, source regions decline toward their thresholds, and each crossing of M switches off that region's PI-driven recruitment under the scenario's collapse rule-a discrete model event, not an observed one.")
+             f"Figure 10 shows the regional time paths at φ = {_fmt(dctx['phi_max'], 1)}: the dominant pool rises and source regions' margins narrow toward, but never reach, their thresholds within the horizon; were a crossing of M to occur it would switch off that region's PI-driven recruitment under the scenario's collapse rule-a discrete model event that no run produces.")
     figure("fig9", f"Figure 9. Talent-concentration scenario with {fd_the} as the dominant region (coupled nine-region model, fitted rates unless stated). (a) Hosted active pool relative to the φ = 0 baseline; (b) effective number of macro-regions; (c) field hit stock relative to baseline at φ = {_fmt(dctx['mid_phi'], 1)} for three variety elasticities γ; (d) smallest γ at which the field's, and the dominant region's own, hit stock falls below baseline within the horizon, for the two largest host regions (points on the dotted line at the top of the panel: not reached within the search range). Time in (a)-(c) is in units of τ = 1/d̄ (upper axis: years at fitted rates). φ and γ are stylised.", width=6.5)
     _add_table_from_df(doc, dominant_strategy_table(dom),
                        caption=f"Table 9. Talent-concentration scenario at the end of the horizon ({_fmt(dctx['horizon_tau'], 1)} τ ≈ {_fmt(dctx['horizon_years'], 0)} years at fitted rates) relative to the φ = 0 baseline, fitted rates (γ = 0), for the two largest observed host regions. γ* is the smallest variety elasticity at which the hit stock falls below baseline within the horizon.",
@@ -2674,7 +2674,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     C(p, "yuan")
     p.add_run(". The economics of science supplies the microfoundation: individuals respond to career incentives")
     C(p, "stephan")
-    p.add_run(". What this literature measures is stocks and flows; it does not specify a community-level state variable whose crossing makes the loss self-reinforcing rather than recoverable. "
+    p.add_run(". What this literature measures is stocks and flows; it generally does not link observed career transitions to a community-level dynamical model and an explicitly defined operational scale benchmark. "
               "Evolutionary and innovation-systems economics supplies the threshold concepts-variety generation and selection, lock-in through increasing returns")
     C(p, "nelson", "dosi", "arthur", "david")
     p.add_run(", and frameworks for analysing the diversity of a technological system")
@@ -2704,7 +2704,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
              "T/M and boundary proximity can be recomputed with each OpenAlex release; a declining margin in any macro-region is a signal for the field, not only for that region. "
              "Because the closest lever and the most elastic lever are identified separately, the indicators also distinguish where monitoring should focus: entry pipelines (I_0) bind first at the observed scale, while attrition (d) is the most elastic. "
              "The exploratory annual layer provides the machinery for tracking rates year by year, although its current direction-prediction skill is low and it should be read as a monitor rather than a forecast. "
-             "For individual universities, the PI stock is the node of the network externality: institutions that convert hit researchers into PIs and retain them regenerate their own inflow, and the macro-regional ladder (Figure 7) gives a benchmark against which an institution's own transition rates can be read. "
+             "For individual universities, the PI stock is the node of the network externality in the model: institutions that convert hit researchers into PIs and retain them would, on the fitted mechanism, regenerate their own inflow. The macro-regional ladder (Figure 7) could in principle give a benchmark against which an institution's own transition rates are read, but our estimates are at macro-region level and institutional-scale validity is unvalidated until an institutional calibration exercise is done. "
              "For early-career researchers, going abroad is a smaller threat to a home system than net-flow accounting implies; attrition is the larger one.")
 
     doc.add_heading("4.5 Policy implications", level=2)
@@ -2776,10 +2776,10 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     p = para("OpenAlex affiliation and country assignments are noisy, especially for multi-affiliated authors, and coverage of non-English venues is incomplete. The T/M ranking is sensitive to the operational M: under independent per-region multipliers in [0.5, 2.0] every region pair can exchange order, so the ranking conditions on the chosen threshold definition (Section 3.6). "
              "The macro-regional grouping is coarse; within-group heterogeneity is substantial, and the grouping of, for example, mainland China and Taiwan follows current OpenAlex country metadata rather than any resolution of their relationship. "
              "Geographic variety is a proxy for the cognitive and institutional variety the mechanism concerns, and the model does not observe research content directly; that macro-regions differ in institutions, languages and funding is documented, but that they carry distinct research programmes is assumed here, not measured, and claims about problem framings or benchmarks should be read with that qualification. "
-             "Irreversibility is likewise a property of the collapse rule in the coupled scenario, not an empirical finding: a real system that fell below M could in principle rebuild through return migration or new entry, which the model does not represent, so the viability boundary denotes the threshold at which the fitted feedback loop stops sustaining the pool, not a prediction that recovery is impossible. "
+             "Irreversibility is likewise a property of the collapse rule in the coupled scenario, not an empirical finding: a real system that fell below M could in principle rebuild through return migration or new entry, which the model does not represent, and the viability boundary is an operational comparison benchmark derived from observed coauthor structure: it does not alter the fitted ODE dynamics, and crossing it does not establish that the endogenous recruitment mechanism ceases to operate or that the community becomes unable to recover. "
              "The model omits cross-region spillovers, firm-level mobility and within-year dynamics; rates are assumed constant within windows; the cohort over-weights prolific authors; and bootstrap intervals are wide, so rankings are descriptive. "
              f"The endogenous inflow cap ({_fmt(ctx['safety_factor_cap'], 2)}) is a modelling choice whose alternatives should be mapped. "
-             "Falling below M is a sufficient rather than necessary condition for collapse, and the historical comparison rests on two point estimates. "
+             "Falling below M is a sufficient condition only for classification as sub-scale under the operational definition; it is neither an established necessary nor sufficient condition for empirical community collapse. The historical comparison rests on two point estimates. "
              "The talent-concentration scenario couples the regions only through observed host shares and stylised pull, retention and collapse rules, holds fitted rates constant over a long horizon, and treats the variety elasticity γ as a free parameter; its results are model-consistent projections that rank strategies, not predictions of when any region's advantage ends. "
              "The PI and hit proxies follow AI/ML authorship conventions (group leader listed last or corresponding; hits scored within the AI/ML subfield); the sensitivity battery shows the absolute PI share varies widely across definitions while rankings survive, and transfer of the pipeline to fields with alphabetical author order or consortium authorship requires redefining these proxies. "
              "Measurement limits quantified in Section 3.7-multi-affiliated authors, non-random missing country, left-censored careers at the 2000 window edge, and short observed spans-mean the reported rates are best read as comparable lower bounds. "
@@ -2798,7 +2798,7 @@ def _add_docx_body(doc, data, fig_paths, blinded=False, registry=None):
     doc.add_heading("5. Conclusion", level=1)
     p = para("We asked how far each AI/ML research system is from an operational benchmark scale derived from observed coauthor structure-below which, in model terms, it would be classified as sub-scale-which career transition governs that distance, and whether the distance is shrinking. "
              "The answer is delivered by a measurement pipeline that turns open bibliometric records into cohort career-transition rates, a calibrated compartment model, and a monitoring diagnostic pair (T/M and its closest-lever reading, viability-boundary proximity), with every measurement choice stress-tested in the main results. "
-             f"All systems currently exceed their minimum viable coauthor scale, but distance to the threshold is governed by relative scale and by attrition rather than by size or outflow; exogenous entry is the binding lever everywhere; the ranking is robust to the form of the recruitment feedback; and rates have drifted between career windows, shrinking the margin in {ctx['period_neg']}. "
+             f"All systems currently exceed their minimum viable coauthor scale, but in the fitted model distance to the threshold is governed by relative scale and by attrition rather than by size or outflow; exogenous entry is the binding lever everywhere at the observed scale; the boundary-proximity ranking is robust to the form of the recruitment feedback; and rates have drifted between career windows, shrinking the margin in {ctx['period_neg']}. "
              "For research evaluation the contribution is a reproducible, field-agnostic measurement framework for research-system viability; for AI/ML it locates the systems whose margins are thin and the levers that matter. "
              "Extensions include external validation of the boundary against historical contractions, identification of the variety elasticity, finer partitions with inter-regional spillovers, and application to other general-purpose research fields.")
 
@@ -2853,7 +2853,7 @@ def write_docx(output_dir, data, fig_paths, blinded=False):
     if blinded:
         _anonymize_docx(doc)
 
-    suffix = "JOI_MANUSCRIPT_BLINDED_FINAL_LOCK_v3" if blinded else "JOI_MANUSCRIPT_FINAL_LOCK_v3"
+    suffix = "JOI_MANUSCRIPT_BLINDED_FINAL_LOCK_v4" if blinded else "JOI_MANUSCRIPT_FINAL_LOCK_v4"
     path = output_dir / f"{suffix}.docx"
     doc.save(path)
     return path
@@ -3188,7 +3188,7 @@ def write_pptx(output_dir, data, fig_paths):
         boot_tab[c] = boot_tab[c].apply(lambda x: _fmt(x, 0))
     add_table_slide("Supplementary Table S6: Bootstrap 95% CI", boot_tab, boot_tab.columns.tolist(), width_per_col=2.2)
 
-    path = output_dir / "JOI_FIGURES_EDITABLE_FINAL_LOCK_v3.pptx"
+    path = output_dir / "JOI_FIGURES_EDITABLE_FINAL_LOCK_v4.pptx"
     prs.save(path)
     return path
 
@@ -3398,7 +3398,7 @@ def write_highlights_docx(output_dir, data):
     doc.add_heading("Highlights", level=1)
     for h in highlights:
         doc.add_paragraph(h, style="List Bullet")
-    path = output_dir / "JOI_HIGHLIGHTS_FINAL_LOCK_v3.docx"
+    path = output_dir / "JOI_HIGHLIGHTS_FINAL_LOCK_v4.docx"
     doc.save(path)
     return path
 
@@ -3430,9 +3430,9 @@ def write_cover_letter(output_dir, data):
     doc = Document()
     for t in paras:
         doc.add_paragraph(t)
-    path = output_dir / "JOI_COVER_LETTER_FINAL_LOCK_v3.docx"
+    path = output_dir / "JOI_COVER_LETTER_FINAL_LOCK_v4.docx"
     doc.save(path)
-    md_path = output_dir / "JOI_COVER_LETTER_FINAL_LOCK_v3.md"
+    md_path = output_dir / "JOI_COVER_LETTER_FINAL_LOCK_v4.md"
     md_path.write_text("\n\n".join(paras) + "\n", encoding="utf-8")
     return path
 
@@ -3454,7 +3454,7 @@ def write_title_page(output_dir, data):
     doc.add_paragraph("Declarations of interest: [to be completed at submission]")
     doc.add_paragraph("Funding: [to be completed at submission]")
     doc.add_paragraph("Data availability: aggregate results and code at https://github.com/bougtoir/researcher-mobility-ode; author-level data re-extractable from OpenAlex (CC0) via reproduce.sh.")
-    path = output_dir / "JOI_TITLE_PAGE_FINAL_LOCK_v3.docx"
+    path = output_dir / "JOI_TITLE_PAGE_FINAL_LOCK_v4.docx"
     doc.save(path)
     return path
 
@@ -3552,7 +3552,7 @@ def main():
     print(f"Submission figures (PNG + TIFF) saved to {sub_fig_dir}")
 
     # Build a submission zip containing the manuscript, editable figures, PNGs and TIFFs
-    zip_path = output_dir / "JOI_SUBMISSION_FINAL_v3.zip"
+    zip_path = output_dir / "JOI_SUBMISSION_FINAL_v4.zip"
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
         for path in [docx_path, blinded_docx_path, pptx_path, md_path, blinded_md_path, sup_path, highlights_path, cover_path, titlepage_path]:
             if path and path.exists():
