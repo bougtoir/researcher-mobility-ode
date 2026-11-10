@@ -1,0 +1,9 @@
+﻿metric,value
+n_pairs_reversible,36
+n_pairs_total,36
+candidate_min_regions,Anglosphere ex-US; Continental Europe; Hindu; Islamic; Japanese; Other Civilizations; Other Western; Sinic; United States
+candidate_max_regions,Anglosphere ex-US; Continental Europe; Hindu; Islamic; Japanese; Other Civilizations; Other Western; Sinic; United States
+mc_min_group_probs,Anglosphere ex-US=0.360; Continental Europe=0.012; Hindu=0.024; Islamic=0.162; Japanese=0.048; Other Civilizations=0.049; Other Western=0.225; Sinic=0.001; United States=0.118
+spearman_q01_q50_q99,-0.383/0.450/0.917
+kendall_q01_q50_q99,-0.278/0.333/0.778
+japan_rank_range,1-9

@@ -1,0 +1,37 @@
+﻿group_i,group_j,baseline_order,status
+Anglosphere ex-US,Continental Europe,i<j,reversible
+Anglosphere ex-US,Hindu,i<j,reversible
+Anglosphere ex-US,Islamic,i<j,reversible
+Anglosphere ex-US,Japanese,i<j,reversible
+Anglosphere ex-US,Other Civilizations,i<j,reversible
+Anglosphere ex-US,Other Western,i<j,reversible
+Anglosphere ex-US,Sinic,i<j,reversible
+Anglosphere ex-US,United States,i<j,reversible
+Continental Europe,Hindu,j<i,reversible
+Continental Europe,Islamic,j<i,reversible
+Continental Europe,Japanese,j<i,reversible
+Continental Europe,Other Civilizations,j<i,reversible
+Continental Europe,Other Western,j<i,reversible
+Continental Europe,Sinic,i<j,reversible
+Continental Europe,United States,j<i,reversible
+Hindu,Islamic,j<i,reversible
+Hindu,Japanese,j<i,reversible
+Hindu,Other Civilizations,j<i,reversible
+Hindu,Other Western,j<i,reversible
+Hindu,Sinic,i<j,reversible
+Hindu,United States,j<i,reversible
+Islamic,Japanese,i<j,reversible
+Islamic,Other Civilizations,i<j,reversible
+Islamic,Other Western,j<i,reversible
+Islamic,Sinic,i<j,reversible
+Islamic,United States,i<j,reversible
+Japanese,Other Civilizations,j<i,reversible
+Japanese,Other Western,j<i,reversible
+Japanese,Sinic,i<j,reversible
+Japanese,United States,j<i,reversible
+Other Civilizations,Other Western,j<i,reversible
+Other Civilizations,Sinic,i<j,reversible
+Other Civilizations,United States,j<i,reversible
+Other Western,Sinic,i<j,reversible
+Other Western,United States,i<j,reversible
+Sinic,United States,j<i,reversible
