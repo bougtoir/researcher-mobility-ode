@@ -1,6 +1,6 @@
 Article type: Full Length Article
 
-Approximate word count (main text incl. tables, excl. references): 7303
+Approximate word count (main text incl. tables, excl. references): 7191
 
 Author information removed for double-anonymised review
 
@@ -8,7 +8,7 @@ Author information removed for double-anonymised review
 
 Researcher mobility is measured as stocks and net flows, but those
 quantities do not say whether a research system can still reproduce its
-own workforce. We build a reproducible measurement pipeline that turns
+own workforce. I build a reproducible measurement pipeline that turns
 open bibliometric records into cohort career-transition rates, a
 six-compartment dynamical model, and a monitoring indicator pair: the
 equilibrium active pool relative to a minimum viable coauthor scale
@@ -18,18 +18,16 @@ diagnostic scale, not two independent tests. Applied to an OpenAlex
 AI/ML cohort (2000-2023) across 9 research macro-regions, all systems
 exceed their minimum scale, but distance to the boundary is governed by
 relative scale rather than size: the lowest $T/M$ is 215.76 (Anglosphere
-ex-US), and the closest boundary is in Anglosphere ex-US, where
-exogenous entry rate ($I_{0}$) reduced to 0.5% of its current value-a
-99.5% reduction-would drive the active pool to its threshold. Dropout,
-which drains every compartment, is the most elastic lever in every
+ex-US), and the closest boundary is in Anglosphere ex-US (exogenous
+entry rate ($I_{0}$) at 0.5% of its current value). Dropout, which
+drains every compartment, is the most elastic lever in every
 macro-region. Transition rates estimated from the 2011-2016 career-start
 window imply a smaller equilibrium pool than 2000-2010 rates in 1 of 9
-macro-regions. Seven origin specifications never reverse a
-macro-region\'s mobility direction, and six PI definitions leave the
-$T$-side rankings structurally invariant while the P-side varies. The
-pipeline is field-agnostic; AI/ML is the case study. The ranking is
-conditional on the operational $M$, and we claim no validated predictive
-power.
+macro-regions. Seven origin specifications never reverse any
+macro-region\'s mobility direction, and six PI definitions leave
+$T$-side rankings invariant. The pipeline is field-agnostic; AI/ML is
+the case study. The ranking is conditional on the operational $M$, and I
+claim no validated predictive power.
 
 **Keywords:** researcher mobility; research evaluation; science of
 science; minimum viable scale; compartment model; bibliometric
@@ -75,18 +73,18 @@ reported in Section 3.6. No proprietary or restricted data were used.
 
 ## Declarations
 
-**Funding:** \[To be completed by the authors at submission.\]
+**Funding:** \[To be completed by the author at submission.\]
 
-**Competing interests:** \[To be completed by the authors at
+**Competing interests:** \[To be completed by the author at
 submission.\]
 
-**Author contributions:** \[To be completed by the authors at
+**Author contributions:** \[To be completed by the author at
 submission.\]
 
 **Declaration of generative AI in scientific writing:** During the
-preparation of this work the authors used AI-assisted tools to draft,
+preparation of this work the author used AI-assisted tools to draft,
 code, and revise the manuscript. All claims, data, and interpretations
-were reviewed and approved by the authors.
+were reviewed and approved by the author.
 
 **Acknowledgments:** \[Removed for double-anonymised review\]
 
@@ -148,16 +146,16 @@ promotion to independent authorship ($p_{D}$, $p_{A}$) and dropout
 Recruitment exhibits a network externality: principal investigators
 (PIs) train students and attract post-doctoral researchers, so inflow
 rises with the PI stock \[33\], making the pool self-reinforcing. (iii)
-From the field\'s observed coauthor structure we construct an
-operational benchmark, the minimum viable coauthor scale $M$ (the median
-number of independent last-author groups times the mean number of
-coauthors per work) \[34\], against which each system\'s equilibrium
-scale can be normalised. (iv) In the model, an equilibrium active pool
-below $M$ classifies the system as sub-scale relative to the field\'s
-observed coauthor intensity. Whether a real community that crosses such
-a benchmark stops reproducing its PI stock, loses research programmes,
-or fails irreversibly is an empirical question this paper does not claim
-to have answered; the path-dependent intuition behind such losses is
+From the field\'s observed coauthor structure I construct an operational
+benchmark, the minimum viable coauthor scale $M$ (the median number of
+independent last-author groups times the mean number of coauthors per
+work) \[34\], against which each system\'s equilibrium scale can be
+normalised. (iv) In the model, an equilibrium active pool below $M$
+classifies the system as sub-scale relative to the field\'s observed
+coauthor intensity. Whether a real community that crosses such a
+benchmark stops reproducing its PI stock, loses research programmes, or
+fails irreversibly is an empirical question this paper does not claim to
+have answered; the path-dependent intuition behind such losses is
 Arthur\'s \[35\]. The research questions are: for each research system,
 how far is the active pool from its minimum viable scale, which
 transition governs that distance, and has the distance been shrinking?
@@ -172,12 +170,12 @@ fitted model; P1 is checked for consistency.
 The contribution is primarily methodological: a reproducible framework
 linking bibliometrically observed career transitions to community-level
 dynamical diagnostics, with explicit propagation of measurement
-uncertainty and operational-definition sensitivity. Empirically, we
+uncertainty and operational-definition sensitivity. Empirically, I
 provide comparative estimates of career-transition rates, minimum viable
 scale and proximity to a model-implied viability boundary (MVB) for the
 macro-regions; the output is a recomputable monitoring diagnostic ($T/M$
 and its closest-lever reading, MVB proximity). AI/ML serves as the case
-study; we make no claim that the specific findings generalise to other
+study; I make no claim that the specific findings generalise to other
 fields, only that the pipeline transfers. Section 2 specifies data and
 measurement, Section 3 reports observed, model and sensitivity results,
 Section 4 discusses implications and limitations, and Section 5
@@ -187,7 +185,7 @@ concludes.
 
 ## 2.1 Data source and cohort
 
-We extracted AI/ML works and author histories from the OpenAlex API for
+I extracted AI/ML works and author histories from the OpenAlex API for
 subfield 1702 (Artificial Intelligence), 2000-2023 \[24\]. OpenAlex
 provides open, CC0 metadata on authors, affiliations, countries,
 publication dates and citations. Author histories were built by
@@ -256,8 +254,8 @@ OpenAlex\'s own disambiguation. Author disambiguation is
 imperfect-careers can be split across duplicate identifiers or merged
 across namesakes-and benchmark comparisons show large method-dependent
 differences \[15\]; constructing individual-level author histories at
-scale requires explicit, auditable rules \[16\], which we do not
-re-disambiguate beyond. We read cohort sizes and rates as comparable
+scale requires explicit, auditable rules \[16\], which I do not
+re-disambiguate beyond. I read cohort sizes and rates as comparable
 operational quantities rather than exact headcounts, carrying
 disambiguation uncertainty into the Section 3.7 audit.
 
@@ -280,7 +278,7 @@ refers to regional aggregates, not individual trajectories.
 
 ## 2.4 Mobility transitions
 
-From each author\'s origin and yearly affiliations we define the career
+From each author\'s origin and yearly affiliations I define the career
 transitions the model uses: the abroad flag records affiliation in a
 non-origin macro-region within the first six career years; return is
 recorded when a subsequent affiliation again includes the origin
@@ -297,16 +295,15 @@ The baseline PI proxy follows AI/ML authorship conventions: the senior
 or group-lead author is listed last or flagged corresponding, a
 convention documented empirically across career stages \[18,19\].
 Because the concept \'principal investigator\' has no direct
-bibliometric field, we define six operationalisations and propagate each
+bibliometric field, I define six operationalisations and propagate each
 through the full model (Section 3.7): ever-last-author (baseline),
 ever-corresponding-author, at least two last-author papers, at least
 eight observed career years, coauthor-network centrality in the top
 decile of the author\'s macro-region, and a combined union of the three
-career-stage definitions. The absolute PI share is proxy-dependent and
-we report the full range; the model\'s $T$-side equilibria are
-structurally invariant to the proxy because the inflow calibration
-anchors total entry to observed entry (Section 2.8), so only P-side
-quantities vary-an asymmetry we report rather than hide.
+career-stage definitions. The absolute PI share is proxy-dependent; the
+model\'s $T$-side equilibria are structurally invariant to it because
+the inflow calibration anchors total entry to observed entry (Section
+2.8)-an asymmetry I report rather than hide.
 
 ## 2.6 Community aggregation
 
@@ -413,7 +410,7 @@ research production stops, that the community collapses, or that any
 loss is irreversible: $M$ is a benchmark built from coauthor structure,
 not an empirically validated survival threshold, and it enters the model
 only as a comparison target, not as part of the fitted dynamics. For the
-boundary proximity measure we scale each rate until $T$ reaches $M$ and
+boundary proximity measure I scale each rate until $T$ reaches $M$ and
 record the critical factor and its proximity \|critical factor - 1\|.
 
 Terminology matters for interpretation. $M$ is a defined classification
@@ -425,8 +422,8 @@ simulated or observed event; empirical collapse of a real system is
 something the data do not contain, since no observed macro-region is
 below $M$. Irreversibility enters only through the collapse rule of the
 coupled scenario (Section 2.10), an assumption rather than an empirical
-finding. We therefore speak throughout of a boundary, never of a point
-of no return.
+finding. I therefore speak throughout of a boundary, never of a point of
+no return.
 
 ## 2.10 Sensitivity design and the talent-concentration scenario
 
@@ -437,26 +434,25 @@ measurement layer (origin rules, mobility specifications, PI
 definitions, missing-data treatment).
 
 To examine what the mechanism implies when one research system
-deliberately concentrates talent, we couple the nine fitted
-single-region models through the observed inter-regional mobility matrix
-(Figure 1) and simulate a stylised talent-concentration strategy:
-early-career outflow from every other region rises from $\alpha$ to
-$\alpha$(1 + φ), the increment is directed to the focal region,
-researchers pulled this way return at $\beta$/(1 + φ), and exogenous
-entry is adjusted so the coupled system reproduces the fitted
-equilibria. Two rules link the scenario to the mechanism: once a
-region\'s active pool falls below $M$ its PI-driven recruitment stops
-permanently (Section 2.9), and hit generation is multiplied by the
-effective number of macro-regions raised to a variety elasticity γ
-($\gamma\  = \ 0$ is the fitted model; $\gamma\  > \ 0$ encodes the
-hypothesis that a more concentrated field generates fewer independent
-contributions). We run φ ∈ {0.5, 1.0, 2.0, 4.0, 8.0} for the two largest
-observed host regions, report all quantities relative to a
-$\varphi\  = \ 0$ baseline, and search for the smallest γ at which the
-field\'s, and the focal region\'s own, hit stock falls below baseline.
-Time is reported in units of the characteristic time
-$\tau\  = \ 1/\overline{d}$, the mean career duration ($\tau$ ≈ 24 years
-at fitted rates); the horizon is 4.2 $\tau$-about 4 researcher
+deliberately concentrates talent, I couple the nine fitted single-region
+models through the observed inter-regional mobility matrix (Figure 1)
+and simulate a stylised talent-concentration strategy: early-career
+outflow from every other region rises from $\alpha$ to $\alpha$(1 + φ),
+the increment is directed to the focal region, researchers pulled this
+way return at $\beta$/(1 + φ), and exogenous entry is adjusted so the
+coupled system reproduces the fitted equilibria. Two rules link the
+scenario to the mechanism: once a region\'s active pool falls below $M$
+its PI-driven recruitment stops permanently (Section 2.9), and hit
+generation is multiplied by the effective number of macro-regions raised
+to a variety elasticity γ ($\gamma\  = \ 0$ is the fitted model;
+$\gamma\  > \ 0$ encodes the hypothesis that a more concentrated field
+generates fewer independent contributions). I run φ ∈ {0.5, 1.0, 2.0,
+4.0, 8.0} for the two largest observed host regions, report all
+quantities relative to a $\varphi\  = \ 0$ baseline, and search for the
+smallest γ at which the field\'s, and the focal region\'s own, hit stock
+falls below baseline. Time is reported in units of the characteristic
+time $\tau\  = \ 1/\overline{d}$, the mean career duration ($\tau$ ≈ 24
+years at fitted rates); the horizon is 4.2 $\tau$-about 4 researcher
 generations-so the ordering of outcomes, not the calendar dates, is the
 result. φ, γ, the retention and collapse rules and the horizon are
 stylised assumptions (Supplementary Table S8); the transition rates,
@@ -536,9 +532,7 @@ whereas the largest absolute elasticity of early-career outflow
 macro-regions, as P2 predicts. The largest positive transition lever is
 domestic hit generation ($h_{D}$), followed by principal-investigator
 promotion ($p_{D}$). The United States macro-region shows the strongest
-response to PI promotion ($p_{D}$). Attrition removes researchers from
-every compartment, whereas outflow moves them to compartments from which
-return and contribution remain possible.
+response to PI promotion ($p_{D}$).
 
   ---------------------------------------------------------------------------------------------
   **Group**       **1st      **1st          **2nd      **2nd          **3rd      **3rd
@@ -575,17 +569,17 @@ Table 4 reports, for each macro-region, the single rate that reaches the
 active-pool threshold with the smallest proportional change, and Figure
 4 ranks macro-regions by that proximity. $I_{0}$ is the closest
 viability-boundary lever for the active researcher pool in every group,
-consistent with P3: the transition that feeds the reproduction loop from
-outside is the binding one. The closest boundary is in Anglosphere
-ex-US, where $I_{0}$ multiplied by 0.0046-that is, the rate reduced to
-0.5% of its current value, a 99.5% reduction-drives the active pool to
-$M$. Across macro-regions the Spearman correlation between boundary
-proximity and $T/M$ is 1.00, whereas that between proximity and absolute
-$T$ is 0.43. Because the $I_{0}$ lever rescales the whole equilibrium,
-proximity is close to a deterministic function of $T/M$ in the linear
-model: the first correlation is the consistency check P1 calls for
-rather than an independent test, and the diagnostic content is that
-rankings by size and by proximity diverge.
+consistent with P3: the transition feeding the reproduction loop from
+outside binds first. The closest boundary is in Anglosphere ex-US, where
+$I_{0}$ multiplied by 0.0046-that is, the rate reduced to 0.5% of its
+current value, a 99.5% reduction-drives the active pool to $M$. Across
+macro-regions the Spearman correlation between boundary proximity and
+$T/M$ is 1.00, whereas that between proximity and absolute $T$ is 0.43.
+Because the $I_{0}$ lever rescales the whole equilibrium, proximity is
+close to a deterministic function of $T/M$ in the linear model: the
+first correlation is the consistency check P1 calls for rather than an
+independent test, and the diagnostic content is that rankings by size
+and by proximity diverge.
 
   ----------------------------------------------------------------------------
   **Group**       **Closest      **Current      **Critical     **Proximity**
@@ -746,7 +740,7 @@ researcher who leaves research is lost to every compartment.
 *Table 7. Top positive mechanical counterfactual per research
 macro-region (margin gain per 10% proportional lever change).*
 
-We also evaluated multi-lever policy packages for the three
+I also evaluated multi-lever policy packages for the three
 smallest-margin groups. The package with the largest margin gain in each
 group was: Other Western (Israel) (retention: +529 active researchers);
 Japan (retention: +2,973 active researchers); South Asia (return plus
@@ -889,14 +883,22 @@ shown in red.*
 Under the coupled scenario, the dominant region\'s hosted pool and share
 rise monotonically with φ while the effective number of macro-regions
 falls: the strategy wins the short run it was designed for, at a direct
-variety cost to the field (Figure 9). No region\'s active pool
-approaches $M$ within the horizon (the collapse rule never activates),
-so these outcomes do not depend on that assumption. Whether the field\'s
-hit stock also falls depends on γ: it declines even at $\gamma\  = \ 0$
-for the United States, and only past a moderate γ for the second-largest
-host; the dominant region itself ends worse off only at a larger γ still
-(γ\* = 3.9 at the strongest pull). γ is not identified by our data; the
-variety loss is the robust finding.
+variety cost to the field (Figure 9). No pool approaches $M$ in any run,
+so the collapse rule never activates. Whether the field\'s hit stock
+also falls depends on γ. At the fitted model ($\gamma\  = \ 0$) the
+terminal field hit stock rises under the United States-led scenario-to
+1.28x baseline at the strongest pull-whereas under the China-centred
+scenario it is already below baseline at $\gamma\  = \ 0$ for every pull
+intensity (displayed as 1.00 at the two weakest pulls; unrounded 0.999
+and 0.995). For the United States, field-wide losses emerge only once γ
+exceeds a scenario-dependent threshold (γ\* = 5.76 at
+$\varphi\  = \ 1.0$, falling to 0.71 at the strongest pull, and not
+reached within $\gamma\  \leq \ 6$ at the weakest); γ\* is scored on
+end-of-horizon values, not on within-horizon dips. The dominant
+region\'s own hosted hit stock ends below baseline only at a still
+larger γ (γ\* = 3.9 at the strongest pull for the United States; 1.6-4.6
+for China-centred). γ is not identified by the data; the variety loss is
+the robust finding.
 
 ![](media/image9.png){width="6.5in" height="4.727272528433946in"}
 
@@ -952,8 +954,7 @@ rates). φ, γ stylised.*
 variety elasticity losing the hit-stock comparison.*
 
 Figure 10 shows the time paths for every macro-region at the strongest
-pull ($\varphi\  = \ 8.0$), one panel per γ; the ordering of outcomes,
-not the calendar dates, is the result.
+pull; the ordering of outcomes, not the calendar dates, is the result.
 
 ![](media/image10.png){width="6.5in" height="2.269841426071741in"}
 
@@ -961,8 +962,8 @@ not the calendar dates, is the result.
 exerted by the United States at* $\varphi\  = \ 8.0$*, for three γ.
 Lines: each macro-region\'s domestic active pool as a multiple of* $M$
 *(log scale; dashed line* $M$*); thick line: dominant region. No region
-crosses* $M$ *in any run (minimum 20.7), so the collapse rule is never
-activated. Time in* $\tau$ *units (≈24 years, upper axis).*
+crosses* $M$ *in any run (minimum 20.7), so the collapse rule never
+activates. Time in* $\tau$ *units.*
 
 # 4. Discussion
 
@@ -978,11 +979,10 @@ $I_{0}$ is the closest viability-boundary lever for the active
 researcher pool in every group, and the ranking is invariant to the form
 of the recruitment feedback. P4 is supported in its weak form:
 equilibria differ between the two career-start windows in all 9
-dual-window macro-regions. Together the results move the
-researcher-mobility debate from net flows to the transition rates that
-govern reproduction, giving an observable monitoring variable whose
-predictive value for real community failure is a separate, unvalidated
-question (Section 4.7).
+dual-window macro-regions. Together the results shift the debate from
+net flows to the transition rates that govern reproduction; the
+monitoring variable\'s predictive value for real failure is unvalidated
+(Section 4.7).
 
 ## 4.2 Comparison with existing informetric research
 
@@ -1029,30 +1029,26 @@ under six definitions propagated through the model, multi-affiliation
 and missingness quantified. This is the level of measurement audit that
 secondary-data mobility studies often leave implicit, and it is what
 makes $T/M$ and boundary proximity usable as monitoring quantities. The
-pipeline is field-agnostic: every step is parameterised on a subfield, a
-year window and an authorship convention, and AI/ML is the case study.
-We do not claim the findings generalise to other fields; we claim the
-machinery does.
+pipeline is field-agnostic and parameterised on subfield, year window
+and authorship convention; AI/ML is the case study. I do not claim the
+findings generalise to other fields; I claim the machinery does.
 
 ## 4.4 Implications for research evaluation
 
 The indicators are designed for evaluators: $T/M$ and boundary proximity
 can be recomputed with each OpenAlex release, and a declining margin
-anywhere is a signal for the field. The separate closest-lever and
-most-elastic-lever readings distinguish where monitoring should focus:
-entry pipelines ($I_{0}$) bind first at the observed scale, while
-attrition ($d$) is the most elastic. The annual layer adds year-by-year
-tracking, but its direction-prediction skill is low-it is a monitor, not
-a forecast. For individual universities, the PI stock is the node of the
-network externality in the model: institutions that convert hit
-researchers into PIs and retain them would, on the fitted mechanism,
+anywhere is a signal for the field. The closest-lever and
+most-elastic-lever readings focus monitoring: entry ($I_{0}$) binds
+first at the observed scale; attrition ($d$) is most elastic. The annual
+layer adds year-by-year tracking, but its direction-prediction skill is
+low-it is a monitor, not a forecast. For individual universities, the PI
+stock is the node of the network externality: institutions that convert
+hit researchers into PIs and retain them would, on the fitted mechanism,
 regenerate their own inflow. The macro-regional ladder (Figure 7) could
-in principle give a benchmark against which an institution\'s own
-transition rates are read, but our estimates are at macro-region level
-and institutional-scale validity is unvalidated until an institutional
-calibration exercise is done. For early-career researchers, going abroad
-is a smaller threat to a home system than net-flow accounting implies;
-attrition is the larger one.
+serve as a benchmark, but the estimates are macro-regional and
+institutional validity is untested. For early-career researchers, going
+abroad is a smaller threat to a home system than net-flow accounting
+implies; attrition is the larger one.
 
 ## 4.5 Policy implications
 
@@ -1070,8 +1066,7 @@ actor, the available evidence, unintended consequences and the model
 dependence of the link; lever rankings are model-conditional (they
 follow from fitted rates and thresholds, not from causal effects of
 programmes), and a pull that raises one region\'s inflow lowers
-another\'s. Each instrument affects a model rate; the instrument-to-rate
-link is argued from the literature, not measured here.
+another\'s.
 
 ## 4.6 Limitations
 
@@ -1088,55 +1083,46 @@ institutional variety the mechanism concerns: that macro-regions differ
 in institutions, languages and funding is documented, but that they
 carry distinct research programmes is assumed, not measured.
 Irreversibility is a property of the collapse rule, not an empirical
-finding: a real system below $M$ could rebuild through return migration
-or new entry, which the model does not represent, and crossing $M$ does
-not establish that endogenous recruitment ceases or that recovery is
-impossible. The model omits cross-region spillovers, firm-level mobility
-and within-year dynamics; rates are constant within windows; the cohort
-over-weights prolific authors; bootstrap intervals are wide. The
-endogenous inflow cap (0.50) is a modelling choice whose alternatives
-should be mapped. Falling below $M$ is a sufficient condition only for
-classification as sub-scale, neither necessary nor sufficient for
-empirical collapse; the historical comparison rests on two point
-estimates. The talent-concentration scenario couples regions through
-observed host shares and stylised rules, holds rates constant over a
-long horizon, and treats γ as a free parameter; its results rank
-strategies, not predict dates. The PI and hit proxies follow AI/ML
-authorship conventions; transferring the pipeline to fields with
-alphabetical or consortium authorship requires redefining them (Section
-3.7). Measurement limits quantified in Section 3.7-multi-affiliation,
-non-random missing country, left-censored careers, short spans-mean the
-reported rates are best read as comparable lower bounds. Finally, the
-propositions are tested on nine macro-regions: correlational support for
-P1 is indicative, and the strongest support is for P2 and P3, which hold
-system by system.
+finding: crossing $M$ does not establish that recruitment ceases or that
+recovery is impossible. The model omits cross-region spillovers,
+firm-level mobility and within-year dynamics; rates are constant within
+windows; the cohort over-weights prolific authors; bootstrap intervals
+are wide. The endogenous inflow cap (0.50) is a modelling choice whose
+alternatives should be mapped. Falling below $M$ is a sufficient
+condition only for classification as sub-scale, neither necessary nor
+sufficient for empirical collapse; the historical comparison rests on
+two point estimates. The scenario couples regions through stylised rules
+and treats γ as a free parameter; it ranks strategies, not dates. The PI
+and hit proxies follow AI/ML authorship conventions; transferring the
+pipeline to fields with alphabetical or consortium authorship requires
+redefining them (Section 3.7). Section 3.7 quantifies the measurement
+limits; the reported rates are best read as comparable lower bounds.
+Finally, the propositions are tested on nine macro-regions only.
 
 ## 4.7 Future validation agenda
 
-Three extensions would test rather than extend the framework: external
-validation of the boundary against historical systems that contracted or
-lost a research programme; identifying γ from disruption or novelty
-measures; and applying the pipeline to a field with different authorship
-conventions or a deliberately mis-specified partition. Each is
-executable on open data with the released code.
+Three extensions would test the framework: external validation of the
+boundary against historical systems that contracted; identifying γ from
+disruption or novelty measures; and applying the pipeline to a field
+with different authorship conventions. Each is executable on open data
+with the released code.
 
 # 5. Conclusion
 
-We asked how far each AI/ML research system is from an operational
+I asked how far each AI/ML research system is from an operational
 benchmark scale derived from observed coauthor structure, which career
 transition governs that distance, and whether the distance is shrinking.
-The answer is a reproducible measurement pipeline that turns open
-bibliometric records into career-transition rates, a calibrated
-compartment model, and a monitoring diagnostic pair ($T/M$ and boundary
-proximity), with every measurement choice stress-tested in the main
-results. All systems exceed their minimum viable coauthor scale, but
-distance to the threshold is governed by relative scale and attrition
-rather than by size or outflow; exogenous entry is the binding lever
-everywhere at the observed scale; the proximity ranking is robust to the
-form of the recruitment feedback; and rates have drifted, shrinking the
-margin in Japan. For research evaluation the contribution is a
-field-agnostic measurement framework; for AI/ML it locates the systems
-whose margins are thin and the levers that matter.
+The answer is a reproducible pipeline from bibliometric records to
+career-transition rates, a calibrated compartment model, and a
+monitoring diagnostic pair ($T/M$ and boundary proximity). All systems
+exceed their minimum viable coauthor scale, but distance to the
+threshold is governed by relative scale and attrition rather than by
+size or outflow; exogenous entry is the binding lever everywhere at the
+observed scale; the proximity ranking is robust to the form of the
+recruitment feedback; and rates have drifted, shrinking the margin in
+Japan. For research evaluation the contribution is a field-agnostic
+measurement framework; for AI/ML it locates the systems whose margins
+are thin and the levers that matter.
 
 # References
 

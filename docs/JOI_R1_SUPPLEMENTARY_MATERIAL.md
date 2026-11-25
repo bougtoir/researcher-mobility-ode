@@ -563,7 +563,7 @@ construction (see text).*
 
 # S4. Sensitivity to the minimum viable scale $M$
 
-$M\  = \ k$ x c-bar is an operational threshold, so we multiply it by
+$M\  = \ k$ x c-bar is an operational threshold, so I multiply it by
 0.50, 0.75, 1.00, 1.25, 1.50, 2.00 and recompute, for every
 macro-region, $T/M$, the rank by $T/M$, the closest viability-boundary
 lever and its proximity, and the elasticities of $T$ to dropout ($d$)
