@@ -1,0 +1,204 @@
+origin_group,recent_group,n_authors,origin_rule
+Anglosphere ex-US,Continental Europe,1021,window3_mode
+Anglosphere ex-US,Hindu,124,window3_mode
+Anglosphere ex-US,Islamic,805,window3_mode
+Anglosphere ex-US,Japanese,64,window3_mode
+Anglosphere ex-US,Other Civilizations,225,window3_mode
+Anglosphere ex-US,Other Western,21,window3_mode
+Anglosphere ex-US,Sinic,1404,window3_mode
+Anglosphere ex-US,United States,1031,window3_mode
+Continental Europe,Anglosphere ex-US,1302,window3_mode
+Continental Europe,Hindu,85,window3_mode
+Continental Europe,Islamic,577,window3_mode
+Continental Europe,Japanese,101,window3_mode
+Continental Europe,Other Civilizations,504,window3_mode
+Continental Europe,Other Western,32,window3_mode
+Continental Europe,Sinic,750,window3_mode
+Continental Europe,United States,1209,window3_mode
+Hindu,Anglosphere ex-US,187,window3_mode
+Hindu,Continental Europe,190,window3_mode
+Hindu,Islamic,101,window3_mode
+Hindu,Japanese,12,window3_mode
+Hindu,Other Civilizations,25,window3_mode
+Hindu,Other Western,13,window3_mode
+Hindu,Sinic,105,window3_mode
+Hindu,United States,534,window3_mode
+Islamic,Anglosphere ex-US,500,window3_mode
+Islamic,Continental Europe,433,window3_mode
+Islamic,Hindu,45,window3_mode
+Islamic,Japanese,32,window3_mode
+Islamic,Other Civilizations,55,window3_mode
+Islamic,Sinic,116,window3_mode
+Islamic,United States,487,window3_mode
+Japanese,Anglosphere ex-US,71,window3_mode
+Japanese,Continental Europe,70,window3_mode
+Japanese,Hindu,18,window3_mode
+Japanese,Islamic,145,window3_mode
+Japanese,Other Civilizations,49,window3_mode
+Japanese,Sinic,470,window3_mode
+Japanese,United States,119,window3_mode
+Other Civilizations,Anglosphere ex-US,207,window3_mode
+Other Civilizations,Continental Europe,465,window3_mode
+Other Civilizations,Hindu,15,window3_mode
+Other Civilizations,Islamic,60,window3_mode
+Other Civilizations,Japanese,24,window3_mode
+Other Civilizations,Other Western,5,window3_mode
+Other Civilizations,Sinic,71,window3_mode
+Other Civilizations,United States,193,window3_mode
+Other Western,Anglosphere ex-US,33,window3_mode
+Other Western,Continental Europe,29,window3_mode
+Other Western,Hindu,1,window3_mode
+Other Western,Other Civilizations,10,window3_mode
+Other Western,Sinic,4,window3_mode
+Other Western,United States,140,window3_mode
+Sinic,Anglosphere ex-US,668,window3_mode
+Sinic,Continental Europe,303,window3_mode
+Sinic,Hindu,47,window3_mode
+Sinic,Islamic,202,window3_mode
+Sinic,Japanese,121,window3_mode
+Sinic,Other Civilizations,59,window3_mode
+Sinic,Other Western,5,window3_mode
+Sinic,United States,1675,window3_mode
+United States,Anglosphere ex-US,806,window3_mode
+United States,Continental Europe,812,window3_mode
+United States,Hindu,289,window3_mode
+United States,Islamic,404,window3_mode
+United States,Japanese,92,window3_mode
+United States,Other Civilizations,202,window3_mode
+United States,Other Western,105,window3_mode
+United States,Sinic,2927,window3_mode
+Anglosphere ex-US,Continental Europe,1090,first_year
+Anglosphere ex-US,Hindu,124,first_year
+Anglosphere ex-US,Islamic,842,first_year
+Anglosphere ex-US,Japanese,68,first_year
+Anglosphere ex-US,Other Civilizations,239,first_year
+Anglosphere ex-US,Other Western,23,first_year
+Anglosphere ex-US,Sinic,1447,first_year
+Anglosphere ex-US,United States,1086,first_year
+Continental Europe,Anglosphere ex-US,1325,first_year
+Continental Europe,Hindu,82,first_year
+Continental Europe,Islamic,589,first_year
+Continental Europe,Japanese,110,first_year
+Continental Europe,Other Civilizations,541,first_year
+Continental Europe,Other Western,30,first_year
+Continental Europe,Sinic,792,first_year
+Continental Europe,United States,1253,first_year
+Hindu,Anglosphere ex-US,192,first_year
+Hindu,Continental Europe,197,first_year
+Hindu,Islamic,109,first_year
+Hindu,Japanese,10,first_year
+Hindu,Other Civilizations,25,first_year
+Hindu,Other Western,13,first_year
+Hindu,Sinic,110,first_year
+Hindu,United States,589,first_year
+Islamic,Anglosphere ex-US,525,first_year
+Islamic,Continental Europe,457,first_year
+Islamic,Hindu,42,first_year
+Islamic,Japanese,30,first_year
+Islamic,Other Civilizations,57,first_year
+Islamic,Sinic,136,first_year
+Islamic,United States,522,first_year
+Japanese,Anglosphere ex-US,74,first_year
+Japanese,Continental Europe,69,first_year
+Japanese,Hindu,15,first_year
+Japanese,Islamic,146,first_year
+Japanese,Other Civilizations,42,first_year
+Japanese,Sinic,501,first_year
+Japanese,United States,131,first_year
+Other Civilizations,Anglosphere ex-US,220,first_year
+Other Civilizations,Continental Europe,484,first_year
+Other Civilizations,Hindu,15,first_year
+Other Civilizations,Islamic,61,first_year
+Other Civilizations,Japanese,26,first_year
+Other Civilizations,Other Western,5,first_year
+Other Civilizations,Sinic,74,first_year
+Other Civilizations,United States,216,first_year
+Other Western,Anglosphere ex-US,33,first_year
+Other Western,Continental Europe,27,first_year
+Other Western,Hindu,3,first_year
+Other Western,Other Civilizations,9,first_year
+Other Western,Sinic,4,first_year
+Other Western,United States,136,first_year
+Sinic,Anglosphere ex-US,688,first_year
+Sinic,Continental Europe,312,first_year
+Sinic,Hindu,45,first_year
+Sinic,Islamic,199,first_year
+Sinic,Japanese,124,first_year
+Sinic,Other Civilizations,61,first_year
+Sinic,Other Western,5,first_year
+Sinic,United States,1752,first_year
+United States,Anglosphere ex-US,814,first_year
+United States,Continental Europe,820,first_year
+United States,Hindu,283,first_year
+United States,Islamic,424,first_year
+United States,Japanese,97,first_year
+United States,Other Civilizations,224,first_year
+United States,Other Western,120,first_year
+United States,Sinic,2904,first_year
+Anglosphere ex-US,Continental Europe,329,career_mode
+Anglosphere ex-US,Hindu,30,career_mode
+Anglosphere ex-US,Islamic,146,career_mode
+Anglosphere ex-US,Japanese,25,career_mode
+Anglosphere ex-US,Other Civilizations,62,career_mode
+Anglosphere ex-US,Other Western,8,career_mode
+Anglosphere ex-US,Sinic,376,career_mode
+Anglosphere ex-US,United States,400,career_mode
+Continental Europe,Anglosphere ex-US,430,career_mode
+Continental Europe,Hindu,30,career_mode
+Continental Europe,Islamic,153,career_mode
+Continental Europe,Japanese,38,career_mode
+Continental Europe,Other Civilizations,107,career_mode
+Continental Europe,Other Western,12,career_mode
+Continental Europe,Sinic,192,career_mode
+Continental Europe,United States,375,career_mode
+Hindu,Anglosphere ex-US,70,career_mode
+Hindu,Continental Europe,73,career_mode
+Hindu,Islamic,32,career_mode
+Hindu,Japanese,9,career_mode
+Hindu,Other Civilizations,7,career_mode
+Hindu,Other Western,10,career_mode
+Hindu,Sinic,39,career_mode
+Hindu,United States,145,career_mode
+Islamic,Anglosphere ex-US,171,career_mode
+Islamic,Continental Europe,146,career_mode
+Islamic,Hindu,20,career_mode
+Islamic,Japanese,15,career_mode
+Islamic,Other Civilizations,21,career_mode
+Islamic,Sinic,45,career_mode
+Islamic,United States,123,career_mode
+Japanese,Anglosphere ex-US,22,career_mode
+Japanese,Continental Europe,17,career_mode
+Japanese,Hindu,3,career_mode
+Japanese,Islamic,22,career_mode
+Japanese,Other Civilizations,10,career_mode
+Japanese,Sinic,78,career_mode
+Japanese,United States,42,career_mode
+Other Civilizations,Anglosphere ex-US,74,career_mode
+Other Civilizations,Continental Europe,192,career_mode
+Other Civilizations,Hindu,9,career_mode
+Other Civilizations,Islamic,26,career_mode
+Other Civilizations,Japanese,5,career_mode
+Other Civilizations,Other Western,3,career_mode
+Other Civilizations,Sinic,22,career_mode
+Other Civilizations,United States,60,career_mode
+Other Western,Anglosphere ex-US,12,career_mode
+Other Western,Continental Europe,9,career_mode
+Other Western,Other Civilizations,2,career_mode
+Other Western,Sinic,2,career_mode
+Other Western,United States,53,career_mode
+Sinic,Anglosphere ex-US,276,career_mode
+Sinic,Continental Europe,152,career_mode
+Sinic,Hindu,15,career_mode
+Sinic,Islamic,82,career_mode
+Sinic,Japanese,52,career_mode
+Sinic,Other Civilizations,20,career_mode
+Sinic,Other Western,4,career_mode
+Sinic,United States,575,career_mode
+United States,Anglosphere ex-US,278,career_mode
+United States,Continental Europe,274,career_mode
+United States,Hindu,94,career_mode
+United States,Islamic,102,career_mode
+United States,Japanese,26,career_mode
+United States,Other Civilizations,36,career_mode
+United States,Other Western,38,career_mode
+United States,Sinic,864,career_mode

@@ -19,3 +19,13 @@ test_outputs/
 *.db-wal
 data/cohort/extract_state.json*
 logs/
+
+# Author-level / large regenerable cohort artefacts
+data/cohort/cohort.csv
+data/cohort/pi_proxy/cohort.csv
+data/cohort/pi_proxy/cohort.partial.csv
+data/cohort/raw_sampled_works.json
+data/cohort/pi_proxy/raw_sampled_works.json
+data/cohort/author_year_groups.json
+results/measurement_validity/COAUTHOR_COUNTS.csv
+logs_*.log
